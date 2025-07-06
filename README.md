@@ -104,8 +104,8 @@
 
 ### 개발 환경
 
-- **Unity**: 2022.3 LTS
-- **IDE**: Visual Studio 2022 / Visual Studio Code
+- **Unity**: 2023.2.16f1 LTS
+- **IDE**: Visual Studio Code
 - **버전 관리**: Git + GitHub
 - **플랫폼**: Android
 
@@ -114,7 +114,9 @@
 
 - TextMeshPro
 - Input System
+- DOTween(3rd Party)
 - JsonUtility (내장)
+- Firebase 또는 The Backend 활용 방안 검토중
 
 
 ### 프로젝트 구조
