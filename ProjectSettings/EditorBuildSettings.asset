@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
+  - enabled: 1
+    path: Assets/Scenes/SelectScene.unity
+    guid: 3691f092396c4734e9ee404c71199b6f
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 6d82dca1a11e27f49961cf1d9049e562
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 0b5ad0834638d0d4db7488abb91a9f3d, type: 2}
   m_UseUCBPForAssetBundles: 0
