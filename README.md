@@ -12,10 +12,16 @@
  - 사회력 점수는 호감도 상승/유지 시 증가되며, 하락 선택지를 고르면 내려감
  - 호감도 증가량이 사회력 점수 증가량보다 높고, 호감도가 100이 된 상태로 게임을 진행하면 사회력 점수 획득량이 2배인 상태로 진행되므로 쉽게 클리어 가능
 
+## 인게임 스크린샷
+### 현재 개발 중인 화면입니다.
+<img width="509" height="903" alt="Image" src="https://github.com/user-attachments/assets/698f1a3f-7c48-483b-882a-9d71073ab220" />
+<img width="469" height="861" alt="Image" src="https://github.com/user-attachments/assets/cba8fc7b-a50b-4d16-a284-b5a8bb5180ed" />
 
 - **개발 기간**: 2025.07~
 - **타겟 플랫폼**: Android (Google Play)
 - **개발 엔진**: Unity 2023.2.16f1 LTS
+- **기술 스택**: C# 7.0 / .NET Framework, Git
+- **그래픽 리소스** : Sora AI / Leonardo AI
 - **장르**: 비주얼 노벨 + 캐주얼 게임
 
 
