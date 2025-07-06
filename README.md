@@ -19,8 +19,8 @@
 
 - **개발 기간**: 2025.07~
 - **타겟 플랫폼**: Android (Google Play)
-- **개발 엔진**: Unity 2023.2.16f1 LTS
-- **기술 스택**: C# 7.0 / .NET Framework, Git
+- **개발 엔진**: <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" /> 2023.2.16f1 LTS
+- **기술 스택**: <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" /> <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white" />  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
 - **그래픽 리소스** : Sora AI / Leonardo AI
 - **장르**: 비주얼 노벨 + 캐주얼 게임
 
