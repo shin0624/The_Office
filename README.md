@@ -12,10 +12,16 @@
  - 사회력 점수는 호감도 상승/유지 시 증가되며, 하락 선택지를 고르면 내려감
  - 호감도 증가량이 사회력 점수 증가량보다 높고, 호감도가 100이 된 상태로 게임을 진행하면 사회력 점수 획득량이 2배인 상태로 진행되므로 쉽게 클리어 가능
 
+## 인게임 스크린샷
+### 현재 개발 중인 화면입니다.
+<img width="509" height="903" alt="Image" src="https://github.com/user-attachments/assets/698f1a3f-7c48-483b-882a-9d71073ab220" />
+<img width="469" height="861" alt="Image" src="https://github.com/user-attachments/assets/cba8fc7b-a50b-4d16-a284-b5a8bb5180ed" />
 
 - **개발 기간**: 2025.07~
 - **타겟 플랫폼**: Android (Google Play)
-- **개발 엔진**: Unity 2023.2.16f1 LTS
+- **개발 엔진**: <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" /> 2023.2.16f1 LTS
+- **기술 스택**: <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" /> <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white" />  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
+- **그래픽 리소스** : Sora AI / Leonardo AI
 - **장르**: 비주얼 노벨 + 캐주얼 게임
 
 
@@ -29,9 +35,13 @@
 
 
 ### 게임 플로우
+0. **게임 플로우 도식화**
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/232f51f3-24ee-4a51-a9ca-deeda1cc2dbc" />
 
 1. **인트로 애니메이션** (터치로 넘기기 가능)
+ 
 2. **상사 선택** (남성/여성/젊은꼰대)
+  
 3. **메인 게임플레이**
     - Portrait 화면 2/3: 메인 화면 (대화)
     - Portrait 화면 1/3: 선택지 화면 (3개 버튼)
@@ -98,8 +108,8 @@
 
 ### 개발 환경
 
-- **Unity**: 2022.3 LTS
-- **IDE**: Visual Studio 2022 / Visual Studio Code
+- **Unity**: 2023.2.16f1 LTS
+- **IDE**: Visual Studio Code
 - **버전 관리**: Git + GitHub
 - **플랫폼**: Android
 
@@ -108,7 +118,9 @@
 
 - TextMeshPro
 - Input System
+- DOTween(3rd Party)
 - JsonUtility (내장)
+- Firebase 또는 The Backend 활용 방안 검토중
 
 
 ### 프로젝트 구조
