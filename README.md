@@ -35,7 +35,8 @@
 
 
 ### 게임 플로우
-
+0. **게임 플로우 도식화**
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/232f51f3-24ee-4a51-a9ca-deeda1cc2dbc" />
 1. **인트로 애니메이션** (터치로 넘기기 가능)
 2. **상사 선택** (남성/여성/젊은꼰대)
 3. **메인 게임플레이**
