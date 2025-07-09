@@ -1,0 +1,72 @@
+{
+  "rank_system": {
+    "ranks": [
+      {
+        "id": 1,
+        "name": "인턴",
+        "required_score": 0
+      },
+      {
+        "id": 2,
+        "name": "사원",
+        "required_score": 500
+      },
+      {
+        "id": 3,
+        "name": "주임",
+        "required_score": 1000
+      },
+      {
+        "id": 4,
+        "name": "대리",
+        "required_score": 2000
+      },
+      {
+        "id": 5,
+        "name": "과장",
+        "required_score": 4000
+      },
+      {
+        "id": 6,
+        "name": "차장",
+        "required_score": 7000
+      },
+      {
+        "id": 7,
+        "name": "부장",
+        "required_score": 12000
+      },
+      {
+        "id": 8,
+        "name": "이사",
+        "required_score": 20000
+      },
+      {
+        "id": 9,
+        "name": "상무",
+        "required_score": 35000
+      },
+      {
+        "id": 10,
+        "name": "전무",
+        "required_score": 60000
+      },
+      {
+        "id": 11,
+        "name": "부사장",
+        "required_score": 90000
+      },
+      {
+        "id": 12,
+        "name": "사장",
+        "required_score": 99999
+      }
+    ]
+  },
+  "affection_thresholds": {
+    "bad_ending": 0,
+    "true_ending": 100,
+    "low_threshold": 30,
+    "high_threshold": 70
+  }
+}

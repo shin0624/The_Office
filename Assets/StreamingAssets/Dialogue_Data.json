@@ -1,0 +1,33 @@
+{
+  "dialogues": [
+    {
+      "id": 1,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "오늘 회의 준비는 다 됐나?",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "네, 완벽하게 준비했습니다!",
+          "affection_change": 10,
+          "social_score_change": 15,
+          "next_dialogue_id": 2
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "아직 조금 더 시간이 필요합니다.",
+          "affection_change": 0,
+          "social_score_change": 5,
+          "next_dialogue_id": 3
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "회의가 오늘이었나요?",
+          "affection_change": -10,
+          "social_score_change": -5,
+          "next_dialogue_id": 4
+        }
+      ]
+    }
+  ]
+}
