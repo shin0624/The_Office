@@ -10,22 +10,253 @@
           "choice_id": 1,
           "choice_text": "네, 완벽하게 준비했습니다!",
           "affection_change": 10,
-          "social_score_change": 15,
-          "next_dialogue_id": 2
+          "social_score_change": 15
         },
         {
           "choice_id": 2,
           "choice_text": "아직 조금 더 시간이 필요합니다.",
           "affection_change": 0,
-          "social_score_change": 5,
-          "next_dialogue_id": 3
+          "social_score_change": 5
         },
         {
           "choice_id": 3,
-          "choice_text": "회의가 오늘이었나요?",
+          "choice_text": "오늘 회의가 있어요?",
           "affection_change": -10,
-          "social_score_change": -5,
-          "next_dialogue_id": 4
+          "social_score_change": -5
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "어제 보고서에 오타가 좀 있던데, 다음부터는 더 꼼꼼히 확인하게.",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "죄송합니다. 앞으로 더욱 신경쓰겠습니다.",
+          "affection_change": 8,
+          "social_score_change": 12
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "봤으면 좀 고쳐주셨으면 좋았을 텐데요.",
+          "affection_change": 0,
+          "social_score_change": 3
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "손이 없어요?",
+          "affection_change": -15,
+          "social_score_change": -10
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "이번 프로젝트 진행 상황은 어떤가? 일정에 맞춰 진행되고 있나?",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "예정보다 조금 앞서 진행되고 있습니다.",
+          "affection_change": 12,
+          "social_score_change": 18
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "네 진행되고 있습니다.",
+          "affection_change": 5,
+          "social_score_change": 8
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "너만 없으면 더 잘 될 것 같은데요.",
+          "affection_change": -8,
+          "social_score_change": -3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "커피 한 잔 마시면서 이야기 좀 할까? 요즘 업무 적응은 어떤가?",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "감사합니다! 많이 배우고 있습니다.",
+          "affection_change": 10,
+          "social_score_change": 14
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "사회생활 힘드네요.",
+          "affection_change": 2,
+          "social_score_change": 5
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "눈이 있으면 좀 보세요 누구때문에 힘든지",
+          "affection_change": -12,
+          "social_score_change": -8
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "오늘 야근해야 할 것 같은데, 괜찮나? 중요한 마감이 있어서 말이야.",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "네, 물론입니다! 끝까지 함께하겠습니다.",
+          "affection_change": 15,
+          "social_score_change": 20
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "저 오늘 반차냈는데요..",
+          "affection_change": 5,
+          "social_score_change": 10
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "부장님도 같이 야근하시는거 맞죠? 저녁 법카 개꿀이노~",
+          "affection_change": -10,
+          "social_score_change": -5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "이번 달 실적이 좋네. 자네 덕분인 것 같아. 수고했어.",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "팀 전체의 노력 덕분입니다. 감사합니다!",
+          "affection_change": 12,
+          "social_score_change": 16
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "알아주시니 감사합니다.",
+          "affection_change": 3,
+          "social_score_change": 7
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "알면 좀 챙겨주세요 맨날 눈치만 주지 마시고",
+          "affection_change": -5,
+          "social_score_change": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "내일 중요한 고객 미팅이 있는데, 자료 준비 도와줄 수 있나?",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "네! 어떤 자료가 필요한지 알려주세요.",
+          "affection_change": 11,
+          "social_score_change": 15
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "내일 저 연차인데요..",
+          "affection_change": 4,
+          "social_score_change": 8
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "부장님은 손이 없나요?",
+          "affection_change": -12,
+          "social_score_change": -7
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "회사 워크샵 준비 위원회에 참여해보는 게 어떨까? 좋은 경험이 될 거야.",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "좋은 기회네요! 꼭 참여하고 싶습니다.",
+          "affection_change": 13,
+          "social_score_change": 17
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "고려해보겠습니다.",
+          "affection_change": 1,
+          "social_score_change": 4
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "그런거 잘 모르겠고 워크샵가면 술좀 강제로 맥이지 마세요",
+          "affection_change": -8,
+          "social_score_change": -3
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "점심시간에 신입사원 교육 관련해서 이야기 좀 하자. 어떤가?",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "네, 좋습니다! 많이 배우고 싶습니다.",
+          "affection_change": 9,
+          "social_score_change": 13
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "점심은 먹고 하는거죠?",
+          "affection_change": 3,
+          "social_score_change": 6
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "점심시간은 좀 냅 두세요 제발",
+          "affection_change": -11,
+          "social_score_change": -6
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "boss_type": "male",
+      "speaker": "boss",
+      "dialogue_text": "자네 업무 처리 속도가 많이 늘었네. 처음보다 훨씬 안정적이야.",
+      "choices": [
+        {
+          "choice_id": 1,
+          "choice_text": "부장님 덕분입니다. 앞으로도 열심히 하겠습니다!",
+          "affection_change": 14,
+          "social_score_change": 19
+        },
+        {
+          "choice_id": 2,
+          "choice_text": "짬밥이 몇년인데 당연하죠",
+          "affection_change": 6,
+          "social_score_change": 9
+        },
+        {
+          "choice_id": 3,
+          "choice_text": "감사한데 부장님 업무까지 저한테 떠넘기지좀 마세요 본인껀 본인이 합시다 좀",
+          "affection_change": 0,
+          "social_score_change": 3
         }
       ]
     }

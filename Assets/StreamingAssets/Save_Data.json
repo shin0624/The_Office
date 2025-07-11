@@ -1,0 +1,23 @@
+{
+  "save_version": "1.0",
+  "player_data": {
+    "player_name": "신입사원",
+    "current_boss": "male_boss",
+    "affection_level": 65,
+    "social_score": 1250,
+    "current_rank": "대리",
+    "current_dialogue_id": 15,
+    "completed_dialogues": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    "game_flags": {
+      "first_meeting": true,
+      "promotion_achieved": false,
+      "special_event_triggered": false
+    }
+  },
+  "game_settings": {
+    "sound_volume": 0.8,
+    "music_volume": 0.6,
+    "auto_save_enabled": true
+  },
+  "timestamp": "2025-07-09T12:35:00Z"
+}

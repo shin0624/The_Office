@@ -2,15 +2,15 @@
   "characters": {
     "male_boss": {
       "name": "김부장",
-      "sprite_path": "Resources/Images/Characters/Male.png",
+      "sprite_path": "Resources/Images/Characters/Male.png"
     },
     "femmale_boss": {
       "name": "박과장",
-      "sprite_path": "Resources/Images/Characters/Female.png",
+      "sprite_path": "Resources/Images/Characters/Female.png"
     },
     "young_boss": {
       "name": "이대리",
-      "sprite_path": "Resources/Images/Characters/Young.png",
+      "sprite_path": "Resources/Images/Characters/Young.png"
     }
   }
 }
