@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 555584766}
   - component: {fileID: 555584765}
   m_Layer: 5
-  m_Name: Button1 (1)
+  m_Name: FemaleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 1005023013}
   - component: {fileID: 1005023012}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: MaleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,6 +914,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222390191}
   m_CullTransparentMesh: 1
+--- !u!1 &1356412317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356412319}
+  - component: {fileID: 1356412318}
+  m_Layer: 0
+  m_Name: SelectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356412318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356412317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d82dd68fd0533844b20b80ca72190bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maleBossButton: {fileID: 1005023012}
+  femaleBossButton: {fileID: 555584765}
+  youngBossButton: {fileID: 1519515026}
+--- !u!4 &1356412319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356412317}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 352.77655, y: 907.61017, z: 4.9226356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519515024
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +974,7 @@ GameObject:
   - component: {fileID: 1519515027}
   - component: {fileID: 1519515026}
   m_Layer: 5
-  m_Name: Button1 (2)
+  m_Name: YoungButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1450,3 +1497,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 182909099}
   - {fileID: 414755245}
+  - {fileID: 1356412319}
