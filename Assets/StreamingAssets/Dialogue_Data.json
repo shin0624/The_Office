@@ -4,23 +4,23 @@
       "id": 1,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "¿À´Ã È¸ÀÇ ÁØºñ´Â ´Ù µÆ³ª?",
+      "dialogue_text": "ì˜¤ëŠ˜ íšŒì˜ ì¤€ë¹„ëŠ” ë‹¤ ëë‚˜?",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "³×, ¿Ïº®ÇÏ°Ô ÁØºñÇß½À´Ï´Ù!",
+          "choice_text": "ë„¤, ì™„ë²½í•˜ê²Œ ì¤€ë¹„í–ˆìŠµë‹ˆë‹¤!",
           "affection_change": 10,
           "social_score_change": 15
         },
         {
           "choice_id": 2,
-          "choice_text": "¾ÆÁ÷ Á¶±Ý ´õ ½Ã°£ÀÌ ÇÊ¿äÇÕ´Ï´Ù.",
+          "choice_text": "ì•„ì§ ì¡°ê¸ˆ ë” ì‹œê°„ì´ í•„ìš”í•©ë‹ˆë‹¤.",
           "affection_change": 0,
           "social_score_change": 5
         },
         {
           "choice_id": 3,
-          "choice_text": "¿À´Ã È¸ÀÇ°¡ ÀÖ¾î¿ä?",
+          "choice_text": "ì˜¤ëŠ˜ íšŒì˜ê°€ ìžˆì–´ìš”?",
           "affection_change": -10,
           "social_score_change": -5
         }
@@ -30,23 +30,23 @@
       "id": 2,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "¾îÁ¦ º¸°í¼­¿¡ ¿ÀÅ¸°¡ Á» ÀÖ´øµ¥, ´ÙÀ½ºÎÅÍ´Â ´õ ²Ä²ÄÈ÷ È®ÀÎÇÏ°Ô.",
+      "dialogue_text": "ì–´ì œ ë³´ê³ ì„œì— ì˜¤íƒ€ê°€ ì¢€ ìžˆë˜ë°, ë‹¤ìŒë¶€í„°ëŠ” ë” ê¼¼ê¼¼ížˆ í™•ì¸í•˜ê²Œ.",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "ÁË¼ÛÇÕ´Ï´Ù. ¾ÕÀ¸·Î ´õ¿í ½Å°æ¾²°Ú½À´Ï´Ù.",
+          "choice_text": "ì£„ì†¡í•©ë‹ˆë‹¤. ì•žìœ¼ë¡œ ë”ìš± ì‹ ê²½ì“°ê² ìŠµë‹ˆë‹¤.",
           "affection_change": 8,
           "social_score_change": 12
         },
         {
           "choice_id": 2,
-          "choice_text": "ºÃÀ¸¸é Á» °íÃÄÁÖ¼ÌÀ¸¸é ÁÁ¾ÒÀ» ÅÙµ¥¿ä.",
+          "choice_text": "ë´¤ìœ¼ë©´ ì¢€ ê³ ì³ì£¼ì…¨ìœ¼ë©´ ì¢‹ì•˜ì„ í…ë°ìš”.",
           "affection_change": 0,
           "social_score_change": 3
         },
         {
           "choice_id": 3,
-          "choice_text": "¼ÕÀÌ ¾ø¾î¿ä?",
+          "choice_text": "ì†ì´ ì—†ì–´ìš”?",
           "affection_change": -15,
           "social_score_change": -10
         }
@@ -56,23 +56,23 @@
       "id": 3,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "ÀÌ¹ø ÇÁ·ÎÁ§Æ® ÁøÇà »óÈ²Àº ¾î¶²°¡? ÀÏÁ¤¿¡ ¸ÂÃç ÁøÇàµÇ°í ÀÖ³ª?",
+      "dialogue_text": "ì´ë²ˆ í”„ë¡œì íŠ¸ ì§„í–‰ ìƒí™©ì€ ì–´ë–¤ê°€? ì¼ì •ì— ë§žì¶° ì§„í–‰ë˜ê³  ìžˆë‚˜?",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "¿¹Á¤º¸´Ù Á¶±Ý ¾Õ¼­ ÁøÇàµÇ°í ÀÖ½À´Ï´Ù.",
+          "choice_text": "ì˜ˆì •ë³´ë‹¤ ì¡°ê¸ˆ ì•žì„œ ì§„í–‰ë˜ê³  ìžˆìŠµë‹ˆë‹¤.",
           "affection_change": 12,
           "social_score_change": 18
         },
         {
           "choice_id": 2,
-          "choice_text": "³× ÁøÇàµÇ°í ÀÖ½À´Ï´Ù.",
+          "choice_text": "ë„¤ ì§„í–‰ë˜ê³  ìžˆìŠµë‹ˆë‹¤.",
           "affection_change": 5,
           "social_score_change": 8
         },
         {
           "choice_id": 3,
-          "choice_text": "³Ê¸¸ ¾øÀ¸¸é ´õ Àß µÉ °Í °°Àºµ¥¿ä.",
+          "choice_text": "ë„ˆë§Œ ì—†ìœ¼ë©´ ë” ìž˜ ë  ê²ƒ ê°™ì€ë°ìš”.",
           "affection_change": -8,
           "social_score_change": -3
         }
@@ -82,23 +82,23 @@
       "id": 4,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "Ä¿ÇÇ ÇÑ ÀÜ ¸¶½Ã¸é¼­ ÀÌ¾ß±â Á» ÇÒ±î? ¿äÁò ¾÷¹« ÀûÀÀÀº ¾î¶²°¡?",
+      "dialogue_text": "ì»¤í”¼ í•œ ìž” ë§ˆì‹œë©´ì„œ ì´ì•¼ê¸° ì¢€ í• ê¹Œ? ìš”ì¦˜ ì—…ë¬´ ì ì‘ì€ ì–´ë–¤ê°€?",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "°¨»çÇÕ´Ï´Ù! ¸¹ÀÌ ¹è¿ì°í ÀÖ½À´Ï´Ù.",
+          "choice_text": "ê°ì‚¬í•©ë‹ˆë‹¤! ë§Žì´ ë°°ìš°ê³  ìžˆìŠµë‹ˆë‹¤.",
           "affection_change": 10,
           "social_score_change": 14
         },
         {
           "choice_id": 2,
-          "choice_text": "»çÈ¸»ýÈ° Èûµå³×¿ä.",
+          "choice_text": "ì‚¬íšŒìƒí™œ íž˜ë“œë„¤ìš”.",
           "affection_change": 2,
           "social_score_change": 5
         },
         {
           "choice_id": 3,
-          "choice_text": "´«ÀÌ ÀÖÀ¸¸é Á» º¸¼¼¿ä ´©±¸¶§¹®¿¡ ÈûµçÁö",
+          "choice_text": "ëˆˆì´ ìžˆìœ¼ë©´ ì¢€ ë³´ì„¸ìš” ëˆ„êµ¬ë•Œë¬¸ì— íž˜ë“ ì§€",
           "affection_change": -12,
           "social_score_change": -8
         }
@@ -108,23 +108,23 @@
       "id": 5,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "¿À´Ã ¾ß±ÙÇØ¾ß ÇÒ °Í °°Àºµ¥, ±¦Âú³ª? Áß¿äÇÑ ¸¶°¨ÀÌ ÀÖ¾î¼­ ¸»ÀÌ¾ß.",
+      "dialogue_text": "ì˜¤ëŠ˜ ì•¼ê·¼í•´ì•¼ í•  ê²ƒ ê°™ì€ë°, ê´œì°®ë‚˜? ì¤‘ìš”í•œ ë§ˆê°ì´ ìžˆì–´ì„œ ë§ì´ì•¼.",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "³×, ¹°·ÐÀÔ´Ï´Ù! ³¡±îÁö ÇÔ²²ÇÏ°Ú½À´Ï´Ù.",
+          "choice_text": "ë„¤, ë¬¼ë¡ ìž…ë‹ˆë‹¤! ëê¹Œì§€ í•¨ê»˜í•˜ê² ìŠµë‹ˆë‹¤.",
           "affection_change": 15,
           "social_score_change": 20
         },
         {
           "choice_id": 2,
-          "choice_text": "Àú ¿À´Ã ¹ÝÂ÷³Â´Âµ¥¿ä..",
+          "choice_text": "ì € ì˜¤ëŠ˜ ë°˜ì°¨ëƒˆëŠ”ë°ìš”..",
           "affection_change": 5,
           "social_score_change": 10
         },
         {
           "choice_id": 3,
-          "choice_text": "ºÎÀå´Ôµµ °°ÀÌ ¾ß±ÙÇÏ½Ã´Â°Å ¸ÂÁÒ? Àú³á ¹ýÄ« °³²ÜÀÌ³ë~",
+          "choice_text": "ë¶€ìž¥ë‹˜ë„ ê°™ì´ ì•¼ê·¼í•˜ì‹œëŠ”ê±° ë§žì£ ? ì €ë… ë²•ì¹´ ê°œê¿€ì´ë…¸~",
           "affection_change": -10,
           "social_score_change": -5
         }
@@ -134,23 +134,23 @@
       "id": 6,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "ÀÌ¹ø ´Þ ½ÇÀûÀÌ ÁÁ³×. ÀÚ³× ´öºÐÀÎ °Í °°¾Æ. ¼ö°íÇß¾î.",
+      "dialogue_text": "ì´ë²ˆ ë‹¬ ì‹¤ì ì´ ì¢‹ë„¤. ìžë„¤ ë•ë¶„ì¸ ê²ƒ ê°™ì•„. ìˆ˜ê³ í–ˆì–´.",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "ÆÀ ÀüÃ¼ÀÇ ³ë·Â ´öºÐÀÔ´Ï´Ù. °¨»çÇÕ´Ï´Ù!",
+          "choice_text": "íŒ€ ì „ì²´ì˜ ë…¸ë ¥ ë•ë¶„ìž…ë‹ˆë‹¤. ê°ì‚¬í•©ë‹ˆë‹¤!",
           "affection_change": 12,
           "social_score_change": 16
         },
         {
           "choice_id": 2,
-          "choice_text": "¾Ë¾ÆÁÖ½Ã´Ï °¨»çÇÕ´Ï´Ù.",
+          "choice_text": "ì•Œì•„ì£¼ì‹œë‹ˆ ê°ì‚¬í•©ë‹ˆë‹¤.",
           "affection_change": 3,
           "social_score_change": 7
         },
         {
           "choice_id": 3,
-          "choice_text": "¾Ë¸é Á» Ã¬°ÜÁÖ¼¼¿ä ¸Ç³¯ ´«Ä¡¸¸ ÁÖÁö ¸¶½Ã°í",
+          "choice_text": "ì•Œë©´ ì¢€ ì±™ê²¨ì£¼ì„¸ìš” ë§¨ë‚  ëˆˆì¹˜ë§Œ ì£¼ì§€ ë§ˆì‹œê³ ",
           "affection_change": -5,
           "social_score_change": 2
         }
@@ -160,23 +160,23 @@
       "id": 7,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "³»ÀÏ Áß¿äÇÑ °í°´ ¹ÌÆÃÀÌ ÀÖ´Âµ¥, ÀÚ·á ÁØºñ µµ¿ÍÁÙ ¼ö ÀÖ³ª?",
+      "dialogue_text": "ë‚´ì¼ ì¤‘ìš”í•œ ê³ ê° ë¯¸íŒ…ì´ ìžˆëŠ”ë°, ìžë£Œ ì¤€ë¹„ ë„ì™€ì¤„ ìˆ˜ ìžˆë‚˜?",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "³×! ¾î¶² ÀÚ·á°¡ ÇÊ¿äÇÑÁö ¾Ë·ÁÁÖ¼¼¿ä.",
+          "choice_text": "ë„¤! ì–´ë–¤ ìžë£Œê°€ í•„ìš”í•œì§€ ì•Œë ¤ì£¼ì„¸ìš”.",
           "affection_change": 11,
           "social_score_change": 15
         },
         {
           "choice_id": 2,
-          "choice_text": "³»ÀÏ Àú ¿¬Â÷ÀÎµ¥¿ä..",
+          "choice_text": "ë‚´ì¼ ì € ì—°ì°¨ì¸ë°ìš”..",
           "affection_change": 4,
           "social_score_change": 8
         },
         {
           "choice_id": 3,
-          "choice_text": "ºÎÀå´ÔÀº ¼ÕÀÌ ¾ø³ª¿ä?",
+          "choice_text": "ë¶€ìž¥ë‹˜ì€ ì†ì´ ì—†ë‚˜ìš”?",
           "affection_change": -12,
           "social_score_change": -7
         }
@@ -186,23 +186,23 @@
       "id": 8,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "È¸»ç ¿öÅ©¼¥ ÁØºñ À§¿øÈ¸¿¡ Âü¿©ÇØº¸´Â °Ô ¾î¶³±î? ÁÁÀº °æÇèÀÌ µÉ °Å¾ß.",
+      "dialogue_text": "íšŒì‚¬ ì›Œí¬ìƒµ ì¤€ë¹„ ìœ„ì›íšŒì— ì°¸ì—¬í•´ë³´ëŠ” ê²Œ ì–´ë–¨ê¹Œ? ì¢‹ì€ ê²½í—˜ì´ ë  ê±°ì•¼.",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "ÁÁÀº ±âÈ¸³×¿ä! ²À Âü¿©ÇÏ°í ½Í½À´Ï´Ù.",
+          "choice_text": "ì¢‹ì€ ê¸°íšŒë„¤ìš”! ê¼­ ì°¸ì—¬í•˜ê³  ì‹¶ìŠµë‹ˆë‹¤.",
           "affection_change": 13,
           "social_score_change": 17
         },
         {
           "choice_id": 2,
-          "choice_text": "°í·ÁÇØº¸°Ú½À´Ï´Ù.",
+          "choice_text": "ê³ ë ¤í•´ë³´ê² ìŠµë‹ˆë‹¤.",
           "affection_change": 1,
           "social_score_change": 4
         },
         {
           "choice_id": 3,
-          "choice_text": "±×·±°Å Àß ¸ð¸£°Ú°í ¿öÅ©¼¥°¡¸é ¼úÁ» °­Á¦·Î ¸ÆÀÌÁö ¸¶¼¼¿ä",
+          "choice_text": "ê·¸ëŸ°ê±° ìž˜ ëª¨ë¥´ê² ê³  ì›Œí¬ìƒµê°€ë©´ ìˆ ì¢€ ê°•ì œë¡œ ë§¥ì´ì§€ ë§ˆì„¸ìš”",
           "affection_change": -8,
           "social_score_change": -3
         }
@@ -212,23 +212,23 @@
       "id": 9,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "Á¡½É½Ã°£¿¡ ½ÅÀÔ»ç¿ø ±³À° °ü·ÃÇØ¼­ ÀÌ¾ß±â Á» ÇÏÀÚ. ¾î¶²°¡?",
+      "dialogue_text": "ì ì‹¬ì‹œê°„ì— ì‹ ìž…ì‚¬ì› êµìœ¡ ê´€ë ¨í•´ì„œ ì´ì•¼ê¸° ì¢€ í•˜ìž. ì–´ë–¤ê°€?",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "³×, ÁÁ½À´Ï´Ù! ¸¹ÀÌ ¹è¿ì°í ½Í½À´Ï´Ù.",
+          "choice_text": "ë„¤, ì¢‹ìŠµë‹ˆë‹¤! ë§Žì´ ë°°ìš°ê³  ì‹¶ìŠµë‹ˆë‹¤.",
           "affection_change": 9,
           "social_score_change": 13
         },
         {
           "choice_id": 2,
-          "choice_text": "Á¡½ÉÀº ¸Ô°í ÇÏ´Â°ÅÁÒ?",
+          "choice_text": "ì ì‹¬ì€ ë¨¹ê³  í•˜ëŠ”ê±°ì£ ?",
           "affection_change": 3,
           "social_score_change": 6
         },
         {
           "choice_id": 3,
-          "choice_text": "Á¡½É½Ã°£Àº Á» ³À µÎ¼¼¿ä Á¦¹ß",
+          "choice_text": "ì ì‹¬ì‹œê°„ì€ ì¢€ ëƒ… ë‘ì„¸ìš” ì œë°œ",
           "affection_change": -11,
           "social_score_change": -6
         }
@@ -238,23 +238,23 @@
       "id": 10,
       "boss_type": "male",
       "speaker": "boss",
-      "dialogue_text": "ÀÚ³× ¾÷¹« Ã³¸® ¼Óµµ°¡ ¸¹ÀÌ ´Ã¾ú³×. Ã³À½º¸´Ù ÈÎ¾À ¾ÈÁ¤ÀûÀÌ¾ß.",
+      "dialogue_text": "ìžë„¤ ì—…ë¬´ ì²˜ë¦¬ ì†ë„ê°€ ë§Žì´ ëŠ˜ì—ˆë„¤. ì²˜ìŒë³´ë‹¤ í›¨ì”¬ ì•ˆì •ì ì´ì•¼.",
       "choices": [
         {
           "choice_id": 1,
-          "choice_text": "ºÎÀå´Ô ´öºÐÀÔ´Ï´Ù. ¾ÕÀ¸·Îµµ ¿­½ÉÈ÷ ÇÏ°Ú½À´Ï´Ù!",
+          "choice_text": "ë¶€ìž¥ë‹˜ ë•ë¶„ìž…ë‹ˆë‹¤. ì•žìœ¼ë¡œë„ ì—´ì‹¬ížˆ í•˜ê² ìŠµë‹ˆë‹¤!",
           "affection_change": 14,
           "social_score_change": 19
         },
         {
           "choice_id": 2,
-          "choice_text": "Â«¹äÀÌ ¸î³âÀÎµ¥ ´ç¿¬ÇÏÁÒ",
+          "choice_text": "ì§¬ë°¥ì´ ëª‡ë…„ì¸ë° ë‹¹ì—°í•˜ì£ ",
           "affection_change": 6,
           "social_score_change": 9
         },
         {
           "choice_id": 3,
-          "choice_text": "°¨»çÇÑµ¥ ºÎÀå´Ô ¾÷¹«±îÁö ÀúÇÑÅ× ¶°³Ñ±âÁöÁ» ¸¶¼¼¿ä º»ÀÎ²« º»ÀÎÀÌ ÇÕ½Ã´Ù Á»",
+          "choice_text": "ê°ì‚¬í•œë° ë¶€ìž¥ë‹˜ ì—…ë¬´ê¹Œì§€ ì €í•œí…Œ ë– ë„˜ê¸°ì§€ì¢€ ë§ˆì„¸ìš” ë³¸ì¸ê»€ ë³¸ì¸ì´ í•©ì‹œë‹¤ ì¢€",
           "affection_change": 0,
           "social_score_change": 3
         }

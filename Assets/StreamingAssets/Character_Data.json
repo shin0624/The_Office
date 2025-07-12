@@ -1,16 +1,25 @@
 {
-  "characters": {
-    "male_boss": {
-      "name": "±èºÎÀå",
-      "sprite_path": "Resources/Images/Characters/Male.png"
+  "characters": [
+    {
+      "key": "male_boss",
+      "value": {
+        "name": "ê¹€ë¶€ì¥",
+        "sprite_path": "Images/Characters/Male"
+      }
     },
-    "femmale_boss": {
-      "name": "¹Ú°úÀå",
-      "sprite_path": "Resources/Images/Characters/Female.png"
+    {
+      "key": "female_boss",
+      "value": {
+        "name": "ë°•ì°¨ì¥",
+        "sprite_path": "Images/Characters/Female"
+      }
     },
-    "young_boss": {
-      "name": "ÀÌ´ë¸®",
-      "sprite_path": "Resources/Images/Characters/Young.png"
+    {
+      "key": "young_boss",
+      "value": {
+        "name": "ì´ëŒ€ë¦¬",
+        "sprite_path": "Images/Characters/Young"
+      }
     }
-  }
+  ]
 }

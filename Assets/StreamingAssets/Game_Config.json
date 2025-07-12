@@ -3,62 +3,62 @@
     "ranks": [
       {
         "id": 1,
-        "name": "ÀÎÅÏ",
+        "name": "ì¸í„´",
         "required_score": 0
       },
       {
         "id": 2,
-        "name": "»ç¿ø",
+        "name": "ì‚¬ì›",
         "required_score": 500
       },
       {
         "id": 3,
-        "name": "ÁÖÀÓ",
+        "name": "ì£¼ì„",
         "required_score": 1000
       },
       {
         "id": 4,
-        "name": "´ë¸®",
+        "name": "ëŒ€ë¦¬",
         "required_score": 2000
       },
       {
         "id": 5,
-        "name": "°úÀå",
+        "name": "ê³¼ì¥",
         "required_score": 4000
       },
       {
         "id": 6,
-        "name": "Â÷Àå",
+        "name": "ì°¨ì¥",
         "required_score": 7000
       },
       {
         "id": 7,
-        "name": "ºÎÀå",
+        "name": "ë¶€ì¥",
         "required_score": 12000
       },
       {
         "id": 8,
-        "name": "ÀÌ»ç",
+        "name": "ì´ì‚¬",
         "required_score": 20000
       },
       {
         "id": 9,
-        "name": "»ó¹«",
+        "name": "ìƒë¬´",
         "required_score": 35000
       },
       {
         "id": 10,
-        "name": "Àü¹«",
+        "name": "ì „ë¬´",
         "required_score": 60000
       },
       {
         "id": 11,
-        "name": "ºÎ»çÀå",
+        "name": "ë¶€ì‚¬ì¥",
         "required_score": 90000
       },
       {
         "id": 12,
-        "name": "»çÀå",
+        "name": "ì‚¬ì¥",
         "required_score": 99999
       }
     ]
