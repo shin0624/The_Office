@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 160120687}
   - component: {fileID: 160120686}
   m_Layer: 5
-  m_Name: SocialityText
+  m_Name: SocialScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0AC\uD68C\uB825 \uC810\uC218"
+  m_text: "\uC0AC\uD68C\uB825 \uC810\uC218 : 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
   m_sharedMaterial: {fileID: 1783129595289558205, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
@@ -1363,7 +1363,7 @@ GameObject:
   - component: {fileID: 575672927}
   - component: {fileID: 575672928}
   m_Layer: 5
-  m_Name: Likeability
+  m_Name: Affection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2333,7 +2333,7 @@ GameObject:
   - component: {fileID: 1158635661}
   - component: {fileID: 1158635662}
   m_Layer: 5
-  m_Name: Sociality
+  m_Name: SocialScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3817,6 +3817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1936717037}
+  - component: {fileID: 1936717039}
   - component: {fileID: 1936717036}
   - component: {fileID: 1936717038}
   m_Layer: 0
@@ -3869,6 +3870,24 @@ MonoBehaviour:
   bossDialogueText: {fileID: 633059496}
   choicesParent: {fileID: 1873267865}
   choiceButtonPrefab: {fileID: 350494357742611059, guid: b82888ed02909134794e1232b434a8b2, type: 3}
+--- !u!114 &1936717039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936717035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb39ad8018589c448a991f6e429db8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affectionSlider: {fileID: 575672928}
+  socialScoreSlider: {fileID: 1158635662}
+  rankSlider: {fileID: 728153326}
+  affectionText: {fileID: 2132443784}
+  socialScoreText: {fileID: 160120686}
+  rankText: {fileID: 1499370596}
 --- !u!224 &1949683322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3369804376934728544, guid: b82888ed02909134794e1232b434a8b2, type: 3}
@@ -4143,7 +4162,7 @@ GameObject:
   - component: {fileID: 2132443785}
   - component: {fileID: 2132443784}
   m_Layer: 5
-  m_Name: LikeabilityText
+  m_Name: AffectionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4188,7 +4207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD638\uAC10\uB3C4"
+  m_text: "\uD638\uAC10\uB3C4 : 50"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
   m_sharedMaterial: {fileID: 1783129595289558205, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
