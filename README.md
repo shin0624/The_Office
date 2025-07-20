@@ -19,7 +19,6 @@
 <img width="457" height="817" alt="Image" src="https://github.com/user-attachments/assets/565c0784-4a2a-424e-b4f2-68b72eb8f54c" />
 <img width="458" height="815" alt="Image" src="https://github.com/user-attachments/assets/d6d26b17-084e-4609-9786-d1e1496edad9" />
 <img width="460" height="817" alt="Image" src="https://github.com/user-attachments/assets/7f1490ed-cfab-474c-b3bc-3bc8cead9052" />
-![Image](https://github.com/user-attachments/assets/d2648a51-3010-4a30-9d1b-7d8f35582ce9)
 
 - **개발 기간**: 2025.07~
 - **타겟 플랫폼**: Android (Google Play)
