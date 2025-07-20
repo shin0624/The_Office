@@ -1,17 +1,18 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Text;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BossTextLoader : MonoBehaviour
 {
     //상사의 대사와 플레이어의 선택지를 UI에 표시하는 클래스.
     //기본적인 대화 진행(다음 대화로 이동)과 선택지 버튼 생성
 
-    [System.Serializable]
+    [Serializable]
     public class Choice//Dialogue_Data.json의 "choices"에 해당하는 클래스.
     {
         public int choice_id;
@@ -20,7 +21,7 @@ public class BossTextLoader : MonoBehaviour
         public int social_score_change;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Dialogue//Dialogue_Data.json의 "dialogues"에 해당하는 클래스.
     {
         public int id;
@@ -30,63 +31,97 @@ public class BossTextLoader : MonoBehaviour
         public List<Choice> choices;//"dialogue"에 포함된 choices를 리스트로 저장.
     }
 
-    [System.Serializable]
+    [Serializable]
     public class DialogueData//Dialogue_Data.json 전체를 감싸는 클래스.
     {
         public List<Dialogue> dialogues;//Dialogue_Data.json의 "dialogues"를 리스트로 저장.
     }
 
-    [Header("UI References")]
+    [Header("UI 요소들")]
     [SerializeField] private TextMeshProUGUI bossDialogueText;//상사의 대사가 출력될  TMProUGUI 컴포넌트.
     [SerializeField] private Transform choicesParent;// 선택지 버튼들을 담을 부모 오브젝트.(Vertical Layout Group이 적용된 오브젝트)
     [SerializeField] private GameObject choiceButtonPrefab;//선택지 버튼 프리팹.
 
     private DialogueData dialogueData;//Dialogue_Data.json의 데이터를 저장할 변수.
     private int currentDialogueIndex = 0;//현재 대화의 인덱스.
+    private string selectedBossType;//선택된 상사의 타입
 
     void Start()
     {
-        string path = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
-        string json = File.ReadAllText(path, Encoding.UTF8);//파일의 내용을 읽어옴.
-        dialogueData = JsonUtility.FromJson<DialogueData>(json);//읽어온 JSON 문자열을 DialogueData 객체로 변환.
-        ShowDialogue(currentDialogueIndex);//초기 대화 표시.
+        selectedBossType = PlayerPrefs.GetString("SelectedBoss", "male_boss"); //PlayerPrefs에서 선택된 상사 타입을 가져옴. 기본값은 "male_boss".
+        LoadDialogueData();//Dialogue_Data.json 파일을 로드.
+        ShowNextDialogue();//초기 대화 표시.
     }
 
-    public void ShowDialogue(int index)// 대화를 표시하는 메서드
+    private void LoadDialogueData()//Dialogue_Data.json 파일을 로드하는 메서드.
     {
-        if (index < 0 || index > dialogueData.dialogues.Count)//인덱스가 유효하지 않으면 반환.
-            return;
-
-        Dialogue dialogue = dialogueData.dialogues[index];//현재 인덱스에 해당하는 대화 객체를 가져옴.
-        bossDialogueText.text = dialogue.dialogue_text;//상사의 대사 텍스트를 출력
-        foreach (Transform child in choicesParent)//선택지 버튼들을 초기화
+        string path = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
+        if (File.Exists(path))
         {
-            Destroy(child.gameObject);//기존의 선택지 버튼들을 모두 제거.
+            string json = File.ReadAllText(path, Encoding.UTF8);//파일의 내용을 읽어옴.
+            dialogueData = JsonUtility.FromJson<DialogueData>(json);//읽어온 JSON 문자열을 DialogueData 객체로 변환.
+            Debug.Log("[BossTextLoader] Dialogue_Data.json 로드 완료");
         }
-
-        foreach (var choice in dialogue.choices)// 선택지 버튼을 생성.
+        else
         {
-            GameObject btnObj = Instantiate(choiceButtonPrefab, choicesParent);//선택지 버튼 프리팹을 인스턴스화하여 부모 오브젝트에 추가.
-            TextMeshProUGUI btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
-            btnText.text = choice.choice_text;//선택지 텍스트를 설정.
+            Debug.LogError("[BossTextLoader] Dialogue_Data.json 파일을 찾을 수 없습니다.");
+        }
+    }
 
-            int nextIndex = currentDialogueIndex + 1;//다음 대화 인덱스 계산.
-            btnObj.GetComponent<Button>().onClick.AddListener(() =>
+    public void ShowNextDialogue()//다음 대화를 표시하는 메서드.
+    {
+        if (dialogueData?.dialogues == null) return;// 대화 데이터가 로드되지 않았으면 반환.                                                
+        Dialogue currentDialogue = null;//현재 상사 타입과 일치하는 대화 찾기
+        for (int i = currentDialogueIndex; i < dialogueData.dialogues.Count; i++)
+        {
+            if (dialogueData.dialogues[i].boss_type == selectedBossType.Replace("_boss", ""))//선택된 상사 타입과 일치하는 대화를 찾는다.
             {
-                Debug.Log($"선택지 : {choice.choice_text} | 호감도 변화 : {choice.affection_change} | 사회적 점수 변화 : {choice.social_score_change}");//점수 변화 처리
-                currentDialogueIndex = nextIndex;//현재 대화 인덱스를 업데이트.
-                
-                if (currentDialogueIndex < dialogueData.dialogues.Count)//다음 대화가 존재하면
-                {
-                    ShowDialogue(currentDialogueIndex);//다음 대화를 표시.
-                }
-                else
-                {
-                    Debug.Log("대화가 끝났습니다."); // 대화가 끝났음을 알림
-                }
-            });
+                currentDialogue = dialogueData.dialogues[i];
+                currentDialogueIndex = i;//현재 대화 인덱스를 업데이트.
+                break;
+            }
         }
 
+        if (currentDialogue == null)
+        {
+            bossDialogueText.text = "대화가 끝났습니다.";
+            return;
+        }
+        ShowDialogue(currentDialogue);
+    }
+
+    public void ShowDialogue(Dialogue dialogue)// 대화를 표시하는 메서드
+    {
+        bossDialogueText.text = dialogue.dialogue_text;// 상사 대사 표시
+
+        // 기존 선택지 버튼 삭제
+        foreach (Transform child in choicesParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var choice in dialogue.choices)// 선택지 버튼 생성
+        {
+            GameObject btnObj = Instantiate(choiceButtonPrefab, choicesParent);
+            TextMeshProUGUI btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+            btnText.text = choice.choice_text;
+            btnObj.GetComponent<Button>().onClick.AddListener(() => { OnChoiceSelected(choice); });// 버튼 클릭 이벤트 등록
+        }
+        if (ScoreManager.Instance != null)// ScoreManager에 현재 대화 ID 저장
+        {
+            ScoreManager.Instance.SetCurrentDialogue(dialogue.id);
+        }
+    }
+
+    private void OnChoiceSelected(Choice choice)//선택지 버튼 클릭 시 호출되는 메서드.
+    {
+        Debug.Log($"선택 : {choice.choice_text}, 호감도 변화: {choice.affection_change:+0;-#}, 사회력 변화: {choice.social_score_change:+0;-#}");
+        if (ScoreManager.Instance != null)//ScoreManager를 통한 점수 업데이트 진행
+        {
+            ScoreManager.Instance.UpdateScores(choice.affection_change, choice.social_score_change);
+        }
+        currentDialogueIndex++;//다음 대화로 이동
+        ShowNextDialogue();//다음 대화 표시
     }
 }
 
