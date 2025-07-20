@@ -25,7 +25,7 @@
 - **개발 엔진**: <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" /> 2023.2.16f1 LTS
 - **기술 스택**: <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" /> <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white" />  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
 - **그래픽 리소스** : Sora AI / Leonardo AI
-- **장르**: 비주얼 노벨 + 캐주얼 게임
+- **장르**: 캐주얼 80%, 비주얼 노벨 20%
 
 
 ## 🎮 게임 시스템
@@ -38,8 +38,8 @@
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/4b2e6806-f06a-47f3-b3ae-8faabdf93fd0" />
 
 2. **상세 데이터 플로우 아키텍처**
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/36250ada-cf4d-4056-b96e-7a6c9f181167" />
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/32f8c012-eef4-4a50-a8b6-e4f07c11ee4e" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/e42104c6-bb00-479f-b1cd-dbcec4516272" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/e3eb7989-6c98-442a-ae31-48be935b9846" />
 
 
 ### 핵심 스테이터스
