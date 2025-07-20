@@ -1,8 +1,8 @@
-# 신입사원 키우기 프로젝트
+# THE OFFICE - 신입사원 살아남기 프로젝트
 
 ## 📋 프로젝트 개요
 
-**신입사원 키우기**는 비주얼 노벨과 캐주얼 게임 요소를 결합한 모바일 게임입니다. Unity UGUI를 활용하여 간단하면서도 효과적인 사용자 경험을 제공하며, JSON 기반 데이터 관리로 확장성을 확보합니다.
+**THE OFFICE - 신입사원 살아남기**는 비주얼 노벨과 캐주얼 게임 요소를 결합한 모바일 게임입니다. Unity UGUI를 활용하여 간단하면서도 효과적인 사용자 경험을 제공하며, JSON 기반 데이터 관리로 확장성을 확보합니다.
 
 ## 📋 프로젝트 컨셉
 
@@ -16,6 +16,10 @@
 ### 현재 개발 중인 화면입니다.
 <img width="509" height="903" alt="Image" src="https://github.com/user-attachments/assets/698f1a3f-7c48-483b-882a-9d71073ab220" />
 <img width="469" height="861" alt="Image" src="https://github.com/user-attachments/assets/cba8fc7b-a50b-4d16-a284-b5a8bb5180ed" />
+<img width="457" height="817" alt="Image" src="https://github.com/user-attachments/assets/565c0784-4a2a-424e-b4f2-68b72eb8f54c" />
+<img width="458" height="815" alt="Image" src="https://github.com/user-attachments/assets/d6d26b17-084e-4609-9786-d1e1496edad9" />
+<img width="460" height="817" alt="Image" src="https://github.com/user-attachments/assets/7f1490ed-cfab-474c-b3bc-3bc8cead9052" />
+![Image](https://github.com/user-attachments/assets/d2648a51-3010-4a30-9d1b-7d8f35582ce9)
 
 - **개발 기간**: 2025.07~
 - **타겟 플랫폼**: Android (Google Play)
@@ -27,26 +31,25 @@
 
 ## 🎮 게임 시스템
 
+### 시스템 아키텍처
+0. **사용자 입력에 따른 게임 진행 흐름도**
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/232f51f3-24ee-4a51-a9ca-deeda1cc2dbc" />
+
+1. **전체 데이터 플로우 및 핵심 데이터 순환 구조**
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/4b2e6806-f06a-47f3-b3ae-8faabdf93fd0" />
+
+2. **상세 데이터 플로우 아키텍처**
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/36250ada-cf4d-4056-b96e-7a6c9f181167" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/32f8c012-eef4-4a50-a8b6-e4f07c11ee4e" />
+
+
 ### 핵심 스테이터스
 
 - **사회력 점수**: 1~99999
 - **직급**: 인턴 → 사원 → 주임 → 대리 → 과장 → 차장 → 부장 → 이사 → 상무 → 전무 → 부사장 → 사장 (12단계)
 - **호감도**: 낮음 → 보통 → 높음 (Red → Blue → Green)
 
-
-### 게임 플로우
-0. **게임 플로우 도식화**
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/232f51f3-24ee-4a51-a9ca-deeda1cc2dbc" />
-
-1. **인트로 애니메이션** (터치로 넘기기 가능)
- 
-2. **상사 선택** (남성/여성/젊은꼰대)
-  
-3. **메인 게임플레이**
-    - Portrait 화면 2/3: 메인 화면 (대화)
-    - Portrait 화면 1/3: 선택지 화면 (3개 버튼)
-
-      
+    
 ## 📅 개발 일정
 
 ### 1단계: 프로젝트 초기 설정 (2-3일)
