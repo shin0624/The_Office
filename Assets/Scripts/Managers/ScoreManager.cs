@@ -171,7 +171,7 @@ public class ScoreManager : MonoBehaviour
     public void AddSocialScore(int value)//사회력 점수를 증가시키는 메서드.
     {
         int oldScore = socialScore;//이전 사회력 점수 저장
-        socialScore = Mathf.Clamp(socialScore + value, 0, 99999);//사회력 점수 범위(0~99999) 내에서 증가
+        socialScore = Mathf.Clamp(socialScore + value, 0, 300);//사회력 점수 범위(0~300) 내에서 증가
         if (oldScore != socialScore)//사회력 점수 변경 시
         {
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.

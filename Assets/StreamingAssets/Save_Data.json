@@ -5,8 +5,8 @@
     "current_boss": "male_boss",
     "affection_level": 0,
     "social_score": 0,
-    "current_rank": "대리",
-    "current_dialogue_id": 15,
+    "current_rank": "인턴",
+    "current_dialogue_id": 1,
     "completed_dialogues": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
     "game_flags": {
       "first_meeting": true,

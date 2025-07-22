@@ -73,7 +73,7 @@
         {
           "choice_id": 3,
           "choice_text": "너만 없으면 더 잘 될 것 같은데요.",
-          "affection_change": -8,
+          "affection_change": -15,
           "social_score_change": -3
         }
       ]
@@ -99,7 +99,7 @@
         {
           "choice_id": 3,
           "choice_text": "눈이 있으면 좀 보세요 누구때문에 힘든지",
-          "affection_change": -12,
+          "affection_change": -15,
           "social_score_change": -8
         }
       ]
@@ -125,7 +125,7 @@
         {
           "choice_id": 3,
           "choice_text": "부장님도 같이 야근하시는거 맞죠? 저녁 법카 개꿀이노~",
-          "affection_change": -10,
+          "affection_change": -20,
           "social_score_change": -5
         }
       ]
@@ -151,7 +151,7 @@
         {
           "choice_id": 3,
           "choice_text": "알면 좀 챙겨주세요 맨날 눈치만 주지 마시고",
-          "affection_change": -5,
+          "affection_change": -25,
           "social_score_change": 2
         }
       ]
@@ -177,7 +177,7 @@
         {
           "choice_id": 3,
           "choice_text": "부장님은 손이 없나요?",
-          "affection_change": -12,
+          "affection_change": -20,
           "social_score_change": -7
         }
       ]
@@ -203,7 +203,7 @@
         {
           "choice_id": 3,
           "choice_text": "그런거 잘 모르겠고 워크샵가면 술좀 강제로 맥이지 마세요",
-          "affection_change": -8,
+          "affection_change": -20,
           "social_score_change": -3
         }
       ]
@@ -229,7 +229,7 @@
         {
           "choice_id": 3,
           "choice_text": "점심시간은 좀 냅 두세요 제발",
-          "affection_change": -11,
+          "affection_change": -20,
           "social_score_change": -6
         }
       ]
@@ -256,7 +256,7 @@
           "choice_id": 3,
           "choice_text": "감사한데 부장님 업무까지 저한테 떠넘기지좀 마세요 본인껀 본인이 합시다 좀",
           "affection_change": 0,
-          "social_score_change": 3
+          "social_score_change": -30
         }
       ]
     }

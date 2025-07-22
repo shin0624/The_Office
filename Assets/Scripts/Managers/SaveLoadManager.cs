@@ -88,17 +88,17 @@ public class SaveLoadManager : MonoBehaviour
         gameConfig.rank_system.ranks = new List<RankInfo>()//직급 정보 리스트 초기화
         {
             new RankInfo { id = 1, name = "인턴", required_score = 0 },
-            new RankInfo { id = 2, name = "사원", required_score = 500 },
-            new RankInfo { id = 3, name = "주임", required_score = 1000 },
-            new RankInfo { id = 4, name = "대리", required_score = 2000 },
-            new RankInfo { id = 5, name = "과장", required_score = 4000 },
-            new RankInfo { id = 6, name = "차장", required_score = 7000 },
-            new RankInfo { id = 7, name = "부장", required_score = 12000 },
-            new RankInfo { id = 8, name = "이사", required_score = 20000 },
-            new RankInfo { id = 9, name = "상무", required_score = 35000 },
-            new RankInfo { id = 10, name = "전무", required_score = 60000 },
-            new RankInfo { id = 11, name = "부사장", required_score = 90000 },
-            new RankInfo { id = 12, name = "사장", required_score = 99999 }
+            new RankInfo { id = 2, name = "사원", required_score = 30 },
+            new RankInfo { id = 3, name = "주임", required_score = 40 },
+            new RankInfo { id = 4, name = "대리", required_score = 50 },
+            new RankInfo { id = 5, name = "과장", required_score = 60 },
+            new RankInfo { id = 6, name = "차장", required_score = 70 },
+            new RankInfo { id = 7, name = "부장", required_score = 80 },
+            new RankInfo { id = 8, name = "이사", required_score = 100 },
+            new RankInfo { id = 9, name = "상무", required_score = 150 },
+            new RankInfo { id = 10, name = "전무", required_score = 190 },
+            new RankInfo { id = 11, name = "부사장", required_score = 250 },
+            new RankInfo { id = 12, name = "사장", required_score = 300 }
         };
         gameConfig.affection_thresholds = new AffectionThresholds();//호감도 임계값 초기화
     }
