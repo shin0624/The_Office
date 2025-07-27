@@ -200,4 +200,98 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
+    //--------------250727 추가 : 뒤로가기를 통한 게임 정상 종료 시 수행되는 데이터 저장 메서드
+    public bool SaveAllGameDataOnQuit()//뒤로가기를 통한 정상 종료에서 호출되는 게임 데이터 및 시점 정보 저장 메서드.QuitPanel 스크립트에서 호출된다.
+    {
+        try
+        {
+            Debug.Log("[SaveLoadManager] 게임 종료 시 전체 데이터 저장 시작");
+
+            // 1. ScoreManager 검증
+            if (ScoreManager.Instance == null)
+            {
+                Debug.LogError("[SaveLoadManager] ScoreManager 인스턴스가 없습니다!");
+                return false;
+            }
+
+            // 2. 현재 저장 데이터 획득
+            var currentSaveData = ScoreManager.Instance.GetCurrentSaveData();
+            if (currentSaveData == null)
+            {
+                Debug.LogError("[SaveLoadManager] 현재 저장 데이터가 없습니다!");
+                return false;
+            }
+
+            // 3. 게임 종료 시점 추가 정보 업데이트
+            UpdateGameStateOnQuit(currentSaveData);
+
+            // 4. 메인 게임 데이터 저장
+            SaveGameData(currentSaveData);
+
+            // 5. 플레이 통계 저장
+            SavePlayStatistics();
+
+            Debug.Log("[SaveLoadManager] 게임 종료 시 데이터 저장 완료");
+            return true;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[SaveLoadManager] 게임 종료 시 데이터 저장 실패: {e.Message}");
+            return false;
+        }
+    }
+
+    private void UpdateGameStateOnQuit(SaveData saveData)//게임 종료 시점의 추가 정보를 저장 데이터에 업데이트하는 메서드.
+    {
+        saveData.timestamp = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ");
+        if (saveData.game_settings != null)// 게임 설정에 종료 관련 정보 추가
+        {
+            PlayerPrefs.SetString("LastQuitMethod", "NormalQuit");
+            PlayerPrefs.SetString("LastQuitTime", saveData.timestamp);
+        }
+        if (saveData.player_data != null)// ScoreManager 상태와 저장 데이터 동기화 확인
+        {
+            saveData.player_data.affection_level = ScoreManager.Instance.GetAffectionScore();
+            saveData.player_data.social_score = ScoreManager.Instance.GetSocialScore();
+            saveData.player_data.current_rank = ScoreManager.Instance.GetCurrentRank();
+            saveData.player_data.current_dialogue_id = ScoreManager.Instance.GetCurrentDialogueId();
+        }
+    }
+
+    private void SavePlayStatistics()//PlayerPrefs 전용 플레이 통계 정보 저장 메서드
+    {
+        PlayerPrefs.SetString("LastPlayTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));// 현재 시간 저장
+
+        float currentSessionTime = Time.time;
+        float totalPlayTime = PlayerPrefs.GetFloat("TotalPlayTime", 0f) + currentSessionTime;// 총 플레이 시간 저장
+        PlayerPrefs.SetFloat("TotalPlayTime", totalPlayTime);
+
+        int quitCount = PlayerPrefs.GetInt("GameQuitCount", 0) + 1; // 게임 종료 횟수 저장
+        PlayerPrefs.SetInt("GameQuitCount", quitCount);
+
+        PlayerPrefs.Save();
+
+        Debug.Log($"[SaveLoadManager] 플레이 통계 저장 - " + $"총 플레이 시간: {totalPlayTime:F1}초, 종료 횟수: {quitCount}");
+    }
+
+    private void EmergencySave()// 게임 강제 종료 또는 비정상 종료 시 응급 저장을 수행하는 메서드.
+    {
+        try
+        {
+            Debug.Log("[SaveLoadManager] 응급 저장 실행");
+            if (ScoreManager.Instance?.GetCurrentSaveData() != null)
+            {
+                var saveData = ScoreManager.Instance.GetCurrentSaveData();
+                saveData.timestamp = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                SaveGameData(saveData);
+                PlayerPrefs.SetString("LastQuitMethod", "EmergencyQuit");
+                PlayerPrefs.Save();
+                Debug.Log("[SaveLoadManager] 응급 저장 완료");
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"[SaveLoadManager] 응급 저장 실패: {e.Message}");
+        }
+    }
 }

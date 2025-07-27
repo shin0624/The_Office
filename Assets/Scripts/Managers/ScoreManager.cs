@@ -162,6 +162,10 @@ public class ScoreManager : MonoBehaviour
         affectionScore = Mathf.Clamp(affectionScore + value, 0, 100);//호감도 범위(0~100) 내에서 증가
         if (oldScore != affectionScore)//호감도 변경 시
         {
+            if (oldScore > affectionScore)// 호감도 감소 시 진동 기능 호출
+            {
+                HapticUX.Vibrate(500);
+            }
             currentSaveData.player_data.affection_level = affectionScore;//저장 데이터에 반영.
             OnAffectionChanged?.Invoke(affectionScore);//호감도 변경 이벤트 호출
             CheckEndingConditions();//호감도에 따른 엔딩 조건 체크
@@ -174,6 +178,10 @@ public class ScoreManager : MonoBehaviour
         socialScore = Mathf.Clamp(socialScore + value, 0, 300);//사회력 점수 범위(0~300) 내에서 증가
         if (oldScore != socialScore)//사회력 점수 변경 시
         {
+            if (oldScore > socialScore)//사회력 점수 감소 시 진동 기능 호출
+            {
+                HapticUX.Vibrate(500);
+            }
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.
             OnSocialScoreChanged?.Invoke(socialScore);//사회력 점수 변경 이벤트 호출
             CheckRankUp();//직급 업데이트 체크

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DataStructures;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class GameInitializer : MonoBehaviour
 {
@@ -29,7 +31,7 @@ public class GameInitializer : MonoBehaviour
             Debug.Log("[GameInitializer] 디버그 : 모든 게임 데이터 초기화 완료");
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);//현재 열린 씬 재로드 후 즉시 초기화 트랜잭션 반영.
-        }
+        }   
  #endif
     }
 
@@ -67,7 +69,6 @@ public class GameInitializer : MonoBehaviour
         }
         InitializeUI();
         StartCoroutine(InitializeAudioAfterDelay());//오디오 매니저 초기화는 딜레이 후 실행
-
         if (showDebugLogs)
             Debug.Log("[GameInitializer] 게임 초기화 완료");
     }
