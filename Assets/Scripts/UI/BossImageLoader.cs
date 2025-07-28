@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class BossImageLoader : MonoBehaviour
 {
@@ -29,13 +30,34 @@ public class BossImageLoader : MonoBehaviour
         public List<CharacterEntry> characters;
     }
 
-    private void Start()
+    void Start()
+    {
+        StartCoroutine(LoadCharacterDataFix());
+    }
+
+    private IEnumerator LoadCharacterDataFix()// File.ReadAllText -> UnityWebRequest 방식으로 변경하여 json데이터를 로드하는 메서드.
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Character_Data.json");
+        using (UnityWebRequest request = UnityWebRequest.Get(filePath))
+        {
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = request.downloadHandler.text;
+                CharacterData data = JsonUtility.FromJson<CharacterData>(json);
+                Debug.Log("[BossImageLoader] Character_Data.json 로드 성공!");
+                LoadBossSprite(data);
+            }
+            else
+            {
+                Debug.LogError($"[BossImageLoader] Character_Data.json 로드 실패: {request.error}");
+            }
+        }
+    }
+
+    private void LoadBossSprite(CharacterData data)//상사 스프라이트 이미지를 로드하는 메서드.
     {
         string selectedBoss = PlayerPrefs.GetString("SelectedBoss", "male_boss");//male_boss는 기본값.
-        string path = Path.Combine(Application.streamingAssetsPath, "Character_Data.json");
-        string json = File.ReadAllText(path);// 파일에서 텍스트를 읽어 json에 저장 
-        CharacterData data = JsonUtility.FromJson<CharacterData>(json);
-
         Character selectedCharacter = null;//List에서 key로 검색
         foreach (var entry in data.characters)
         {
@@ -45,7 +67,7 @@ public class BossImageLoader : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("선택된 상사 : " + selectedCharacter.name);
+         
 
         if (selectedCharacter == null)
         {
@@ -53,7 +75,10 @@ public class BossImageLoader : MonoBehaviour
             return;
         }
 
+        Debug.Log("선택된 상사 : " + selectedCharacter.name);
+
         Sprite bossSprite = Resources.Load<Sprite>(selectedCharacter.sprite_path);//Resources에서 Sprite로드
+
         if (bossSprite == null)
         {
             Debug.LogError("상사의 스프라이트 이미지를 찾을 수 없음" + selectedCharacter.sprite_path);

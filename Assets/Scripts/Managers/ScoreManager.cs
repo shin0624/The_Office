@@ -84,6 +84,11 @@ public class ScoreManager : MonoBehaviour
             yield return null;// SaveLoadManager가 초기화될 때까지 대기
         }
 
+        while (!SaveLoadManager.Instance.IsConfigLoaded())//250728 의존성 수정 : SaveLoadManager의 gameConfig 로드 완료까지 대기.
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
         gameConfig = SaveLoadManager.Instance.GetGameConfig();//게임 설정 로드
         LoadOrCreateGameData();//게임 시작 시 저장데이터 확인 및 초기화. 저장 데이터 존재 여부에 따라 분기 처리한다.
         isInitialized = true;//초기화 완료 플래그 설정

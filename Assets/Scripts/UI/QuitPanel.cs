@@ -68,13 +68,20 @@ public class QuitPanel : MonoBehaviour
 
     private bool SaveAllGameData()// 모든 게임 데이터를 저장하는 메서드.SaveLoadManage.cs의 메서드를 사용
     {
-        if (SaveLoadManager.Instance == null)
+        try
         {
-            Debug.LogError("[QuitPanel] SaveLoadManager 인스턴스가 없습니다!");
+            if (SaveLoadManager.Instance == null)
+            {
+                Debug.LogError("[QuitPanel] SaveLoadManager 인스턴스가 없습니다!");
+                return false;
+            }
+            return SaveLoadManager.Instance.SaveAllGameDataOnQuit();// SaveLoadManager에 모든 저장 로직 위임
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[QuitPanel] 데이터 저장 중 예외 발생: {e.Message}");
             return false;
         }
-
-        return SaveLoadManager.Instance.SaveAllGameDataOnQuit();// SaveLoadManager에 모든 저장 로직 위임
     }
 
     private IEnumerator ClosePanel()//패널을 닫고 GameQuitController 에 알리는 메서드.

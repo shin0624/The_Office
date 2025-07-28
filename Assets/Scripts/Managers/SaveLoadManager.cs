@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using static DataStructures;
 using System;
+using UnityEngine.Networking;
 public class SaveLoadManager : MonoBehaviour
 {
     //저장/로드 관리 스크립트. 게임 데이터의 저장, 로드, json 파일 관리를 담당하는 싱글톤 매니저로, 파일 시스템과의 모든 상호작용을 처리.
@@ -35,6 +36,7 @@ public class SaveLoadManager : MonoBehaviour
     private string saveFilePath;//저장 파일 경로
     private string configFilePath;//설정 파일 경로
     private GameConfig gameConfig;//로드된 게임 설정 데이터
+    private bool configLoaded = false;
 
     private void Awake()
     {
@@ -43,7 +45,7 @@ public class SaveLoadManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
             InitializePaths();//저장 경로 초기화
-            LoadGameConfig();//게임 설정 로드
+
         }
         else if (instance != this)
         {
@@ -51,33 +53,40 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        StartCoroutine(LoadGameConfigFix());
+    }
+
     private void InitializePaths()//저장 및 설정 파일의 전체 경로를 설정하는 메서드. 플랫폼 별로 올바른 경로를 생성한다.
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "Save_Data.json");//영구 저장 경로. persistentDataPath는 플랫폼에 따라 다르게 설정됨. 
-        configFilePath = Path.Combine(Application.streamingAssetsPath, "Game_Config.json");//스트리밍 에셋 폴더에서 설정 파일 경로. streamingAssetsPath는 빌드 시 읽기 전용으로 사용됨.
+        
         Debug.Log($"[SaveLoadManager] 저장 경로: {saveFilePath}");
-        Debug.Log($"[SaveLoadManager] 설정 파일 경로: {configFilePath}");
+        
     }
 
-    private void LoadGameConfig()//게임 설정 파일을 로드하는 메서드.
+    private IEnumerator LoadGameConfigFix()//게임 설정 파일을 로드하는 메서드. UnityWebRequest 방식으로 수정
     {
-        try
+        configFilePath = Path.Combine(Application.streamingAssetsPath, "Game_Config.json");//스트리밍 에셋 폴더에서 설정 파일 경로. streamingAssetsPath는 빌드 시 읽기 전용으로 사용됨.
+        Debug.Log($"[SaveLoadManager] 설정 파일 경로: {configFilePath}");
+
+        using (UnityWebRequest request = UnityWebRequest.Get(configFilePath))
         {
-            if (File.Exists(configFilePath))//설정 파일이 경로에 존재하면
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
             {
-                string json = File.ReadAllText(configFilePath, Encoding.UTF8);//파일 내용을 읽어옴.
-                gameConfig = JsonUtility.FromJson<GameConfig>(json);//JSON 문자열을 GameConfig 객체로 변환
+                string json = request.downloadHandler.text;
+                gameConfig = JsonUtility.FromJson<GameConfig>(json);
                 Debug.Log("[SaveLoadManager] Game_Config.json 로드 완료");
             }
             else
             {
                 Debug.LogError("[SaveLoadManager] Game_Config.json 파일이 존재하지 않습니다.");
+                CreateDefaultGameConfig();
             }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"[SaveLoadManager] Game_Config.json 로드 중 오류 발생: {e.Message}");//파일 읽기 오류 처리
-            CreateDefaultGameConfig();//기본 게임 설정을 생성
+            configLoaded = true;
         }
     }
 
@@ -103,6 +112,11 @@ public class SaveLoadManager : MonoBehaviour
         gameConfig.affection_thresholds = new AffectionThresholds();//호감도 임계값 초기화
     }
 
+    public bool IsConfigLoaded()//게임 설정 데이터가 로드되었는지 여부를 확인하는 메서드.
+    {
+        return configLoaded;
+    }
+
     public bool HasSaveData()//저장 데이터 존재 여부를 확인하는 메서드.
     {
         return File.Exists(saveFilePath);//저장 파일이 존재하면 true 반환
@@ -110,6 +124,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public SaveData LoadSaveData()//Sabe_Data.json파일을 읽어서 SaveData 객체로 반환하는 메서드. 파일 손상 시 기본 데이터를 생성하도록 예외처리를 하고, utf8인코딩으로 한글 깨짐을 방지.
     {
+        //250728 : 이 메서드에서, 사용되는 saveFilePath는 persistentDataPath --> persistentDataPath는 앱 전용 외부 저장소로, APK 내부에 압축되어 저장되는 StreamingAssets와 다르게 외부에 일반 파일로 저장되기에 File.ReadAllText() 사용 가능.
         try
         {
             if (HasSaveData())//저장 데이터가 존재하면
