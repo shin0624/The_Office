@@ -84,6 +84,11 @@ public class ScoreManager : MonoBehaviour
             yield return null;// SaveLoadManager가 초기화될 때까지 대기
         }
 
+        while (!SaveLoadManager.Instance.IsConfigLoaded())//250728 의존성 수정 : SaveLoadManager의 gameConfig 로드 완료까지 대기.
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
         gameConfig = SaveLoadManager.Instance.GetGameConfig();//게임 설정 로드
         LoadOrCreateGameData();//게임 시작 시 저장데이터 확인 및 초기화. 저장 데이터 존재 여부에 따라 분기 처리한다.
         isInitialized = true;//초기화 완료 플래그 설정
@@ -162,6 +167,10 @@ public class ScoreManager : MonoBehaviour
         affectionScore = Mathf.Clamp(affectionScore + value, 0, 100);//호감도 범위(0~100) 내에서 증가
         if (oldScore != affectionScore)//호감도 변경 시
         {
+            if (oldScore > affectionScore)// 호감도 감소 시 진동 기능 호출
+            {
+                HapticUX.Vibrate(500);
+            }
             currentSaveData.player_data.affection_level = affectionScore;//저장 데이터에 반영.
             OnAffectionChanged?.Invoke(affectionScore);//호감도 변경 이벤트 호출
             CheckEndingConditions();//호감도에 따른 엔딩 조건 체크
@@ -171,9 +180,13 @@ public class ScoreManager : MonoBehaviour
     public void AddSocialScore(int value)//사회력 점수를 증가시키는 메서드.
     {
         int oldScore = socialScore;//이전 사회력 점수 저장
-        socialScore = Mathf.Clamp(socialScore + value, 0, 99999);//사회력 점수 범위(0~99999) 내에서 증가
+        socialScore = Mathf.Clamp(socialScore + value, 0, 300);//사회력 점수 범위(0~300) 내에서 증가
         if (oldScore != socialScore)//사회력 점수 변경 시
         {
+            if (oldScore > socialScore)//사회력 점수 감소 시 진동 기능 호출
+            {
+                HapticUX.Vibrate(500);
+            }
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.
             OnSocialScoreChanged?.Invoke(socialScore);//사회력 점수 변경 이벤트 호출
             CheckRankUp();//직급 업데이트 체크

@@ -86,7 +86,7 @@ public class UIManager : MonoBehaviour
     {
         if (socialScoreSlider != null)
         {
-            float normalizedScore = Mathf.Clamp(socialScore / 999.99f, 0.0f, 100.0f);//사회력을 0~100 범위로 정규화(99999를 100으로)
+            float normalizedScore = Mathf.Clamp(socialScore / 300.0f, 0.0f, 100.0f);//사회력을 0~100 범위로 정규화(300를 100으로)
             socialScoreSlider.value = normalizedScore; //사회력 슬라이더 값 업데이트
         }
         if (socialScoreText != null)

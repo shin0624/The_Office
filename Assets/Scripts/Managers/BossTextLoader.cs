@@ -6,6 +6,9 @@ using System.IO;
 using System.Text;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.Networking;
+using Unity.VisualScripting;
+using System.Collections;
 
 public class BossTextLoader : MonoBehaviour
 {
@@ -49,22 +52,43 @@ public class BossTextLoader : MonoBehaviour
     void Start()
     {
         selectedBossType = PlayerPrefs.GetString("SelectedBoss", "male_boss"); //PlayerPrefs에서 선택된 상사 타입을 가져옴. 기본값은 "male_boss".
-        LoadDialogueData();//Dialogue_Data.json 파일을 로드.
-        ShowNextDialogue();//초기 대화 표시.
+        StartCoroutine(LoadDialogueDataFixed());//Dialogue_Data.json 파일을 로드.
+        //ShowNextDialogue();//초기 대화 표시. --> LoadDialogueDataFixed()에서 호출함.
     }
 
-    private void LoadDialogueData()//Dialogue_Data.json 파일을 로드하는 메서드.
+    // private void LoadDialogueData()//Dialogue_Data.json 파일을 로드하는 메서드.
+    // {
+    //     string path = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
+    //     if (File.Exists(path))
+    //     {
+    //         string json = File.ReadAllText(path, Encoding.UTF8);//파일의 내용을 읽어옴.
+    //         dialogueData = JsonUtility.FromJson<DialogueData>(json);//읽어온 JSON 문자열을 DialogueData 객체로 변환.
+    //         Debug.Log("[BossTextLoader] Dialogue_Data.json 로드 완료");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError("[BossTextLoader] Dialogue_Data.json 파일을 찾을 수 없습니다.");
+    //     }
+    // }
+
+
+    private IEnumerator LoadDialogueDataFixed()//Dialogue_Data.json 파일을 로드할 때 UnityWebRequest를 사용하여 Android APK 압축 구조를 유니티에서 자동 처리하도록 하는 메서드.
     {
-        string path = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
-        if (File.Exists(path))
+        string filePath = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
+        using (UnityWebRequest request = UnityWebRequest.Get(filePath))// request 객체를 통해 GET으로 파일경로를 가져온다. using 문으로 작업 종료 후 자동 리소스 해제가 수행됨.
         {
-            string json = File.ReadAllText(path, Encoding.UTF8);//파일의 내용을 읽어옴.
-            dialogueData = JsonUtility.FromJson<DialogueData>(json);//읽어온 JSON 문자열을 DialogueData 객체로 변환.
-            Debug.Log("[BossTextLoader] Dialogue_Data.json 로드 완료");
-        }
-        else
-        {
-            Debug.LogError("[BossTextLoader] Dialogue_Data.json 파일을 찾을 수 없습니다.");
+            yield return request.SendWebRequest();//파일 로드 완료까지 대기한다.
+            if (request.result == UnityWebRequest.Result.Success)//파일을 받아오는데 성공하면
+            {
+                string json = request.downloadHandler.text;//downloadHandler.text를 사용하여 json을 문자열로 반환한다.
+                dialogueData = JsonUtility.FromJson<DialogueData>(json);
+                Debug.Log("[BossTextLoader] Android JSON 로드 성공!");
+                ShowNextDialogue();//로드 완료 후 UI 업데이트
+            }
+            else
+            {
+                Debug.LogError($"[BossTextLoader] Android JSON 로드 실패: {request.error}");
+            }
         }
     }
 
