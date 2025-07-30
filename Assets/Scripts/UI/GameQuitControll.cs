@@ -37,13 +37,17 @@ public class GameQuitControll : MonoBehaviour
 
     void Update()
     {
-        if (Application.platform == RuntimePlatform.Android)
-        {
+        // if (Application.platform == RuntimePlatform.Android)
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Escape))
+        //     {
+        //         HandleAndroidBackButton();
+        //     }
+        // }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 HandleAndroidBackButton();
             }
-        }
         
     }
 

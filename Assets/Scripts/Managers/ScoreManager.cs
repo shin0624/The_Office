@@ -221,6 +221,8 @@ public class ScoreManager : MonoBehaviour
 
             OnRankChanged?.Invoke(currentRank);//직급 변경 이벤트 호출
             Debug.Log($"[ScoreManager] 직급 변경: {oldRank} -> {currentRank}");//직급 변경 로그 출력
+
+            // 250730. 현재 직급이 상사의 직급보다 높아지면 TrueEnding으로 분기하는 로직 추가 예정
         }
     }
 

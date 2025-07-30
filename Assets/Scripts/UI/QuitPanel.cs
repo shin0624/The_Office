@@ -23,7 +23,7 @@ public class QuitPanel : MonoBehaviour
 
     private void SetUpButtons()
     {
-        quitButton.onClick.AddListener(() => OnQuitButtonClicked());
+        quitButton.onClick.AddListener(() => StartCoroutine(OnQuitButtonClicked()));
         backButton.onClick.AddListener(OnBackButtonClicked);
     }
 
@@ -110,11 +110,7 @@ public class QuitPanel : MonoBehaviour
     private void QuitApplication()
     {
         Debug.Log("[QuitPanel] 애플리케이션 종료");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+        Application.Quit();
     }
     
     void OnDestroy()
