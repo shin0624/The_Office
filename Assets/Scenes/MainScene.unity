@@ -3716,6 +3716,7 @@ GameObject:
   - component: {fileID: 1936717036}
   - component: {fileID: 1936717038}
   - component: {fileID: 1936717040}
+  - component: {fileID: 1936717041}
   m_Layer: 0
   m_Name: MainSceneManager
   m_TagString: Untagged
@@ -3798,6 +3799,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foyerButton: {fileID: 1255276926}
   foyerUI: {fileID: 1298792180}
+--- !u!114 &1936717041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936717035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df003890d6436c84ea8103cfb9d706eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1949683322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3369804376934728544, guid: b82888ed02909134794e1232b434a8b2, type: 3}

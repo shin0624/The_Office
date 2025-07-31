@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DataStructures;
 
+public enum EndingBranchType { Affection, Rank }// 엔딩 분기 타입 열거체 선언.
+
 public class ScoreManager : MonoBehaviour
 {
     //플레이어의 사회력점수와 상사 호감도를 관리하는 클래스. 게임의 핵심인 두 점수를 관리하고, 승진/엔딩 조건을 체크. 싱글톤으로 작성. 
@@ -48,6 +50,10 @@ public class ScoreManager : MonoBehaviour
     public Action OnBadEnding;//베드 엔딩 이벤트
     public Action OnTrueEnding;//트루 엔딩 이벤트
     public Action<SaveData> OnGameDataLoaded;//게임 데이터 로드 이벤트
+    public event Action<bool, EndingBranchType> OnEndingBranchChanged;// 엔딩 분기 액션
+    public string rankTrue = "사장";
+    public string rankEnableBranch = "차장";//Good/True엔딩 분기 가능 직급. 엔딩 분기 시점을 설정하지 않으면 게임 시작 직후 엔딩으로 분기할 수 있으므로, 이를 방지하기 위함
+    private bool isEndingBranchEndabled = false;//Good/True엔딩 분기 플래그.
 
     //Getter 메서드들
     public int GetAffectionScore() => affectionScore;//호감도 반환
@@ -68,6 +74,11 @@ public class ScoreManager : MonoBehaviour
         {
             Destroy(gameObject);//중복 인스턴스 제거
         }
+    }
+
+    private void Start()
+    {
+        CheckEndingBranchValidity();//엔딩 브랜치 가능 여부 체크   
     }
 
     private void InitializeGame()//게임 초기화 메서드. 게임 설정과 저장 데이터를 로드하고, 초기 상태를 설정한다.
@@ -173,6 +184,7 @@ public class ScoreManager : MonoBehaviour
             }
             currentSaveData.player_data.affection_level = affectionScore;//저장 데이터에 반영.
             OnAffectionChanged?.Invoke(affectionScore);//호감도 변경 이벤트 호출
+            CheckEndingBranchValidity();//엔딩 분기 플래그 체크
             CheckEndingConditions();//호감도에 따른 엔딩 조건 체크
         }
     }
@@ -190,24 +202,31 @@ public class ScoreManager : MonoBehaviour
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.
             OnSocialScoreChanged?.Invoke(socialScore);//사회력 점수 변경 이벤트 호출
             CheckRankUp();//직급 업데이트 체크
+            CheckEndingBranchValidity();// 엔딩 분기 플래그 체크
         }
     }
 
-    private void CheckEndingConditions()//호감도에 따른 엔딩 조건을 체크하는 메서드. Game_Config.json의 임계값 기준으로 엔딩 조건을 체크한다. 엔딩 처리 로직은 추후 작성.
+    private void CheckEndingConditions()//호감도에 따른 엔딩 조건을 체크하는 메서드. Game_Config.json의 임계값 기준으로 엔딩 조건을 체크한다. 엔딩 처리 로직 작성 중(250731)
     {
         if (gameConfig?.affection_thresholds == null) return;//호감도 임계값 정보가 없으면 반환.
-        if (affectionScore <= gameConfig.affection_thresholds.bad_ending)//호감도가 베드엔딩 임계값이면
-        {
-            Debug.Log("[ScoreManager] 베드 엔딩");
-            OnBadEnding?.Invoke();//베드엔딩 이벤트 호출
-            //추가적인 엔딩 처리 로직 작성.
-        }
-        else if (affectionScore >= gameConfig.affection_thresholds.true_ending)//호감도가 트루엔딩 임계값 이상이면
-        {
-            Debug.Log("[ScoreManager] 트루 엔딩");
-            OnTrueEnding?.Invoke();//트루엔딩 이벤트 호출
-            //추가적인 엔딩 처리 로직 작성.
-        }
+        // if (affectionScore <= gameConfig.affection_thresholds.bad_ending)//호감도가 베드엔딩 임계값이면
+        // {
+        //     Debug.Log("[ScoreManager] 베드 엔딩");
+        //     OnBadEnding?.Invoke();//베드엔딩 이벤트 호출
+        //     //추가적인 엔딩 처리 로직 작성.
+        // }
+        // else if (affectionScore < gameConfig.affection_thresholds.true_ending && affectionScore >= gameConfig.affection_thresholds.low_threshold)//호감도 100 이하 && 호감도 30 이상 && 플레이어직급==사장 이면 True엔딩.
+        // {
+        //     Debug.Log("[ScoreManager] 트루 엔딩");
+        //     OnTrueEnding?.Invoke();//트루엔딩 이벤트 호출
+        //     //추가적인 엔딩 처리 로직 작성.
+        // }
+        
+        if(!isEndingBranchEndabled)//분기 유효화 전에는 무조건 엔딩 체크 안함 --> 엔딩 플래그 설정 이후 부터 분기 가능.
+            return;
+
+        bool isTrueBranch = affectionScore >= gameConfig.affection_thresholds.low_threshold && affectionScore <= gameConfig.affection_thresholds.true_ending;//호감도 30 이상 100 이하 시 True 조건(1) 만족
+        OnEndingBranchChanged?.Invoke(isTrueBranch, EndingBranchType.Affection);// isTrueBranch의 t/f값과 호감도 플래그를 전달.
     }
 
     private void CheckRankUp()//사회력 점수에 따른 직급 업데이트를 체크하는 메서드.
@@ -221,9 +240,12 @@ public class ScoreManager : MonoBehaviour
 
             OnRankChanged?.Invoke(currentRank);//직급 변경 이벤트 호출
             Debug.Log($"[ScoreManager] 직급 변경: {oldRank} -> {currentRank}");//직급 변경 로그 출력
-
-            // 250730. 현재 직급이 상사의 직급보다 높아지면 TrueEnding으로 분기하는 로직 추가 예정
         }
+
+        if (isEndingBranchEndabled)//분기 유효화 전에는 무조건 엔딩 체크 안함. --> 엔딩 플래그 설정 이후 부터 분기 가능
+            return;
+        bool isTrueBranch = currentRank == rankTrue;//현재 직급이 사장이 되면 True 조건(2) 만족
+        OnEndingBranchChanged?.Invoke(isTrueBranch, EndingBranchType.Rank);//t/f값과 직급 플래그 전달.
     }
 
     private void SaveGame()//게임 데이터를 저장하는 메서드.
@@ -256,6 +278,12 @@ public class ScoreManager : MonoBehaviour
         else return "높음";//높은 호감도
     }
 
+    private void CheckEndingBranchValidity()//엔딩분기 플래그의 t/f를 결정하는 메서드.
+    {
+        string playerRank = GetCurrentRank();
+        isEndingBranchEndabled = playerRank == rankEnableBranch;// 플레이어가 차장이 될 때 엔딩 분기 유효 플래그 = true가 될 것.
+    }
+
     //디버그용 메서드들
     [ContextMenu("새 게임 시작")]
     private void DebugNewGame()//디버그용 새 게임 시작 메서드. 에디터에서 실행 가능.
@@ -277,7 +305,7 @@ public class ScoreManager : MonoBehaviour
     {
         Debug.Log($"[ScoreManager] 현재 상태 - 호감도: {affectionScore}, 사회력: {socialScore}, 직급: {currentRank}, 대화 ID: {currentDialogueId}");
     }
-        [ContextMenu("점수 +10/+100")]
+    [ContextMenu("점수 +10/+100")]
     public void DebugAddScores()//디버그용 점수 증가 메서드. 에디터에서 실행 가능.
     {
         UpdateScores(10, 100);
