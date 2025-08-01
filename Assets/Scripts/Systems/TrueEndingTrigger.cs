@@ -32,6 +32,10 @@ public class TrueEndingTrigger : MonoBehaviour
         if (scoreManager != null)
             scoreManager.OnEndingBranchChanged -= OnEndingBranchCheck;
     }
+    void Start()
+    {
+        Debug.Log($"endingTriggered = {endingTriggered}");
+    }
 
     private void OnEndingBranchCheck(bool value, EndingBranchType which)//ScoreManager에서 넘어온 t/f값과 플래그에 따라 엔딩 분기를 결정하는 메서드.
     {
@@ -43,22 +47,27 @@ public class TrueEndingTrigger : MonoBehaviour
 
     private void CheckEndingBranch()//각 value 값들로부터 엔딩을 분기하는 메서드.
     {
+        if (!ScoreManager.Instance.IsEndingBranchEnabled()) return;//플레이어 직급이 "차장" 미만일 때는 아예 분기하지 않도록 안전장치를 추가하여 게임 시작 직후 bad엔딩에 빠지는 예외를 방지.
+
         if (endingTriggered) return;//엔딩 트리거 false이면 분기X (엔딩 유효화 플래그는 ScoreManager 내부 분기에서 이미 필터링 됨.)
 
         if (affectionBranch && rankBranch)//True엔딩 (호감도 true && 직급 true)
         {
             endingTriggered = true;// 분기 결과 어떤 엔딩이라도 하나가 실행되면 바로 endingTringger는 true가 되고, 이후 추가 호출에서는 중복 엔딩 처리 x --> 이는 엔딩 이후 플래그 초기화 필요. 
             TriggerEnding(EndingType.True);
+            Debug.Log("True 엔딩 진입");
         }
         else if (affectionBranch && !rankBranch)//Good엔딩 (호감도 true && 직급 false)
         {
             endingTriggered = true;
             TriggerEnding(EndingType.Good);
+            Debug.Log("Good 엔딩 진입");
         }
-        else if(!affectionBranch)//Bad엔딩 (호감도 false && 직급 false)
+        else if (!affectionBranch)//Bad엔딩 (호감도 false && 직급 false)
         {
             endingTriggered = true;
             TriggerEnding(EndingType.Bad, rankBranch);
+            Debug.Log("BAD 엔딩 진입");
         }
     }
 
@@ -89,5 +98,20 @@ public class TrueEndingTrigger : MonoBehaviour
         }
         // ScoreManager 등에서 점수 리셋 등 초기화
         // 엔딩 후 MainScene/상사선택 등으로 이동 제어
+    }
+
+    public void ResetEndingTrigger()// 엔딩 분기 변수 및 트리거 초기화 메서드. 상태 초기화는 ScoreManager.cs의 CreateNewGame()을 사용.
+    {
+        affectionBranch = false;
+        rankBranch = false;
+        endingTriggered = false;
+    }
+
+    public void OnClickReplayOrNextBoss()//엔딩 이후 재도전 또는 다음 상사 선택 화면으로 넘어가는 등 엔딩 이후에 호출되는 초기화 메서드.
+    {
+        ScoreManager.Instance?.CreateNewGame();//모든 상태, 저장 데이터, UI 초기화 
+        this.ResetEndingTrigger();//TrueEndingTrigger 내부 상태 리셋
+
+        //이후 로직 작성 예정
     }
 }

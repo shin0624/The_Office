@@ -141,7 +141,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log($"[ScoreManager] 데이터 로드 완료 - 호감도: {affectionScore}, 사회력: {socialScore}, 직급: {currentRank}");
     }
 
-    private void CreateNewGame()//새 게임을 시작할 때 호출되는 메서드. 기본값으로 초기화하고 저장한다.
+    public void CreateNewGame()//새 게임을 시작할 때 호출되는 메서드. 기본값으로 초기화하고 저장한다.
     {
         currentSaveData = SaveLoadManager.Instance.CreateDefaultSaveData();// 기본 저장 데이터 생성
         affectionScore = currentSaveData.player_data.affection_level;//기본 호감도
@@ -242,7 +242,7 @@ public class ScoreManager : MonoBehaviour
             Debug.Log($"[ScoreManager] 직급 변경: {oldRank} -> {currentRank}");//직급 변경 로그 출력
         }
 
-        if (isEndingBranchEndabled)//분기 유효화 전에는 무조건 엔딩 체크 안함. --> 엔딩 플래그 설정 이후 부터 분기 가능
+        if (!isEndingBranchEndabled)//분기 유효화 전에는 무조건 엔딩 체크 안함. --> 엔딩 플래그 설정 이후 부터 분기 가능
             return;
         bool isTrueBranch = currentRank == rankTrue;//현재 직급이 사장이 되면 True 조건(2) 만족
         OnEndingBranchChanged?.Invoke(isTrueBranch, EndingBranchType.Rank);//t/f값과 직급 플래그 전달.
@@ -282,51 +282,12 @@ public class ScoreManager : MonoBehaviour
     {
         string playerRank = GetCurrentRank();
         isEndingBranchEndabled = playerRank == rankEnableBranch;// 플레이어가 차장이 될 때 엔딩 분기 유효 플래그 = true가 될 것.
+        Debug.Log($"엔딩 분기 플래그  = {isEndingBranchEndabled}");
     }
 
-    //디버그용 메서드들
-    [ContextMenu("새 게임 시작")]
-    private void DebugNewGame()//디버그용 새 게임 시작 메서드. 에디터에서 실행 가능.
+    public bool IsEndingBranchEnabled()
     {
-        SaveLoadManager.Instance.DeleteSaveData();//기존 저장 데이터 삭제
-        Debug.Log("[ScoreManager] 디버그 - 새 게임 시작");
-        CreateNewGame();
-    }
-
-    [ContextMenu("게임 저장")]
-    private void DebugSaveGame()//디버그용 게임 저장 메서드. 에디터에서 실행 가능.
-    {
-        SaveGame();//현재 게임 상태 저장
-        Debug.Log("[ScoreManager] 디버그 - 게임 저장 완료");
-    }
-
-    [ContextMenu("현재 상태 출력")]
-    private void DebugPrintStatus()//디버그용 현재 상태 출력 메서드. 에디터에서 실행 가능.
-    {
-        Debug.Log($"[ScoreManager] 현재 상태 - 호감도: {affectionScore}, 사회력: {socialScore}, 직급: {currentRank}, 대화 ID: {currentDialogueId}");
-    }
-    [ContextMenu("점수 +10/+100")]
-    public void DebugAddScores()//디버그용 점수 증가 메서드. 에디터에서 실행 가능.
-    {
-        UpdateScores(10, 100);
-    }
-
-    [ContextMenu("점수 초기화")]
-    public void DebugResetScores()//디버그용 점수 초기화 메서드. 에디터에서 실행 가능.
-    {
-        affectionScore = 50;
-        socialScore = 0;
-        currentRank = "인턴";
-        if (currentSaveData != null)
-        {
-            currentSaveData.player_data.affection_level = affectionScore;
-            currentSaveData.player_data.social_score = socialScore;
-            currentSaveData.player_data.current_rank = currentRank;
-        }
-        OnAffectionChanged?.Invoke(affectionScore);
-        OnSocialScoreChanged?.Invoke(socialScore);
-        OnRankChanged?.Invoke(currentRank);
-        SaveGame();
+        return isEndingBranchEndabled;
     }
 
 }
