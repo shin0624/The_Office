@@ -142,23 +142,4 @@ public class UIManager : MonoBehaviour
             ScoreManager.Instance.OnGameDataLoaded -= OnGameDataLoaded;
         }
     }
-    // 디버그 메서드들 (인스펙터에서 테스트 가능)
-    [ContextMenu("테스트: 점수 증가")]
-    public void TestIncreaseScores()
-    {
-        if (ScoreManager.Instance != null)
-        {
-            ScoreManager.Instance.UpdateScores(10, 500);
-        }
-    }
-
-    [ContextMenu("테스트: 점수 초기화")]
-    public void TestResetScores()
-    {
-        if (ScoreManager.Instance != null)
-        {
-            ScoreManager.Instance.DebugResetScores();
-        }
-    }
-
 }

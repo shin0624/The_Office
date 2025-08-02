@@ -19,6 +19,7 @@ public class TrueEndingTrigger : MonoBehaviour
     private bool affectionBranch = false;
     private bool rankBranch = false;
     private bool endingTriggered = false;
+    [SerializeField] private EndingUIController endingUIController;
 
     void OnEnable()
     {
@@ -76,26 +77,29 @@ public class TrueEndingTrigger : MonoBehaviour
         if (endingTriggered) return;//중복 트리거 방지
         endingTriggered = true; // 엔딩 클리어 이후 다시 false로 변경해야 함
 
-        switch (type)// 엔딩 별로 필요한 연출/초기화/콜렉션 저장 등 호출
-        {
-            case EndingType.True:
-                Debug.Log("★ True Ending! 회사 최고 리더 등극 ★");
-                // True 엔딩 컷신/이미지/업적/컬렉션 등 추가
-                break;
+        endingUIController.ShowEnding(type);
+        
+        // switch (type)// 엔딩 별로 필요한 연출/초기화/콜렉션 저장 등 호출
+        // {
+        //     case EndingType.True:
+        //         Debug.Log("★ True Ending! 회사 최고 리더 등극 ★");
 
-            case EndingType.Good:
-                Debug.Log("☆ Good Ending! 상사와 진한 신뢰관계 형성 ☆");
-                // Good엔딩 연출, 등등
-                break;
+        //         // True 엔딩 컷신/이미지/업적/컬렉션 등 추가
+        //         break;
 
-            case EndingType.Bad:
-                if (rankBranchValue)
-                    Debug.Log("Bad 엔딩(내부고발형 등) -- 직급은 높지만 해고");
-                else
-                    Debug.Log("Bad 엔딩(권고사직/퇴출) -- 평범하게 망함");
-                // 각각 연출/메시지/업적 상이하게 연출
-                break;
-        }
+        //     case EndingType.Good:
+        //         Debug.Log("☆ Good Ending! 상사와 진한 신뢰관계 형성 ☆");
+        //         // Good엔딩 연출, 등등
+        //         break;
+
+        //     case EndingType.Bad:
+        //         if (rankBranchValue)
+        //             Debug.Log("Bad 엔딩(내부고발형 등) -- 직급은 높지만 해고");
+        //         else
+        //             Debug.Log("Bad 엔딩(권고사직/퇴출) -- 평범하게 망함");
+        //         // 각각 연출/메시지/업적 상이하게 연출
+        //         break;
+        // }
         // ScoreManager 등에서 점수 리셋 등 초기화
         // 엔딩 후 MainScene/상사선택 등으로 이동 제어
     }
