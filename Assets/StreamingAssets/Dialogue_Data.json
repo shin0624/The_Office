@@ -9,7 +9,7 @@
         {
           "choice_id": 1,
           "choice_text": "네, 완벽하게 준비했습니다!",
-          "affection_change": 10,
+          "affection_change": 2,
           "social_score_change": 15
         },
         {

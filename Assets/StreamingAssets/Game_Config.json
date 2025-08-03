@@ -66,6 +66,6 @@
   "affection_thresholds": {
     "bad_ending": 0,
     "low_threshold": 30,
-    "high_threshold": 70
+    "high_threshold": 100
   }
 }
