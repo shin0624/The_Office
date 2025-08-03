@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 157052321}
   - component: {fileID: 157052320}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: GameViewPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2658,7 +2658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1168356918
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3758,7 +3758,7 @@ RectTransform:
   m_GameObject: {fileID: 1592315808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.5380387, y: 10.831118, z: 1}
+  m_LocalScale: {x: 7.682195, y: 19.496012, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 796134183}
@@ -4133,7 +4133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b8f23dc969b42249a745c721edf7862, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4850,18 +4850,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3218394dc4db04f95ab03d2644f500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endingPanel: {fileID: 1168356917}
   EndingCanvasPanel: {fileID: 1168356921}
-  endingImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  endingTitle:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  endingImage: {fileID: 1675425452}
+  endingTitle: {fileID: 1592315810}
   endingButtons:
   - {fileID: 1606260509}
   - {fileID: 693162014}
+  endingTitleSprite:
+  - {fileID: 21300000, guid: 8a9a131bdde34364992391415f32f2ec, type: 3}
+  - {fileID: 21300000, guid: 359fd3555c9765c46938ed492af3b795, type: 3}
+  - {fileID: 21300000, guid: ceef3c60bb1a3214dac80bc5a593ce9e, type: 3}
+  endingImageSprite:
+  - {fileID: 21300000, guid: 9b8f23dc969b42249a745c721edf7862, type: 3}
+  - {fileID: 21300000, guid: 874c55ecae8b8044cb8b118659506842, type: 3}
+  - {fileID: 21300000, guid: ccf6edf7eced5ef40a4687074648a269, type: 3}
 --- !u!224 &1949683322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3369804376934728544, guid: b82888ed02909134794e1232b434a8b2, type: 3}

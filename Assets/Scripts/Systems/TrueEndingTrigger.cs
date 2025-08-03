@@ -40,6 +40,7 @@ public class TrueEndingTrigger : MonoBehaviour
 
     private void OnEndingBranchCheck(bool value, EndingBranchType which)//ScoreManager에서 넘어온 t/f값과 플래그에 따라 엔딩 분기를 결정하는 메서드.
     {
+        Debug.Log($"[TrueEndingTrigger] 엔딩 브랜치 체크: {which} = {value}");
         if (which == EndingBranchType.Affection) affectionBranch = value;
         if (which == EndingBranchType.Rank) rankBranch = value;
 
@@ -54,21 +55,19 @@ public class TrueEndingTrigger : MonoBehaviour
 
         if (affectionBranch && rankBranch)//True엔딩 (호감도 true && 직급 true)
         {
-            endingTriggered = true;// 분기 결과 어떤 엔딩이라도 하나가 실행되면 바로 endingTringger는 true가 되고, 이후 추가 호출에서는 중복 엔딩 처리 x --> 이는 엔딩 이후 플래그 초기화 필요. 
-            TriggerEnding(EndingType.True);
             Debug.Log("True 엔딩 진입");
+            TriggerEnding(EndingType.True);
         }
         else if (affectionBranch && !rankBranch)//Good엔딩 (호감도 true && 직급 false)
         {
-            endingTriggered = true;
-            TriggerEnding(EndingType.Good);
             Debug.Log("Good 엔딩 진입");
+            TriggerEnding(EndingType.Good);
         }
         else if (!affectionBranch)//Bad엔딩 (호감도 false && 직급 false)
         {
-            endingTriggered = true;
-            TriggerEnding(EndingType.Bad, rankBranch);
             Debug.Log("BAD 엔딩 진입");
+            TriggerEnding(EndingType.Bad, rankBranch);
+            
         }
     }
 
@@ -78,34 +77,14 @@ public class TrueEndingTrigger : MonoBehaviour
         endingTriggered = true; // 엔딩 클리어 이후 다시 false로 변경해야 함
 
         endingUIController.ShowEnding(type);
-        
-        // switch (type)// 엔딩 별로 필요한 연출/초기화/콜렉션 저장 등 호출
-        // {
-        //     case EndingType.True:
-        //         Debug.Log("★ True Ending! 회사 최고 리더 등극 ★");
-
-        //         // True 엔딩 컷신/이미지/업적/컬렉션 등 추가
-        //         break;
-
-        //     case EndingType.Good:
-        //         Debug.Log("☆ Good Ending! 상사와 진한 신뢰관계 형성 ☆");
-        //         // Good엔딩 연출, 등등
-        //         break;
-
-        //     case EndingType.Bad:
-        //         if (rankBranchValue)
-        //             Debug.Log("Bad 엔딩(내부고발형 등) -- 직급은 높지만 해고");
-        //         else
-        //             Debug.Log("Bad 엔딩(권고사직/퇴출) -- 평범하게 망함");
-        //         // 각각 연출/메시지/업적 상이하게 연출
-        //         break;
-        // }
+    
         // ScoreManager 등에서 점수 리셋 등 초기화
         // 엔딩 후 MainScene/상사선택 등으로 이동 제어
     }
 
-    public void ResetEndingTrigger()// 엔딩 분기 변수 및 트리거 초기화 메서드. 상태 초기화는 ScoreManager.cs의 CreateNewGame()을 사용.
+    private void ResetEndingTrigger()// 엔딩 분기 변수 및 트리거 초기화 메서드. 상태 초기화는 ScoreManager.cs의 CreateNewGame()을 사용.
     {
+        Debug.Log("[TrueEndingTrigger] 엔딩 트리거 리셋");
         affectionBranch = false;
         rankBranch = false;
         endingTriggered = false;
