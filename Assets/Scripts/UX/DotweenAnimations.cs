@@ -10,6 +10,7 @@ public static class DotweenAnimations
 {
     // DOTween 래핑 메서드 모음 클래스.
     // 엔딩 분기(true, good, bad)에 맞추어서 이미지, 타이틀에 들어가는 요소가 다를 것.
+    // CollectionScene에서 사용할 애니메이션은 책 표지 넘기기와 같은 애니메이션
     private static bool isInitialized = false;
     public static void DotweenInit()
     {
@@ -58,4 +59,91 @@ public static class DotweenAnimations
         });
     }
 
+    //-------------------------------CollectScene 용 애니메이션
+
+    public static Tween FlipBookCover(RectTransform coverTransform, float flipAngle = -180.0f, float duration = 1.5f, Ease ease = Ease.OutQuad)//사원 수첩의 표지 3d 회전 넘기기 애니메이션.
+    {
+        return coverTransform.DORotate(new Vector3(0.0f, flipAngle, 0.0f), duration).SetEase(ease);
+    }
+
+    public static Tween FadeOutBookCover(CanvasGroup canvasGroup, float duration = 0.5f)//사원 수첩 내지 페이드아웃 메서드.
+    {
+        return canvasGroup.DOFade(0f, duration).SetEase(Ease.InQuad);
+    }
+
+    public static Tween FadeInBookCover(CanvasGroup canvasGroup, float duration = 0.5f)//사원 수첩 내지 페이드인 메서드.
+    {
+        canvasGroup.alpha = 0.0f;
+        return canvasGroup.DOFade(1.0f, duration).SetEase(Ease.OutQuad);
+    }
+
+
+    public static void ShowCollectionCard(GameObject card, float duration = 0.6f, float delay = 0.0f)// 사원수첩 내 엔딩 컬렉션 카드 등장 애니메이션 메서드.
+    {
+        card.transform.localScale = Vector3.zero;
+        var canvasGroup = card.GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0.0f;
+        }
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(card.transform.DOScale(1.2f, duration * 0.6f)).Join(canvasGroup != null ? canvasGroup.DOFade(1.0f, duration * 0.6f) : null)
+                                                                      .Append(card.transform.DOScale(1.0f, duration * 0.4f))
+                                                                      .SetDelay(delay)
+                                                                      .SetEase(Ease.OutBack);
+    }
+
+    public static void ShowCollectionCardsSequentially(List<GameObject> cards, float staggerDelay = 0.1f, float duration = 0.6f)//사원 수첩 내 컬렉션 카드 순차 등장 애니메이션 메서드.
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            float delay = i * staggerDelay;
+            ShowCollectionCard(cards[i], duration, delay);
+        }
+    }
+
+    public static void NewCollectionItemEffect(GameObject item, float duration = 1.0f)// 사원수첩 내 새 아이템 획득 효과 메서드.
+    {
+        var sequence = DOTween.Sequence();
+        var image = item.GetComponent<Image>();
+        if (image != null)// 황금빛 나는 효과
+        {
+            Color originalColor = image.color;
+            sequence.Append(image.DOColor(Color.yellow, duration * 0.3f)).Append(image.DOColor(originalColor, duration * 0.3f)).SetLoops(2);
+        }
+        sequence.Join(item.transform.DOScale(1.1f, duration * 0.2f).SetLoops(4, LoopType.Yoyo));// 스케일 펄스 효과
+    }
+
+    public static Tween FadeOutCollectionScene(CanvasGroup canvasGroup, float duration = 0.5f, Action onComplete = null)//사원수첩 씬 전체 페이드아웃 메서드.
+    {
+        return canvasGroup.DOFade(0.0f, duration).SetEase(Ease.InQuad).OnComplete(() => onComplete?.Invoke());
+    }
+
+    public static void SlidePageTransition(RectTransform currentPage, RectTransform nextPage, bool slideLeft = true, float duration = 0.5f, Action onComplete = null)//사원수첩 페이지 전환 효과 메서드 (좌우 슬라이드)
+    {
+        float slideDistance = currentPage.rect.width;
+        Vector3 slideDirection = slideLeft ? Vector3.left : Vector3.right;
+
+        var sequence = DOTween.Sequence();
+
+        // 현재 페이지 슬라이드 아웃
+        sequence.Append(currentPage.DOMove(currentPage.position + slideDirection * slideDistance, duration));
+
+        // 다음 페이지 슬라이드 인 (반대 방향에서 시작)
+        nextPage.position = nextPage.position - slideDirection * slideDistance;
+        sequence.Join(nextPage.DOMove(nextPage.position + slideDirection * slideDistance, duration));
+
+        sequence.SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                {
+                    currentPage.gameObject.SetActive(false);
+                    onComplete?.Invoke();
+                });
+    }
+
+    public static void KillTweensOnTransform(Transform target)// 특정 Transform의 DOTween 애니메이션 정지 메서드.
+    {
+        target.DOKill();
+    }
 }

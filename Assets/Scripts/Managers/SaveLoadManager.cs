@@ -54,7 +54,8 @@ public class SaveLoadManager : MonoBehaviour
     }
 
     void Start()
-    {
+    { 
+        DotweenAnimations.DotweenInit();
         StartCoroutine(LoadGameConfigFix());
     }
 
