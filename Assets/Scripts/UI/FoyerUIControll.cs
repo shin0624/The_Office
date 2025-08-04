@@ -18,13 +18,12 @@ public class FoyerUIControll : MonoBehaviour
         continueButton.onClick.AddListener(GameContinue);
         settingButton.onClick.AddListener(OpenSettingUI);
         collectionSceneButton.onClick.AddListener(OpenCollectionScene);
-    }  
+    }
 
     private void GameContinue()
     {
-        if (Time.timeScale != 1.0f && gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
-            Time.timeScale = 1.0f; 
             gameObject.SetActive(false);
         }
     }
@@ -39,12 +38,13 @@ public class FoyerUIControll : MonoBehaviour
         SceneManager.LoadScene("CollectionScene");
     }
 
-    void OnDisable()
-    {
-        continueButton.onClick.RemoveAllListeners();
-        settingButton.onClick.RemoveAllListeners();
-        collectionSceneButton.onClick.RemoveAllListeners();
-    }
+
+     void OnDisable()
+     {
+         continueButton.onClick.RemoveAllListeners();
+         settingButton.onClick.RemoveAllListeners();
+         collectionSceneButton.onClick.RemoveAllListeners();
+     }
 
 
 }

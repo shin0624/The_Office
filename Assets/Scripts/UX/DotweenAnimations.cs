@@ -61,9 +61,10 @@ public static class DotweenAnimations
 
     //-------------------------------CollectScene 용 애니메이션
 
-    public static Tween FlipBookCover(RectTransform coverTransform, float flipAngle = -180.0f, float duration = 1.5f, Ease ease = Ease.OutQuad)//사원 수첩의 표지 3d 회전 넘기기 애니메이션.
+    public static Tween FlipBookCover(RectTransform coverTransform, float flipAngle = -180.0f, float duration = 1.5f, Ease ease = Ease.OutExpo)//사원 수첩의 표지 3d 회전 넘기기 애니메이션.
     {
-        return coverTransform.DORotate(new Vector3(0.0f, flipAngle, 0.0f), duration).SetEase(ease);
+        // return coverTransform.DORotate(new Vector3(0.0f, flipAngle, 0.0f), duration).SetEase(ease);
+        return coverTransform.DORotate(new Vector3(0.0f, flipAngle, 0.0f), duration, RotateMode.FastBeyond360).SetEase(ease);
     }
 
     public static Tween FadeOutBookCover(CanvasGroup canvasGroup, float duration = 0.5f)//사원 수첩 내지 페이드아웃 메서드.
@@ -80,7 +81,7 @@ public static class DotweenAnimations
 
     public static void ShowCollectionCard(GameObject card, float duration = 0.6f, float delay = 0.0f)// 사원수첩 내 엔딩 컬렉션 카드 등장 애니메이션 메서드.
     {
-        card.transform.localScale = Vector3.zero;
+        //card.transform.localScale = Vector3.zero;
         var canvasGroup = card.GetComponent<CanvasGroup>();
         if (canvasGroup != null)
         {
@@ -88,10 +89,12 @@ public static class DotweenAnimations
         }
 
         var sequence = DOTween.Sequence();
-        sequence.Append(card.transform.DOScale(1.2f, duration * 0.6f)).Join(canvasGroup != null ? canvasGroup.DOFade(1.0f, duration * 0.6f) : null)
-                                                                      .Append(card.transform.DOScale(1.0f, duration * 0.4f))
-                                                                      .SetDelay(delay)
-                                                                      .SetEase(Ease.OutBack);
+        // sequence.Append(card.transform.DOScale(1.2f, duration * 0.6f)).Join(canvasGroup != null ? canvasGroup.DOFade(1.0f, duration * 0.6f) : null)
+        //                                                               .Append(card.transform.DOScale(1.0f, duration * 0.4f))
+        //                                                               .SetDelay(delay)
+        //                                                               .SetEase(Ease.OutBack);
+        sequence.Append(card.transform.DOScale(card.transform.localScale*1.2f, duration)).Join(canvasGroup!=null ? canvasGroup.DOFade(1.0f, duration) : null);
+        sequence.Append(card.transform.DOScale(card.transform.localScale, duration));
     }
 
     public static void ShowCollectionCardsSequentially(List<GameObject> cards, float staggerDelay = 0.1f, float duration = 0.6f)//사원 수첩 내 컬렉션 카드 순차 등장 애니메이션 메서드.

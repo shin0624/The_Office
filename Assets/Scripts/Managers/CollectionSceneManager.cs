@@ -16,7 +16,7 @@ public class CollectionSceneManager : MonoBehaviour
 
     [Header("표지 넘기기 애니메이션 설정")]
     [SerializeField] private RectTransform coverTransform;//표지 트랜스폼
-    [SerializeField] private float flipDuration = 1.5f;//넘기기 애니메이션 시간
+    [SerializeField] private float flipDuration = 0.5f;//넘기기 애니메이션 시간
     [SerializeField] private float flipAngle = -180.0f;//넘기기 회전 각도
 
     [Header("페이드 효과 설정")]
@@ -24,8 +24,8 @@ public class CollectionSceneManager : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 0.5f;//페이드아웃 시간
 
     [Header("자동 진행 설정")]
-    [SerializeField] private bool autoFlipOnStart = true;//씬 진입 시 표지 자동 넘기기 플래그
-    [SerializeField] private float autoFlipDelay = 1.0f;//자동 넘기기 지연시간
+    //[SerializeField] private bool autoFlipOnStart = true;//씬 진입 시 표지 자동 넘기기 플래그
+    [SerializeField] private float autoFlipDelay = 0.5f;//자동 넘기기 지연시간
 
     [Header("상호작용 버튼")]
     [SerializeField] private Button backButton;//뒤로가기 버튼
@@ -36,14 +36,14 @@ public class CollectionSceneManager : MonoBehaviour
 
     public bool IsAnimating => isAnimating;
     public bool HasFliped => hasFlipped;
-
-    void Start()
+    void OnEnable()
     {
         InitializeScene();//씬 초기상태 설정
-        if (autoFlipOnStart)
-        {
-            StartCoroutine(AutoFlipCover());
-        }
+        SetUpButtons();
+    }
+    void Start()
+    {
+        StartCoroutine(AutoFlipCover());
     }
     
  #if UNITY_ANDROID
@@ -55,11 +55,6 @@ public class CollectionSceneManager : MonoBehaviour
         }
     }
 #endif
-
-    void OnEnable()
-    {
-        SetUpButtons();
-    }
 
     void OnDisable()
     {
@@ -74,6 +69,7 @@ public class CollectionSceneManager : MonoBehaviour
             coverPanel.SetActive(true);//표지 패널을 먼저 활성화
             if (coverCanvasGroup != null)
                 coverCanvasGroup.alpha = 1.0f;
+            Debug.Log("[CollectionScene] 통과");
 
         }
         if (contentPanel != null)
@@ -81,49 +77,53 @@ public class CollectionSceneManager : MonoBehaviour
             contentPanel.SetActive(false);//내지 패널은 비활성화. 
             if (contentCanvasGroup != null)
                 contentCanvasGroup.alpha = 0.0f;
+            Debug.Log("[CollectionScene] 통과");
         }
         if (coverTransform != null)//표지의 트랜스폼 초기 상태 설정. 
         {
             coverTransform.rotation = Quaternion.identity;
             coverTransform.localScale = Vector3.one;
+            Debug.Log("[CollectionScene] 통과");
         }
         hasFlipped = false;
         isAnimating = false;
+        Debug.Log("[CollectionScene] InitializeScene 통과");
     }
 
-    private void SetUpButtons()//뒤로가기 버튼 및 표지 버튼 설정. 표지에 버튼 컴포넌트를 달아서, 표지 클릭 시 페이지 넘기기 애니메이션이 실행될 것.(자동 수동 모두 가능)
+    private void SetUpButtons()//뒤로가기 버튼 및 표지 버튼 설정. 
     {
         if (backButton != null)
         {
             backButton.onClick.AddListener(OnBackButtonClicked);
         }
-        if (coverPanel != null)
-        {
-            Button coverButton = coverPanel.GetComponent<Button>();
-            if (coverButton == null)
-                coverButton = coverPanel.AddComponent<Button>();
+        // if (coverPanel != null)
+        // {
+        //     Button coverButton = coverPanel.GetComponent<Button>();
+        //     if (coverButton == null)
+        //         coverButton = coverPanel.AddComponent<Button>();
 
-            coverButton.onClick.AddListener(OnCoverClicked);
-        }
+        //     coverButton.onClick.AddListener(OnCoverClicked);
+        // }
     }
 
     private IEnumerator AutoFlipCover()//자동 표지 넘기기 코루틴 메서드.
     {
         yield return new WaitForSeconds(autoFlipDelay);
-        if (!hasFlipped && !isAnimating)
+        if (hasFlipped==false && isAnimating==false)
         {
             FlipCoverToContents();
         }
+        Debug.Log("[CollectionScene] AutoFlipCover통과");
     }
 
-    private void OnCoverClicked()//표지 클릭 시 수동 넘기기
-    {
-        if (!hasFlipped && !isAnimating)
-        {
-            Debug.Log("[CollectionScene] 표지 수동 클릭 - 넘기기 시작");
-            FlipCoverToContents();
-        }
-    }
+    // private void OnCoverClicked()//표지 클릭 시 수동 넘기기
+    // {
+    //     if (!hasFlipped && !isAnimating)
+    //     {
+    //         Debug.Log("[CollectionScene] 표지 수동 클릭 - 넘기기 시작");
+    //         FlipCoverToContents();
+    //     }
+    // }
 
     public void FlipCoverToContents()//표지에서 내지로 넘기는 메서드.
     {
@@ -132,6 +132,7 @@ public class CollectionSceneManager : MonoBehaviour
             Debug.LogWarning("[CollectionScene] 이미 애니메이션 중이거나 넘김 완료 상태입니다.");
             return;
         }
+        Debug.Log("[CollectionScene] FlipCoverToContents통과");
         StartCoroutine(FlipCoverSequence());
     }
 
@@ -150,7 +151,7 @@ public class CollectionSceneManager : MonoBehaviour
         var fadeInTween = DotweenAnimations.FadeInBookCover(contentCanvasGroup, fadeInDuration);//표지가 사라지면 내지가 페이드인 됨.
 
         yield return flipTween.WaitForCompletion();//애니메이션 완료 대기
-
+        Debug.Log("[CollectionScene] FlipCoverSequence통과");
         if (coverPanel != null)//표지 패널 비활성화. 
         {
             coverPanel.SetActive(false);
@@ -180,7 +181,11 @@ public class CollectionSceneManager : MonoBehaviour
             var fadeOutTween = DotweenAnimations.FadeOutCollectionScene(activeCanvasGroup, fadeOutDuration);
             yield return fadeOutTween.WaitForCompletion();
         }
-        SceneManager.LoadScene("MainScene");
+        if (this != null && gameObject != null) // 안전 체크
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+
     }
 
     private void RemoveButtons()
@@ -190,14 +195,14 @@ public class CollectionSceneManager : MonoBehaviour
             backButton.onClick.RemoveAllListeners();
         }
 
-        if (coverPanel != null)
-        {
-            Button coverButton = coverPanel.GetComponent<Button>();
-            if (coverButton != null)
-            {
-                coverButton.onClick.RemoveAllListeners();
-            }
-        }
+        // if (coverPanel != null)
+        // {
+        //     Button coverButton = coverPanel.GetComponent<Button>();
+        //     if (coverButton != null)
+        //     {
+        //         coverButton.onClick.RemoveAllListeners();
+        //     }
+        // }
     }
 
     void OnDestroy()//DOTWeen 정리.
