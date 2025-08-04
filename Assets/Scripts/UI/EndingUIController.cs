@@ -87,9 +87,13 @@ public class EndingUIController : MonoBehaviour
         SceneManager.LoadScene("StartScene");
     }
 
-    private void OnCollectionButtonClicked()
+    private void OnCollectionButtonClicked()//컬렉션 보기 버튼 클릭 시
     {
-
+        Debug.Log("[EndingUIController] 컬렉션 버튼 클릭 - 사원수첩 씬으로 이동");
+        DotweenAnimations.FadeOutEndingPanel(EndingCanvasPanel, 0.5f, () =>
+        {
+            SceneManager.LoadScene("CollectionScene"); // 사원수첩 씬으로 이동
+        });
     }
 
     private void SetSprite(Sprite titleSprite, Sprite imageSprite)

@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static DataStructures;
 
 public class CollectionSceneManager : MonoBehaviour
 {
@@ -29,7 +30,11 @@ public class CollectionSceneManager : MonoBehaviour
 
     [Header("상호작용 버튼")]
     [SerializeField] private Button backButton;//뒤로가기 버튼
-    [SerializeField] private List<GameObject> cardList;//엔딩컬렉션 카드 리스트. 0-true, 1-good, 2-bad
+    [SerializeField] private List<GameObject> cardList;//엔딩컬렉션 카드 리스트.
+    //0-male_true, 1-male_good, 2-male_bad
+    //3-female_true, 4-female_good, 5-female_bad
+    //6-young-true, 7-young-good, 8-young_bad  
+
 
     private bool isAnimating = false;//애니메이션 진행 중 플래그
     private bool hasFlipped = false;//표지를 넘겼는지 여부
@@ -69,25 +74,20 @@ public class CollectionSceneManager : MonoBehaviour
             coverPanel.SetActive(true);//표지 패널을 먼저 활성화
             if (coverCanvasGroup != null)
                 coverCanvasGroup.alpha = 1.0f;
-            Debug.Log("[CollectionScene] 통과");
-
         }
         if (contentPanel != null)
         {
             contentPanel.SetActive(false);//내지 패널은 비활성화. 
             if (contentCanvasGroup != null)
                 contentCanvasGroup.alpha = 0.0f;
-            Debug.Log("[CollectionScene] 통과");
         }
         if (coverTransform != null)//표지의 트랜스폼 초기 상태 설정. 
         {
             coverTransform.rotation = Quaternion.identity;
             coverTransform.localScale = Vector3.one;
-            Debug.Log("[CollectionScene] 통과");
         }
         hasFlipped = false;
         isAnimating = false;
-        Debug.Log("[CollectionScene] InitializeScene 통과");
     }
 
     private void SetUpButtons()//뒤로가기 버튼 및 표지 버튼 설정. 
@@ -96,14 +96,6 @@ public class CollectionSceneManager : MonoBehaviour
         {
             backButton.onClick.AddListener(OnBackButtonClicked);
         }
-        // if (coverPanel != null)
-        // {
-        //     Button coverButton = coverPanel.GetComponent<Button>();
-        //     if (coverButton == null)
-        //         coverButton = coverPanel.AddComponent<Button>();
-
-        //     coverButton.onClick.AddListener(OnCoverClicked);
-        // }
     }
 
     private IEnumerator AutoFlipCover()//자동 표지 넘기기 코루틴 메서드.
@@ -113,17 +105,7 @@ public class CollectionSceneManager : MonoBehaviour
         {
             FlipCoverToContents();
         }
-        Debug.Log("[CollectionScene] AutoFlipCover통과");
     }
-
-    // private void OnCoverClicked()//표지 클릭 시 수동 넘기기
-    // {
-    //     if (!hasFlipped && !isAnimating)
-    //     {
-    //         Debug.Log("[CollectionScene] 표지 수동 클릭 - 넘기기 시작");
-    //         FlipCoverToContents();
-    //     }
-    // }
 
     public void FlipCoverToContents()//표지에서 내지로 넘기는 메서드.
     {
@@ -132,11 +114,10 @@ public class CollectionSceneManager : MonoBehaviour
             Debug.LogWarning("[CollectionScene] 이미 애니메이션 중이거나 넘김 완료 상태입니다.");
             return;
         }
-        Debug.Log("[CollectionScene] FlipCoverToContents통과");
         StartCoroutine(FlipCoverSequence());
     }
 
-    private IEnumerator FlipCoverSequence()//수동 표지 넘기기 시퀀스 메서드.
+    private IEnumerator FlipCoverSequence()//표지 넘기기 시퀀스 메서드.
     {
         isAnimating = true;
         Debug.Log("[CollectionScene] 표지 넘기기 애니메이션 시작");
@@ -156,13 +137,50 @@ public class CollectionSceneManager : MonoBehaviour
         {
             coverPanel.SetActive(false);
         }
-        if (cardList != null)//사원수첩 내 엔딩 카드 리스트 순차 등장.
-        {
-            DotweenAnimations.ShowCollectionCardsSequentially(cardList);
-        }
+        // if (cardList != null)//사원수첩 내 엔딩 카드 리스트 순차 등장.
+        // {
+        //     DotweenAnimations.ShowCollectionCardsSequentially(cardList);
+        // }
+
+        LoadAndShowCollectionCards();//컬렉션 데이터 로드 및 엔딩 카드 표시
+
         hasFlipped = true;
         isAnimating = false;
         Debug.Log("[CollectionScene] 표지 넘기기 애니메이션 완료");
+    }
+
+    private void LoadAndShowCollectionCards()//엔딩 카드를 로드하고 표시하는 메서드.
+    {
+        if (CollectionManager.Instance != null)
+        {
+            CollectionManager.Instance.LoadCollectionData();//컬렉션 데이터 로드
+            var unlockedCards = CollectionManager.Instance.GetUnlockedCards();//해금된 카드 리스트를 가져온다.
+            Debug.Log($"[CollectionScene] 잠금 해제된 카드 수: {unlockedCards.Count}/9");
+
+            if (cardList != null && cardList.Count > 0)//DOTWeen 애니메이션을 사용한 카드 리스트 애니메이션 재생
+            {
+                UpdateCardVisibility(unlockedCards);//해금된 카드만 표시하도록 설정
+                DotweenAnimations.ShowCollectionCardsSequentially(cardList);
+            }
+        }
+    }
+
+    private void UpdateCardVisibility(List<CollectionCard> unlockedCards)// 카드 표시 상태를 업데이트 하는 메서드.
+    {
+        for (int i = 0; i < cardList.Count; i++)//카드 리스트와 각 카드들에 대해 해금 상태를 확인한다.
+        {
+            var cardObj = cardList[i];
+            if (cardObj != null)
+            {
+                bool isUnlocked = i < unlockedCards.Count;//해당 인덱스에 맞는 카드가 잠금 해제되었는지 확인 
+                var image = cardObj.GetComponent<Image>();
+                if (image != null)
+                {
+                    image.color = isUnlocked ? Color.white : new Color(0.3f, 0.3f, 0.3f, 1.0f);//미해금된 카드는 어둡게 표시 
+                }
+                cardObj.SetActive(true);
+            }
+        }
     }
 
     private void OnBackButtonClicked()//뒤로가기 메서드
@@ -185,7 +203,6 @@ public class CollectionSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainScene");
         }
-
     }
 
     private void RemoveButtons()
@@ -194,15 +211,6 @@ public class CollectionSceneManager : MonoBehaviour
         {
             backButton.onClick.RemoveAllListeners();
         }
-
-        // if (coverPanel != null)
-        // {
-        //     Button coverButton = coverPanel.GetComponent<Button>();
-        //     if (coverButton != null)
-        //     {
-        //         coverButton.onClick.RemoveAllListeners();
-        //     }
-        // }
     }
 
     void OnDestroy()//DOTWeen 정리.
