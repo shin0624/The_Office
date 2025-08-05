@@ -79,22 +79,37 @@ public static class DotweenAnimations
     }
 
 
-    public static void ShowCollectionCard(GameObject card, float duration = 0.6f, float delay = 0.0f)// 사원수첩 내 엔딩 컬렉션 카드 등장 애니메이션 메서드.
+    public static void ShowCollectionCard(GameObject card, float duration = 2.0f, float delay = 0.0f)// 사원수첩 내 엔딩 컬렉션 카드 등장 애니메이션 메서드.
     {
-        //card.transform.localScale = Vector3.zero;
+        // 카드의 원본 크기 저장
+        Vector3 originalScale = new Vector3(3.45f, 18.89f, 1.0f);
+        Vector3 popScale = new Vector3(3.45f * 1.2f, 18.89f * 1.2f, 1.0f); // 1.2배 확대
+        card.transform.localScale = Vector3.zero;
         var canvasGroup = card.GetComponent<CanvasGroup>();
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0.0f;
+            canvasGroup.interactable = false;//애니메이션 중 상호작용 차단
         }
 
         var sequence = DOTween.Sequence();
-        // sequence.Append(card.transform.DOScale(1.2f, duration * 0.6f)).Join(canvasGroup != null ? canvasGroup.DOFade(1.0f, duration * 0.6f) : null)
-        //                                                               .Append(card.transform.DOScale(1.0f, duration * 0.4f))
-        //                                                               .SetDelay(delay)
-        //                                                               .SetEase(Ease.OutBack);
-        sequence.Append(card.transform.DOScale(card.transform.localScale*1.2f, duration)).Join(canvasGroup!=null ? canvasGroup.DOFade(1.0f, duration) : null);
-        sequence.Append(card.transform.DOScale(card.transform.localScale, duration));
+        sequence.Append(card.transform.DOScale(popScale, duration ));//0 -> 1.2배 크기로 확대 + 페이드인
+        if (canvasGroup != null)
+        {
+            sequence.Join(canvasGroup.DOFade(1.0f, duration * 0.6f));
+        }
+        sequence.Append(card.transform.DOScale(originalScale, duration * 0.4f));//1.2배 -> 원본 크기로 축소 
+        sequence.SetDelay(delay).SetEase(Ease.OutBack).OnComplete(() =>
+                                                    {
+                                                        card.transform.localScale = originalScale;//최종 상태 보장
+                                                        if (canvasGroup != null)
+                                                        {
+                                                            canvasGroup.alpha = 1.0f;
+                                                            canvasGroup.interactable = true;//상호작용 복구
+                                                        }
+                                                    });
+        // sequence.Append(card.transform.DOScale(card.transform.localScale*1.2f, duration)).Join(canvasGroup!=null ? canvasGroup.DOFade(1.0f, duration) : null);
+        // sequence.Append(card.transform.DOScale(card.transform.localScale, duration));
     }
 
     public static void ShowCollectionCardsSequentially(List<GameObject> cards, float staggerDelay = 0.1f, float duration = 0.6f)//사원 수첩 내 컬렉션 카드 순차 등장 애니메이션 메서드.

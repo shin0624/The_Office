@@ -32,6 +32,9 @@ public class CollectionManager : MonoBehaviour
     public event Action<float> OnCompletionRateChanged;//카드 수집률 변동 이벤트
     private CollectionData currentCollectionData;
 
+    private readonly string[] bossOrder = { "male_boss", "female_boss", "young_boss" };//엔딩 카드 배치 순서 정의(3*3)
+    private readonly EndingType[] endingOrder = { EndingType.True, EndingType.Good, EndingType.Bad };
+
     void Awake()
     {
         if (instance == null)
@@ -69,14 +72,17 @@ public class CollectionManager : MonoBehaviour
         }
         UpdateCompletionRate();//수집률 업데이트.
     }
-
+//-------------------------------250805_3*3그리드에 맞추어 엔딩 카드를 로드하는 메서드 선언
     public void UnlockEndingCard(EndingType endingType, string bossType)//엔딩 달성 시 컬렉션 카드 잠금을 해제하는 메서드. 엔딩 타입과 상사 타입을 매개변수로 받아 해금 여부를 체크하고, 미해금된 카드를 해금한다.
     {
         string cardId = $"{bossType}_{endingType.ToString().ToLower()}";
         if (IsCardUnlocked(cardId))//이미 해금된 카드인지 확인
         {
             Debug.Log($"[CollectionManager] 이미 해금된 카드 : {cardId}");
+            return;
         }
+
+        int cardIndex = GetCardIndex(bossType, endingType);//엔딩카드 인덱스 계산(3*3 순서에 맞춤)
 
         var newCard = new CollectionCard//해금되지 않았다면, 새 엔딩카드 객체를 생성하여 해금 처리 수행.
         {
@@ -97,17 +103,81 @@ public class CollectionManager : MonoBehaviour
         //추후 획득 UI 추가
     }
 
-    public bool IsCardUnlocked(string cardId)//카드 해금 여부 확인 메서드.
+    private int GetCardIndex(string bossType, EndingType endingType)//엔딩 카드 인덱스 계산 메서드. (0행 : maleBoss(true, good, bad) / 1행 : female_boss(true, good, bad) / 2행 : young_boss(true, good, bad))
     {
-        for (int i = 0; i < currentCollectionData.unlockedCards.Count; i++)//해금카드 리스트의 원소 중 카드 아이디가 일치하는 지 여부를 체크하여 해금 여부를 판단한다.
+        int bossIndex = GetBossIndex(bossType);//상사 타입으로 행을 반환하고, 엔딩 타입으로 열을 반환한다.
+        int endingIndex = GetEndingIndex(endingType);
+        return bossIndex * 3 + endingIndex;//3*3그리드에서 인덱스 계산 : 행 * 3 + 열
+    }
+
+    private int GetBossIndex(string bossType)//상사 타입으로 행 인덱스를 반환하는 메서드
+    {
+        for (int i = 0; i < bossOrder.Length; i++)
+        {
+            if (bossOrder[i] == bossType)
+            {
+                return i;
+            }
+        }return 0;//기본값은 0행
+    }
+
+    private int GetEndingIndex(EndingType endingType)//엔딩 타입으로 열 인덱스를 반환하는 메서드
+    {
+        for (int i = 0; i < endingOrder.Length; i++)
+        {
+            if (endingOrder[i] == endingType)
+            {
+                return i;
+            } 
+        }
+        return 0;//기본값은 0열
+    }
+
+    public List<CardSlotInfo> GetOrderedCardSlots()//순서대로 정렬된 모든 카드 슬롯 정보를 반환하는 메서드.(잠금/해제 포함)
+    {
+        List<CardSlotInfo> slots = new List<CardSlotInfo>();
+        for (int bossIdx = 0; bossIdx < bossOrder.Length; bossIdx++)
+        {
+            for (int endingIdx = 0; endingIdx < endingOrder.Length; endingIdx++)
+            {
+                string bossType = bossOrder[bossIdx];
+                EndingType endingType = endingOrder[endingIdx];
+                string cardId = $"{bossType}_{endingType.ToString().ToLower()}";
+
+                CollectionCard unlockedCard = GetUnlockedCard(cardId);//해당 카드가 해금되었는지 여부 확인 
+
+                slots.Add(new CardSlotInfo
+                {
+                    slotIndex = bossIdx * 3 + endingIdx,
+                    cardId = cardId,
+                    bossType = bossType,
+                    endingType = endingType,
+                    isUnlocked = unlockedCard != null,
+                    unlockedCard = unlockedCard,
+                    cardName = GetCardName(endingType, bossType)
+                });
+            }
+        }
+        return slots;
+    }
+
+    private CollectionCard GetUnlockedCard(string cardId)//특정 카드 id로 해금된 카드를 찾는 메서드.
+    {
+        for (int i = 0; i < currentCollectionData.unlockedCards.Count; i++)
         {
             if (currentCollectionData.unlockedCards[i].cardId == cardId)
             {
-                return true;//동일한 cardId 원소가 있다면 그 카드는 이미 해금된 것.
+                return currentCollectionData.unlockedCards[i];
             }
         }
-        return false;
+        return null;
     }
+
+    public bool IsCardUnlocked(string cardId)//카드 해금 여부 확인 메서드.
+    {
+        return GetUnlockedCard(cardId) != null;
+    }
+    //------------------------------- ▼ 3*3 그리드를 사용하지 않았을 때의 메서드들
 
     public List<CollectionCard> GetUnlockedCards()//잠금 해제된 모든 카드들을 반환하는 메서드.
     {

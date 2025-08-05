@@ -95,4 +95,16 @@ public class DataStructures : MonoBehaviour
         public int totalCardCount = 9;//전체 수집 가능한 카드 수 = 상사 3명 * 엔딩 3개
         public float completionRate = 0.0f;//수집률
     }
+
+    [Serializable]
+    public class CardSlotInfo
+    {
+        public int slotIndex;//그리드에서의 위치(0~8)
+        public string cardId;//카드 id
+        public string bossType;//상사 타입
+        public EndingType endingType;//엔딩 타입
+        public bool isUnlocked;//해금 여부
+        public CollectionCard unlockedCard;//해금된 카드 정보
+        public string cardName;//카드 이름
+    }
 }

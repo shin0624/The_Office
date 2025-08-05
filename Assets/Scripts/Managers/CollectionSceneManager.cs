@@ -131,36 +131,87 @@ public class CollectionSceneManager : MonoBehaviour
         var fadeOutTween = DotweenAnimations.FadeOutBookCover(coverCanvasGroup, fadeOutDuration);//표지가 넘어가며 페이드아웃 실행
         var fadeInTween = DotweenAnimations.FadeInBookCover(contentCanvasGroup, fadeInDuration);//표지가 사라지면 내지가 페이드인 됨.
 
-        yield return flipTween.WaitForCompletion();//애니메이션 완료 대기
+        //yield return flipTween.WaitForCompletion();//애니메이션 완료 대기
         Debug.Log("[CollectionScene] FlipCoverSequence통과");
-        if (coverPanel != null)//표지 패널 비활성화. 
-        {
-            coverPanel.SetActive(false);
-        }
+
         // if (cardList != null)//사원수첩 내 엔딩 카드 리스트 순차 등장.
         // {
         //     DotweenAnimations.ShowCollectionCardsSequentially(cardList);
         // }
 
         LoadAndShowCollectionCards();//컬렉션 데이터 로드 및 엔딩 카드 표시
-
+        yield return flipTween.WaitForCompletion();
+        if (coverPanel != null)//표지 패널 비활성화. 
+        {
+            coverPanel.SetActive(false);
+        }
         hasFlipped = true;
         isAnimating = false;
         Debug.Log("[CollectionScene] 표지 넘기기 애니메이션 완료");
     }
 
-    private void LoadAndShowCollectionCards()//엔딩 카드를 로드하고 표시하는 메서드.
+    private void LoadAndShowCollectionCards()//엔딩 카드를 로드하고 표시하는 메서드.(엔딩 카드의 3*3그리드 체계에 맞춤)
     {
         if (CollectionManager.Instance != null)
         {
             CollectionManager.Instance.LoadCollectionData();//컬렉션 데이터 로드
-            var unlockedCards = CollectionManager.Instance.GetUnlockedCards();//해금된 카드 리스트를 가져온다.
-            Debug.Log($"[CollectionScene] 잠금 해제된 카드 수: {unlockedCards.Count}/9");
+            var orderedSlots = CollectionManager.Instance.GetOrderedCardSlots();
+            Debug.Log($"[CollectionScene] 잠금 해제된 카드 수: {orderedSlots.Count}/9");
 
-            if (cardList != null && cardList.Count > 0)//DOTWeen 애니메이션을 사용한 카드 리스트 애니메이션 재생
+            if (cardList != null && cardList.Count >= 9)//그리드 9개 확인
             {
-                UpdateCardVisibility(unlockedCards);//해금된 카드만 표시하도록 설정
+                UpdateCardsByOrder(orderedSlots);//기존 카드 리스트를 순서대로 업데이트
                 DotweenAnimations.ShowCollectionCardsSequentially(cardList);
+            }
+            else
+            {
+               Debug.LogWarning("[CollectionScene] 카드 리스트가 9개 미만입니다. 현재 개수: " + (cardList?.Count ?? 0)); 
+            }
+
+            // var unlockedCards = CollectionManager.Instance.GetUnlockedCards();//해금된 카드 리스트를 가져온다.
+            // 
+
+            // if (cardList != null && cardList.Count > 0)//DOTWeen 애니메이션을 사용한 카드 리스트 애니메이션 재생
+            // {
+            //     UpdateCardVisibility(unlockedCards);//해금된 카드만 표시하도록 설정
+            //     DotweenAnimations.ShowCollectionCardsSequentially(cardList);
+            // }
+        }
+    }
+
+    private void UpdateCardsByOrder(List<CardSlotInfo> orderedSlots)//순서에 맞게 카드 상태를 업데이트하는 메서드.
+    {
+        for (int i = 0; i < orderedSlots.Count && i < cardList.Count; i++)
+        {
+            var slot = orderedSlots[i];
+            var cardObj = cardList[i];
+            if (cardObj != null)
+            {
+            cardObj.name = $"Card_{i}_{slot.bossType}_{slot.endingType}";// 카드 이름 설정 (디버깅용)
+            
+            var image = cardObj.GetComponent<Image>();
+            if (image != null)// 잠금 해제 상태에 따른 시각적 처리
+            {
+                if (slot.isUnlocked)
+                {         
+                    image.color = Color.white;// 잠금 해제된 카드: 밝게 표시
+                    if (!string.IsNullOrEmpty(slot.unlockedCard?.spritePath))// 실제 카드 스프라이트 로드 시도
+                    {
+                        Sprite cardSprite = Resources.Load<Sprite>(slot.unlockedCard.spritePath);
+                        if (cardSprite != null)
+                        {
+                            image.sprite = cardSprite;
+                        }
+                    }
+                }
+                else
+                {
+                    image.color = new Color(0.3f, 0.3f, 0.3f, 1f); // 잠금된 카드: 어둡게 표시
+                }
+            }
+            cardObj.SetActive(true);// 카드 활성화
+            
+            Debug.Log($"[CollectionScene] 슬롯 {i}: {slot.cardName} - {(slot.isUnlocked ? "해제됨" : "잠금됨")}");
             }
         }
     }
