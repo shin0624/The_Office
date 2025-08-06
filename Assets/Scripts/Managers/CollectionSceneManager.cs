@@ -206,7 +206,7 @@ public class CollectionSceneManager : MonoBehaviour
                 }
                 else
                 {
-                    image.color = new Color(0.3f, 0.3f, 0.3f, 1f); // 잠금된 카드: 어둡게 표시
+                    image.color = new Color(0.1f, 0.1f, 0.1f, 1f); // 잠금된 카드: 어둡게 표시
                 }
             }
             cardObj.SetActive(true);// 카드 활성화

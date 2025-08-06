@@ -88,12 +88,13 @@ public class CollectionManager : MonoBehaviour
         {
             cardId = cardId,
             cardName = GetCardName(endingType, bossType),
-            spritePath = $"Resources/Images/EndingCutScene/{bossType}/{cardId}",
+            spritePath = $"Images/EndingCutScene/{bossType}/{cardId}",
             endingType = endingType,
             bossType = bossType,
             unlockedTime = DateTime.Now,
             isUnlocked = true
         };
+
         currentCollectionData.unlockedCards.Add(newCard);//해금 카드 컬렉션 리스트에 추가.
         UpdateCompletionRate();//카드 수집률 변경
         SaveCollectionData();//저장 데이터에 반영

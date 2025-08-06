@@ -16,6 +16,8 @@ public class EndingUIController : MonoBehaviour
     [SerializeField] private List<Button> endingButtons;//0-컬렉션 보기 / 1- 다시하기
     [SerializeField] private List<Sprite> endingTitleSprite;//0-true / 1-good / 2-bad
     [SerializeField] private List<Sprite> endingImageSprite;//0-true / 1-good / 2-bad
+    [SerializeField] private GameObject endingMessageObject;
+    [SerializeField] private TextMeshProUGUI endingMessage;
 
     void Awake()
     {
@@ -100,6 +102,13 @@ public class EndingUIController : MonoBehaviour
     {
         endingTitle.sprite = titleSprite;
         endingImage.sprite = imageSprite;
+    }
+
+    private void SetEndingMessage()//엔딩 시퀀스에서 엔딩 카드가 보여질 때 동시에 나타나는 엔딩메시지를 출력하는 메서드.
+    {
+        if (!endingMessageObject.activeSelf)
+            endingMessageObject.SetActive(true);
+        DotweenAnimations.FadeInBackground(endingMessageObject.GetComponent<CanvasGroup>());
     }
 
 
