@@ -107,4 +107,13 @@ public class DataStructures : MonoBehaviour
         public CollectionCard unlockedCard;//해금된 카드 정보
         public string cardName;//카드 이름
     }
+
+    [Serializable]
+    public class EndingSpriteSet
+    {
+        public Sprite trueEndingSprite;  // True 엔딩 이미지
+        public Sprite goodEndingSprite;  // Good 엔딩 이미지
+        public Sprite badEndingSprite;   // Bad 엔딩 이미지
+        public Sprite errorSprite;//에러 발생 시 이미지
+    }
 }

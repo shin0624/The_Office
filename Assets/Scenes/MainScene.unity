@@ -2019,7 +2019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0C1\uC0AC\uC640 \uACB0\uD63C\uD588\uC2B5\uB2C8\uB2E4"
+  m_text: "\uC608\uC2DC\uD14D\uC2A4\uD2B8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
   m_sharedMaterial: {fileID: 1783129595289558205, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
@@ -5279,6 +5279,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ccf6edf7eced5ef40a4687074648a269, type: 3}
   endingMessageObject: {fileID: 0}
   endingMessage: {fileID: 0}
+  maleBossSprites:
+    trueEndingSprite: {fileID: 0}
+    goodEndingSprite: {fileID: 0}
+    badEndingSprite: {fileID: 0}
+    errorSprite: {fileID: 0}
+  femaleBossSprites:
+    trueEndingSprite: {fileID: 0}
+    goodEndingSprite: {fileID: 0}
+    badEndingSprite: {fileID: 0}
+    errorSprite: {fileID: 0}
+  youngBossSprites:
+    trueEndingSprite: {fileID: 0}
+    goodEndingSprite: {fileID: 0}
+    badEndingSprite: {fileID: 0}
+    errorSprite: {fileID: 0}
 --- !u!224 &1949683322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3369804376934728544, guid: b82888ed02909134794e1232b434a8b2, type: 3}
