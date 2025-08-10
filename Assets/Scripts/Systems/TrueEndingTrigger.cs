@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.Examples;
 using UnityEngine;
 
 public enum EndingType { True, Good, Bad}//엔딩 타입 열거체 정의
@@ -15,6 +16,7 @@ public class TrueEndingTrigger : MonoBehaviour
     // 	c. [상사의 호감도가 BAD 임계치 도달 + 상사보다 직급이 낮은 상태 -> Bad 엔딩(구조조정 OR 권고사직 등)](False / False)
     // 	d. [상사의 호감도가 BAD 임계치 도달 + 상사보다 직급이 높은 상태 -> Bad 엔딩(내부고발로 해고 등)](False / True)
 
+    //250805. TriggerEnding()에 엔딩 도달 시 컬렉션에 카드 추가 기능 포함.
 
     private bool affectionBranch = false;
     private bool rankBranch = false;
@@ -71,15 +73,19 @@ public class TrueEndingTrigger : MonoBehaviour
         }
     }
 
+    //250805. 엔딩 트리거 시 엔딩 카드 잠금 해제 기능 추가.
     private void TriggerEnding(EndingType type, bool rankBranchValue = false)//실제 분기메서드에 전해진 값에 따라 엔딩이 트리거되는 메서드.
     {
         if (endingTriggered) return;//중복 트리거 방지
         endingTriggered = true; // 엔딩 클리어 이후 다시 false로 변경해야 함
 
+        string selectBoss = PlayerPrefs.GetString("SelectedBoss", "male_boss");//현재 선택한 상사 정보 가져오기
+        if (CollectionManager.Instance != null)// 엔딩 카드 잠금 해제.
+        {
+            CollectionManager.Instance.UnlockEndingCard(type, selectBoss);//현재 선택된 상사 문자열 값과 현재 엔딩 타입을 매개변수로 하여, 그에 해당하는 엔딩카드를 해금.
+        }
         endingUIController.ShowEnding(type);
-    
-        // ScoreManager 등에서 점수 리셋 등 초기화
-        // 엔딩 후 MainScene/상사선택 등으로 이동 제어
+        Debug.Log($"[TrueEndingTrigger]{type} 엔딩 트리거 완료 및 컬렉션 카드 해금");
     }
 
     private void ResetEndingTrigger()// 엔딩 분기 변수 및 트리거 초기화 메서드. 상태 초기화는 ScoreManager.cs의 CreateNewGame()을 사용.
@@ -92,9 +98,17 @@ public class TrueEndingTrigger : MonoBehaviour
 
     public void OnClickReplayOrNextBoss()//엔딩 이후 재도전 또는 다음 상사 선택 화면으로 넘어가는 등 엔딩 이후에 호출되는 초기화 메서드.
     {
-        ScoreManager.Instance?.CreateNewGame();//모든 상태, 저장 데이터, UI 초기화 
-        this.ResetEndingTrigger();//TrueEndingTrigger 내부 상태 리셋
+        var oldSave = ScoreManager.Instance?.GetCurrentSaveData();
+        var backupCollection = oldSave != null ? oldSave.player_data?.collectionData : null;//엔딩을 본 후에는 컬렉션 데이터 이외의 모든 데이터가 초기화되어야 하므로 컬렉션 백업
 
-        //이후 로직 작성 예정
+        ScoreManager.Instance?.CreateNewGame();//모든 상태, 저장 데이터, UI 초기화 
+
+        var newSave = ScoreManager.Instance?.GetCurrentSaveData();
+        if (backupCollection != null && newSave != null && newSave.player_data != null)
+        {
+            newSave.player_data.collectionData = backupCollection;//컬렉션 복구
+            SaveLoadManager.Instance.SaveGameData(newSave);
+        }
+        this.ResetEndingTrigger();//TrueEndingTrigger 내부 상태 리셋
     }
 }

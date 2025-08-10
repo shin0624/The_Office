@@ -10,14 +10,14 @@
     {
       "key": "female_boss",
       "value": {
-        "name": "박차장",
+        "name": "박상무",
         "sprite_path": "Images/Characters/Female"
       }
     },
     {
       "key": "young_boss",
       "value": {
-        "name": "이대리",
+        "name": "이차장",
         "sprite_path": "Images/Characters/Young"
       }
     }

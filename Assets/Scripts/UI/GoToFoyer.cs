@@ -17,17 +17,15 @@ public class GoToFoyer : MonoBehaviour
     private void OnFoyerButtonClicked()
     {
         
-        if(foyerUI.activeSelf==false && Time.timeScale != 0.0f)
+        if(foyerUI.activeSelf==false)
         {
             foyerUI.SetActive(true);
-            Time.timeScale = 0.0f;
+
         }
     }
 
-    void OnDestroy()
-    {
-        foyerUI.SetActive(false);
-        Time.timeScale = 1.0f;
+     void OnDisable()
+     {
         foyerButton.onClick.RemoveAllListeners();
-    }
+     }
 }

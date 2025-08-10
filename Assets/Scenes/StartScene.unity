@@ -1944,6 +1944,7 @@ GameObject:
   - component: {fileID: 2067047154}
   - component: {fileID: 2067047153}
   - component: {fileID: 2067047156}
+  - component: {fileID: 2067047157}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1997,6 +1998,8 @@ MonoBehaviour:
   socialScore: 0
   currentRank: "\uC778\uD134"
   currentDialogueId: 1
+  rankTrue: "\uC0AC\uC7A5"
+  rankEnableBranch: "\uCC28\uC7A5"
 --- !u!114 &2067047155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,6 +2026,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quitPanelPrefab: {fileID: 3724154477701628081, guid: 3802cf67651de5b499d94a07ff3d021d, type: 3}
   quitPanelParent: {fileID: 1141850597}
+--- !u!114 &2067047157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067047151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854ddc97d9257b64eba63b87ba8409a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2132443782
 GameObject:
   m_ObjectHideFlags: 0

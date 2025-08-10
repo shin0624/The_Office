@@ -34,6 +34,7 @@ public class DataStructures : MonoBehaviour
         public int current_dialogue_id = 1;//현재 진행 중인 대화 ID
         public List<int> completed_dialogues = new List<int>();//완료된 대화 ID 목록
         public GameFlags game_flags = new GameFlags();//게임 진행상황 추적
+        public CollectionData collectionData = new CollectionData();//250805 추가 : 엔딩카드 수집 데이터 
     }
 
     [Serializable]
@@ -74,4 +75,53 @@ public class DataStructures : MonoBehaviour
         public RankSystem rank_system; //직급 시스템 정보
         public AffectionThresholds affection_thresholds; //호감도 임계값 정보
     }
+
+    [Serializable]
+    public class CollectionCard// 엔딩 카드 컬렉션 데이터.
+    {
+        public string cardId;//엔딩 카드의 고유 id. bosstype_endingType 형태이며, endingType은 모두 소문자
+        public string cardName;//카드 이름
+        public string spritePath;//스프라이트 경로
+        public EndingType endingType;//엔딩 타입(True, Good, Bad)
+        public string bossType;//상사 타입
+        public DateTime unlockedTime;//해금 날짜
+        public bool isUnlocked;//해금 여부
+    }
+
+    [Serializable]
+    public class CollectionData//엔딩 카드 수집 데이터
+    {
+        public List<CollectionCard> unlockedCards = new List<CollectionCard>();//엔딩 카드 컬렉션 리스트
+        public int totalCardCount = 9;//전체 수집 가능한 카드 수 = 상사 3명 * 엔딩 3개
+        public float completionRate = 0.0f;//수집률
+    }
+
+    [Serializable]
+    public class CardSlotInfo
+    {
+        public int slotIndex;//그리드에서의 위치(0~8)
+        public string cardId;//카드 id
+        public string bossType;//상사 타입
+        public EndingType endingType;//엔딩 타입
+        public bool isUnlocked;//해금 여부
+        public CollectionCard unlockedCard;//해금된 카드 정보
+        public string cardName;//카드 이름
+    }
+
+    [Serializable]
+    public class EndingSpriteSet
+    {
+        public Sprite trueEndingSprite;  // True 엔딩 이미지
+        public Sprite goodEndingSprite;  // Good 엔딩 이미지
+        public Sprite badEndingSprite;   // Bad 엔딩 이미지
+        public Sprite errorSprite;//에러 발생 시 이미지
+
+        [TextArea(2, 4)]
+        public string trueEndingMessage;  // True 엔딩 메시지
+        [TextArea(2, 4)]
+        public string goodEndingMessage;  // Good 엔딩 메시지
+        [TextArea(2, 4)]
+        public string badEndingMessage;   // Bad 엔딩 메시지
+    }
+
 }
