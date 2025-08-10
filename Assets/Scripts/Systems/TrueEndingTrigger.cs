@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.Examples;
 using UnityEngine;
 
 public enum EndingType { True, Good, Bad}//엔딩 타입 열거체 정의
@@ -97,9 +98,17 @@ public class TrueEndingTrigger : MonoBehaviour
 
     public void OnClickReplayOrNextBoss()//엔딩 이후 재도전 또는 다음 상사 선택 화면으로 넘어가는 등 엔딩 이후에 호출되는 초기화 메서드.
     {
-        ScoreManager.Instance?.CreateNewGame();//모든 상태, 저장 데이터, UI 초기화 
-        this.ResetEndingTrigger();//TrueEndingTrigger 내부 상태 리셋
+        var oldSave = ScoreManager.Instance?.GetCurrentSaveData();
+        var backupCollection = oldSave != null ? oldSave.player_data?.collectionData : null;//엔딩을 본 후에는 컬렉션 데이터 이외의 모든 데이터가 초기화되어야 하므로 컬렉션 백업
 
-        //이후 로직 작성 예정
+        ScoreManager.Instance?.CreateNewGame();//모든 상태, 저장 데이터, UI 초기화 
+
+        var newSave = ScoreManager.Instance?.GetCurrentSaveData();
+        if (backupCollection != null && newSave != null && newSave.player_data != null)
+        {
+            newSave.player_data.collectionData = backupCollection;//컬렉션 복구
+            SaveLoadManager.Instance.SaveGameData(newSave);
+        }
+        this.ResetEndingTrigger();//TrueEndingTrigger 내부 상태 리셋
     }
 }

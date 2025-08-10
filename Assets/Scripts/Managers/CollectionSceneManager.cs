@@ -34,15 +34,16 @@ public class CollectionSceneManager : MonoBehaviour
     //0-male_true, 1-male_good, 2-male_bad
     //3-female_true, 4-female_good, 5-female_bad
     //6-young-true, 7-young-good, 8-young_bad  
-
-
     private bool isAnimating = false;//애니메이션 진행 중 플래그
     private bool hasFlipped = false;//표지를 넘겼는지 여부
+    private string entrySource = "FromFoyerPanel";// 플레이어프렙스의 엔트리소스 필드. 기본값을 정해놓았으니 CollectionScene으로 진입할 때 버튼에서 매 번 정확한 값으로 덮어씌울 것. 그러므로 리셋 로직을 별도로 추가하지 않음.
 
     public bool IsAnimating => isAnimating;
     public bool HasFliped => hasFlipped;
     void OnEnable()
     {
+        entrySource = PlayerPrefs.GetString("CollectionEntrySource", "FromFoyer");
+        Debug.Log($"[CollectionSceneManager] EntrySource = {entrySource}");
         InitializeScene();//씬 초기상태 설정
         SetUpButtons();
     }
@@ -241,6 +242,7 @@ public class CollectionSceneManager : MonoBehaviour
         StartCoroutine(ExitSceneWithFade());
     }
 
+    //250810. CollectionScene 진입 경로가 2개이며, 각 진입 경로에 따라 CollecitonScene에서 뒤로가기 클릭 시 로드되는 Scene이 달라야 하기 떄문에, 두 진입 경로를 PlayerPrefs의 entrySource로 구분하고, CollectionSceneManager.cs가 이를 읽어 뒤로가기 목적지를 다르게 처리하도록 함.
     private IEnumerator ExitSceneWithFade()// 뒤로가기 버튼 클릭 시 페이드아웃 후 이전 씬으로 돌아가는 메서드.
     {
         isAnimating = true;
@@ -252,7 +254,14 @@ public class CollectionSceneManager : MonoBehaviour
         }
         if (this != null && gameObject != null) // 안전 체크
         {
-            SceneManager.LoadScene("MainScene");
+            if (entrySource == "FromEndingPanel")// 엔딩 후 CollectionPanel 에서 뒤로가기 클릭 시 : 게임이 재시작되어야 함
+            {
+                SceneManager.LoadScene("StartScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("MainScene");//게임 진행 도중 휴게실 패널에서 CollectionScene 진입 후 뒤로가기 클릭 시 : 원래 하던 게임으로 돌아가야 함.
+            }
         }
     }
 

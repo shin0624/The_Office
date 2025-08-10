@@ -115,5 +115,13 @@ public class DataStructures : MonoBehaviour
         public Sprite goodEndingSprite;  // Good 엔딩 이미지
         public Sprite badEndingSprite;   // Bad 엔딩 이미지
         public Sprite errorSprite;//에러 발생 시 이미지
+
+        [TextArea(2, 4)]
+        public string trueEndingMessage;  // True 엔딩 메시지
+        [TextArea(2, 4)]
+        public string goodEndingMessage;  // Good 엔딩 메시지
+        [TextArea(2, 4)]
+        public string badEndingMessage;   // Bad 엔딩 메시지
     }
+
 }

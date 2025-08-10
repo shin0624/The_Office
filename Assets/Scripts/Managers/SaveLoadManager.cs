@@ -6,6 +6,7 @@ using System.Text;
 using static DataStructures;
 using System;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 public class SaveLoadManager : MonoBehaviour
 {
     //저장/로드 관리 스크립트. 게임 데이터의 저장, 로드, json 파일 관리를 담당하는 싱글톤 매니저로, 파일 시스템과의 모든 상호작용을 처리.
@@ -38,6 +39,8 @@ public class SaveLoadManager : MonoBehaviour
     private GameConfig gameConfig;//로드된 게임 설정 데이터
     private bool configLoaded = false;
 
+    public string beforeSceneName = "";
+
     private void Awake()
     {
         if (instance == null)
@@ -54,17 +57,24 @@ public class SaveLoadManager : MonoBehaviour
     }
 
     void Start()
-    { 
+    {
         DotweenAnimations.DotweenInit();
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
         StartCoroutine(LoadGameConfigFix());
+    }
+
+    private void OnActiveSceneChanged(Scene scene1, Scene scene2)
+    {
+        beforeSceneName = scene1.name;
+        Debug.Log($"[SaveLoadManager] 현재 씬 이름 : {beforeSceneName}");
     }
 
     private void InitializePaths()//저장 및 설정 파일의 전체 경로를 설정하는 메서드. 플랫폼 별로 올바른 경로를 생성한다.
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "Save_Data.json");//영구 저장 경로. persistentDataPath는 플랫폼에 따라 다르게 설정됨. 
-        
+
         Debug.Log($"[SaveLoadManager] 저장 경로: {saveFilePath}");
-        
+
     }
 
     private IEnumerator LoadGameConfigFix()//게임 설정 파일을 로드하는 메서드. UnityWebRequest 방식으로 수정
@@ -309,5 +319,10 @@ public class SaveLoadManager : MonoBehaviour
         {
             Debug.LogError($"[SaveLoadManager] 응급 저장 실패: {e.Message}");
         }
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
     }
 }

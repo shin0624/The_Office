@@ -5273,27 +5273,32 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a9a131bdde34364992391415f32f2ec, type: 3}
   - {fileID: 21300000, guid: 359fd3555c9765c46938ed492af3b795, type: 3}
   - {fileID: 21300000, guid: ceef3c60bb1a3214dac80bc5a593ce9e, type: 3}
-  endingImageSprite:
-  - {fileID: 21300000, guid: 9b8f23dc969b42249a745c721edf7862, type: 3}
-  - {fileID: 21300000, guid: 874c55ecae8b8044cb8b118659506842, type: 3}
-  - {fileID: 21300000, guid: ccf6edf7eced5ef40a4687074648a269, type: 3}
-  endingMessageObject: {fileID: 0}
-  endingMessage: {fileID: 0}
+  endingMessageObject: {fileID: 1968160505}
+  endingMessage: {fileID: 680038802}
   maleBossSprites:
-    trueEndingSprite: {fileID: 0}
-    goodEndingSprite: {fileID: 0}
-    badEndingSprite: {fileID: 0}
-    errorSprite: {fileID: 0}
+    trueEndingSprite: {fileID: 21300000, guid: 9b8f23dc969b42249a745c721edf7862, type: 3}
+    goodEndingSprite: {fileID: 21300000, guid: 874c55ecae8b8044cb8b118659506842, type: 3}
+    badEndingSprite: {fileID: 21300000, guid: ccf6edf7eced5ef40a4687074648a269, type: 3}
+    errorSprite: {fileID: 21300000, guid: 3796370a9681eb34fb49423cd9c4c8d1, type: 3}
+    trueEndingMessage: "\uC0AC\uC6D0\uC5D0\uC11C \uC0AC\uC7A5\uAE4C\uC9C0"
+    goodEndingMessage: "\uBBFF\uACE0 \uB530\uB97C \uC218 \uC788\uB294 \uAD00\uACC4"
+    badEndingMessage: "\uAD8C\uACE0\uC0AC\uC9C1"
   femaleBossSprites:
-    trueEndingSprite: {fileID: 0}
-    goodEndingSprite: {fileID: 0}
-    badEndingSprite: {fileID: 0}
-    errorSprite: {fileID: 0}
+    trueEndingSprite: {fileID: 21300000, guid: 43f008b006b7b0747ae15e24be04b6e1, type: 3}
+    goodEndingSprite: {fileID: 21300000, guid: d9a34843ee46e9a40995106412cb5de2, type: 3}
+    badEndingSprite: {fileID: 21300000, guid: ccb7c42f47658904689a51a015d4597f, type: 3}
+    errorSprite: {fileID: 21300000, guid: 3796370a9681eb34fb49423cd9c4c8d1, type: 3}
+    trueEndingMessage: "\uC0AC\uB0B4\uC5F0\uC560 \uC131\uACF5"
+    goodEndingMessage: "\uADF8\uB140\uB97C \uBC14\uB77C\uBCF4\uBA70"
+    badEndingMessage: "\uBB34\uB2A5\uD55C \uBD80\uD558\uC9C1\uC6D0"
   youngBossSprites:
-    trueEndingSprite: {fileID: 0}
-    goodEndingSprite: {fileID: 0}
-    badEndingSprite: {fileID: 0}
-    errorSprite: {fileID: 0}
+    trueEndingSprite: {fileID: 21300000, guid: 1b591e6371935674cbd016a215b12603, type: 3}
+    goodEndingSprite: {fileID: 21300000, guid: 250216e19cbbd5543846d819c6f3c5cc, type: 3}
+    badEndingSprite: {fileID: 21300000, guid: 904fe3d406092774baca8c2328f61eab, type: 3}
+    errorSprite: {fileID: 21300000, guid: 3796370a9681eb34fb49423cd9c4c8d1, type: 3}
+    trueEndingMessage: "\uC2E0\uB8B0\uD560 \uC218 \uC788\uB294 \uD30C\uD2B8\uB108"
+    goodEndingMessage: "\uC0AC\uD68C\uC5D0\uC11C \uB9CC\uB09C \uCE5C\uAD6C"
+    badEndingMessage: "\uC815\uCE58\uC5D0 \uD718\uB9D0\uB824 \uD1F4"
 --- !u!224 &1949683322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3369804376934728544, guid: b82888ed02909134794e1232b434a8b2, type: 3}
