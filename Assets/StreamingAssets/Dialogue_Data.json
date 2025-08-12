@@ -3817,8 +3817,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "올라가면 뭐가 달라지는 건가요?",
-                    "affection_change": -2,
-                    "social_score_change": 2
+                    "affection_change": -12,
+                    "social_score_change": -12
                 }
             ]
         },
@@ -3895,8 +3895,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "조금 감성적인 표현이네요.",
-                    "affection_change": 2,
-                    "social_score_change": 2
+                    "affection_change": -22,
+                    "social_score_change": -22
                 }
             ]
         },
@@ -3921,8 +3921,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "저는 빠지겠습니다.",
-                    "affection_change": -6,
-                    "social_score_change": -3
+                    "affection_change": -15,
+                    "social_score_change": -15
                 }
             ]
         },
@@ -3999,8 +3999,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "이름이 부담이 되네요.",
-                    "affection_change": -3,
-                    "social_score_change": 0
+                    "affection_change": -5,
+                    "social_score_change": -5
                 }
             ]
         },
@@ -4025,8 +4025,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "부담이 조금 됩니다.",
-                    "affection_change": 3,
-                    "social_score_change": 4
+                    "affection_change": -5,
+                    "social_score_change": -5
                 }
             ]
         },
@@ -4051,8 +4051,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "혹시 다르면 불편할까요?",
-                    "affection_change": -2,
-                    "social_score_change": 2
+                    "affection_change": -10,
+                    "social_score_change": -5
                 }
             ]
         },
@@ -4077,8 +4077,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "부담스러운 자리네요.",
-                    "affection_change": 2,
-                    "social_score_change": 2
+                    "affection_change": -10,
+                    "social_score_change": 0
                 }
             ]
         },
@@ -4103,8 +4103,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "조용한 회의도 좋지 않나요?",
-                    "affection_change": -3,
-                    "social_score_change": 0
+                    "affection_change": -15,
+                    "social_score_change": -15
                 }
             ]
         },
@@ -4155,8 +4155,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "말뿐이 아니길 바랍니다.",
-                    "affection_change": -2,
-                    "social_score_change": 2
+                    "affection_change": -20,
+                    "social_score_change": -10
                 }
             ]
         },
@@ -4207,8 +4207,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "또 다른 산이 준비돼 있겠죠.",
-                    "affection_change": 2,
-                    "social_score_change": 2
+                    "affection_change": 1,
+                    "social_score_change": 0
                 }
             ]
         },
@@ -4233,8 +4233,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "약점도 개성이라고 생각합니다.",
-                    "affection_change": -2,
-                    "social_score_change": 0
+                    "affection_change": -10,
+                    "social_score_change": -5
                 }
             ]
         },
@@ -4259,8 +4259,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "성과만 있으면 충분하다고 봅니다.",
-                    "affection_change": -5,
-                    "social_score_change": -2
+                    "affection_change": -15,
+                    "social_score_change": -10
                 }
             ]
         },
@@ -4268,7 +4268,7 @@
             "id": 2056,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "요즘 너랑 일하는 게 재미있다.",
+            "dialogue_text": "요즘 너랑 일하는 게 재미있어.",
             "choices": [
                 {
                     "choice_id": 1,
@@ -4285,8 +4285,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "즐거움도 좋지만 실적이 우선이죠.",
-                    "affection_change": -3,
-                    "social_score_change": 0
+                    "affection_change": -5,
+                    "social_score_change": -5
                 }
             ]
         },
@@ -4363,8 +4363,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "한쪽만 집중하겠습니다.",
-                    "affection_change": -4,
-                    "social_score_change": -2
+                    "affection_change": -10,
+                    "social_score_change": -15
                 }
             ]
         },
@@ -4389,8 +4389,8 @@
                 {
                     "choice_id": 3,
                     "choice_text": "가끔은 그냥 넘어가도 괜찮죠.",
-                    "affection_change": -3,
-                    "social_score_change": 0
+                    "affection_change": -25,
+                    "social_score_change": -20
                 }
             ]
         },
