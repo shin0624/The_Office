@@ -62,6 +62,9 @@ public class ScoreManager : MonoBehaviour
     public int GetCurrentDialogueId() => currentDialogueId;//현재 대화 ID 반환
     public SaveData GetCurrentSaveData() => currentSaveData;//현재 저장 데이터 반환
 
+    //250813. affection, social 수치 변화 UI 시각화를 위한 이벤트 브로드캐스트 (ScoreManager는 싱글톤이라 MainScene을 벗어나면 스크립트 참조가 해제되어 NRE가 발생하므로, 수치변화 메서드가 작성된 ValueChangeEffect는 일반 참조할 수 없음.)
+    public event Action<int, int> OnScoresChanged;// Action매개변수는 각각 affection, social이며, 점수 변경 시에만 ScoreManager가 이벤트를 발행하게 해서 MainScene 씬 활성화 시 ValueChangeEffect는 해당 이벤트를 구독, 비활성화 시 해제한다. -> 씬에 ui가 없으면 아무도 이벤트를 듣지 않으므로 NRE 발생X
+
     private void Awake()
     {
         if (instance == null)
@@ -109,7 +112,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (SaveLoadManager.Instance.HasSaveData())//저장 데이터가 존재하면
         {
-            Debug.Log("[ScoreManagerr] 기존 저장 데이터 발견, 로드 중...");
+            Debug.Log("[ScoreManager] 기존 저장 데이터 발견, 로드 중...");
             LoadGameData();//저장 데이터 로드
         }
         else
@@ -166,6 +169,9 @@ public class ScoreManager : MonoBehaviour
     {
         AddAffection(affectionChange);//호감도 업데이트
         AddSocialScore(socialChange);//사회력 점수 업데이트
+
+        OnScoresChanged?.Invoke(affectionChange, socialChange);//250813. 점수 변화 시에만 구독하는 점수 증감치 시각화 이벤트.
+
         if (currentSaveData.game_settings.auto_save_enabled)//자동 저장이 활성화되어 있으면
         {
             SaveGame();//자동 저장 활성화 시 점수 변경 후 자동 저장
