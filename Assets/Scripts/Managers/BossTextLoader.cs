@@ -56,22 +56,6 @@ public class BossTextLoader : MonoBehaviour
         //ShowNextDialogue();//초기 대화 표시. --> LoadDialogueDataFixed()에서 호출함.
     }
 
-    // private void LoadDialogueData()//Dialogue_Data.json 파일을 로드하는 메서드.
-    // {
-    //     string path = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
-    //     if (File.Exists(path))
-    //     {
-    //         string json = File.ReadAllText(path, Encoding.UTF8);//파일의 내용을 읽어옴.
-    //         dialogueData = JsonUtility.FromJson<DialogueData>(json);//읽어온 JSON 문자열을 DialogueData 객체로 변환.
-    //         Debug.Log("[BossTextLoader] Dialogue_Data.json 로드 완료");
-    //     }
-    //     else
-    //     {
-    //         Debug.LogError("[BossTextLoader] Dialogue_Data.json 파일을 찾을 수 없습니다.");
-    //     }
-    // }
-
-
     private IEnumerator LoadDialogueDataFixed()//Dialogue_Data.json 파일을 로드할 때 UnityWebRequest를 사용하여 Android APK 압축 구조를 유니티에서 자동 처리하도록 하는 메서드.
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, "Dialogue_Data.json");//StreamingAssets 폴더에서 Dialogue_Data.json 파일의 경로를 가져옴.
@@ -95,8 +79,8 @@ public class BossTextLoader : MonoBehaviour
     public void ShowNextDialogue()//다음 대화를 표시하는 메서드.
     {
         if (dialogueData?.dialogues == null) return;// 대화 데이터가 로드되지 않았으면 반환.                                                
-        Dialogue currentDialogue = null;//현재 상사 타입과 일치하는 대화 찾기
-        for (int i = currentDialogueIndex; i < dialogueData.dialogues.Count; i++)
+        Dialogue currentDialogue = null;
+        for (int i = currentDialogueIndex; i < dialogueData.dialogues.Count; i++)//현재 상사 타입과 일치하는 대화 찾기
         {
             if (dialogueData.dialogues[i].boss_type == selectedBossType.Replace("_boss", ""))//선택된 상사 타입과 일치하는 대화를 찾는다.
             {
