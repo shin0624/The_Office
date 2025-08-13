@@ -41,6 +41,10 @@ public class SaveLoadManager : MonoBehaviour
 
     public string beforeSceneName = "";
 
+    // 250813. 긴급 저장 메서드 호출 구간 정의. Application.quitting, OnApplicationPause(true), OnApplicationFocus(false)일 때 긴급저장을 수행하도록 하고, 
+    // EmergencyCheckManager.cs에서 StartScene 진입 시 LastQuitMethod == EmergencyQuit를 읽어서 이전 세션이 비정상 종료일 경우 비정상 종료 히스토리를 표시하도록 설정.
+    private bool emergencySaved = false;//긴급저장 플래그
+
     private void Awake()
     {
         if (instance == null)
@@ -54,6 +58,8 @@ public class SaveLoadManager : MonoBehaviour
         {
             Destroy(gameObject);//중복 인스턴스 제거
         }
+        Application.quitting += OnAppQuitting;//긴급저장 이벤트 할당
+       
     }
 
     void Start()
@@ -300,9 +306,11 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log($"[SaveLoadManager] 플레이 통계 저장 - " + $"총 플레이 시간: {totalPlayTime:F1}초, 종료 횟수: {quitCount}");
     }
 
+    //------------긴급 저장 관련 메서드
+
     private void EmergencySave()// 게임 강제 종료 또는 비정상 종료 시 응급 저장을 수행하는 메서드.
     {
-        try
+        try// 긴급 저장은 I/O실패 가능성이 있으므로, try-catch를 사용해야 함.
         {
             Debug.Log("[SaveLoadManager] 응급 저장 실행");
             if (ScoreManager.Instance?.GetCurrentSaveData() != null)
@@ -321,8 +329,42 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
+    private void SafeEmergencySave()//EmergencySave()를 호출하고 긴급저장 플래그를 true로 변경하는 메서드.
+    {
+        if (emergencySaved) return;//이미 true일 경우 리턴.
+        emergencySaved = true;
+        EmergencySave();
+    }
+
+    void OnApplicationPause(bool pause)//홈 버튼, 전화 수신, 앱 전환 등 앱이 백그라운드로 내려갈 때 pauseStatus==true가 되며 호출되는 메서드.
+    {
+        if (pause) SafeEmergencySave();//pause == true이면 앱이 백그라운드로 내려갔다는 뜻.
+    }
+
+    void OnApplicationFocus(bool hasFocus)//다른 앱이 위로 올라오는 등 현재 앱이 포커스를 잃을 때 호출되는 메서드.
+    {
+        if (!hasFocus) SafeEmergencySave();//hasFocus == false이면 현재 앱이 포커스를 잃었다는 뜻.
+    }
+
+    private void OnAppQuitting()//앱이 종료되기 직전 호출되는 메서드.
+    {
+        SafeEmergencySave();
+    }
+
+    public bool WasLastQuitEmergency()
+    {
+        return PlayerPrefs.GetString("LastQuitMethod", string.Empty) == "EmergencyQuit";//이전 종료 방법이 긴급종료였다면 true 반환.
+    }
+
+    public void ClearLastQuitFlag()
+    {
+        PlayerPrefs.DeleteKey("LastQuitMethod");
+        PlayerPrefs.Save();
+    }
+
     void OnDestroy()
     {
         SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        Application.quitting -= OnAppQuitting;
     }
 }
