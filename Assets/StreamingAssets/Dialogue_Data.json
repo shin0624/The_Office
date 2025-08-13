@@ -3982,7 +3982,7 @@
             "id": 2045,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "이번 분기 마감 보고서에는 우리 둘의 이름이 나란히 올라간다.",
+            "dialogue_text": "이번 분기 마감 보고서에는 우리 둘의 이름이 나란히 올라갈거야.",
             "choices": [
                 {
                     "choice_id": 1,
@@ -3998,7 +3998,7 @@
                 },
                 {
                     "choice_id": 3,
-                    "choice_text": "이름이 부담이 되네요.",
+                    "choice_text": "많이 부담되네요..",
                     "affection_change": -5,
                     "social_score_change": -5
                 }
@@ -4034,7 +4034,7 @@
             "id": 2047,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "너랑 나 코드 스타일이 참 잘 맞는 것 같아. 그래서 업무가 편하다.",
+            "dialogue_text": "너랑 나 코딩 스타일이 참 잘 맞는 것 같아. 읽기 쉽네.",
             "choices": [
                 {
                     "choice_id": 1,
@@ -4050,7 +4050,7 @@
                 },
                 {
                     "choice_id": 3,
-                    "choice_text": "혹시 다르면 불편할까요?",
+                    "choice_text": "저는 반대라고 생각합니다만..",
                     "affection_change": -10,
                     "social_score_change": -5
                 }
@@ -4060,23 +4060,23 @@
             "id": 2048,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "후배들이 널 롤모델로 뽑았다고 하더라.",
+            "dialogue_text": "후배들이 널 많이 따르더라. 이것저것 챙겨줘.",
             "choices": [
                 {
                     "choice_id": 1,
-                    "choice_text": "책임감 있게 행동하겠습니다.",
+                    "choice_text": "선배로서 모범적으로 행동하겠습니다.",
                     "affection_change": 9,
                     "social_score_change": 12
                 },
                 {
                     "choice_id": 2,
-                    "choice_text": "가이드 문서도 만들어두겠습니다.",
+                    "choice_text": "평소에도 챙겨주고 있습니다.",
                     "affection_change": 7,
                     "social_score_change": 10
                 },
                 {
                     "choice_id": 3,
-                    "choice_text": "부담스러운 자리네요.",
+                    "choice_text": "알아서 잘 살겠죠 뭐",
                     "affection_change": -10,
                     "social_score_change": 0
                 }
@@ -4138,23 +4138,23 @@
             "id": 2051,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "나도 너한테 기대고 싶다. 너도 나를 믿고 기대도 된다.",
+            "dialogue_text": "이제까지 나를 믿고 따라줘서 고맙다.",
             "choices": [
                 {
                     "choice_id": 1,
-                    "choice_text": "서로의 든든한 버팀목이 되겠습니다.",
+                    "choice_text": "항상 신뢰해 주셔서 감사합니다.",
                     "affection_change": 12,
                     "social_score_change": 12
                 },
                 {
                     "choice_id": 2,
-                    "choice_text": "고맙습니다. 든든합니다.",
+                    "choice_text": "고맙습니다. 항상 든든합니다.",
                     "affection_change": 10,
                     "social_score_change": 10
                 },
                 {
                     "choice_id": 3,
-                    "choice_text": "말뿐이 아니길 바랍니다.",
+                    "choice_text": "그런 적 없는데..",
                     "affection_change": -20,
                     "social_score_change": -10
                 }
@@ -4346,23 +4346,23 @@
             "id": 2059,
             "boss_type": "young",
             "speaker": "boss",
-            "dialogue_text": "돌다리도 두드리되 두드릴 망치는 같이 들어야 한다.",
+            "dialogue_text": "항상 퇴근하기 전에 본인의 자리를 돌아봐. 놓치고 있던 것을 찾을 수 있을거야.",
             "choices": [
                 {
                     "choice_id": 1,
-                    "choice_text": "리스크 관리와 실행을 같이 하겠습니다.",
+                    "choice_text": "명심하겠습니다.",
                     "affection_change": 10,
                     "social_score_change": 12
                 },
                 {
                     "choice_id": 2,
-                    "choice_text": "체크리스트를 만들고 바로 시작하겠습니다.",
+                    "choice_text": "조언 감사합니다..",
                     "affection_change": 8,
                     "social_score_change": 10
                 },
                 {
                     "choice_id": 3,
-                    "choice_text": "한쪽만 집중하겠습니다.",
+                    "choice_text": "(돌아보고)없는데요?",
                     "affection_change": -10,
                     "social_score_change": -15
                 }
