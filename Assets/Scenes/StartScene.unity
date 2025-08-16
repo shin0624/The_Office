@@ -2020,8 +2020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC624\uB298\uB3C4 \uACE0\uC0DD\uD55C \uB2F9\uC2E0\uC5D0\uAC8C \uC751\uC6D0\uC744
-    \uBCF4\uB0C5\uB2C8\uB2E4"
+  m_text: "\uC2E0\uC785\uC0AC\uC6D0\uC774 \uB418\uC5B4 \uC0C1\uC0AC\uB97C \uACF5\uB7B5\uD574\uBCF4\uC138\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
   m_sharedMaterial: {fileID: 1783129595289558205, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
