@@ -187,6 +187,11 @@ public class ScoreManager : MonoBehaviour
             if (oldScore > affectionScore)// 호감도 감소 시 진동 기능 호출
             {
                 HapticUX.Vibrate(500);
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreDown);//점수 다운 효과음 재생 
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreUp);//점수 업 효과음 재생
             }
             currentSaveData.player_data.affection_level = affectionScore;//저장 데이터에 반영.
             OnAffectionChanged?.Invoke(affectionScore);//호감도 변경 이벤트 호출
@@ -204,6 +209,11 @@ public class ScoreManager : MonoBehaviour
             if (oldScore > socialScore)//사회력 점수 감소 시 진동 기능 호출
             {
                 HapticUX.Vibrate(500);
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreDown);//점수 다운 효과음 재생 
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreUp);//점수 업 효과음 재생
             }
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.
             OnSocialScoreChanged?.Invoke(socialScore);//사회력 점수 변경 이벤트 호출

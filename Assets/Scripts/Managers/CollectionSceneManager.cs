@@ -122,6 +122,7 @@ public class CollectionSceneManager : MonoBehaviour
     {
         isAnimating = true;
         Debug.Log("[CollectionScene] 표지 넘기기 애니메이션 시작");
+
         HapticUX.Vibrate(100);//진동 햅틱 피드백
 
         if (contentPanel != null && !contentPanel.activeSelf)//내지 패널 미리 활성화
@@ -129,6 +130,7 @@ public class CollectionSceneManager : MonoBehaviour
             contentPanel.SetActive(true);
         }
         var flipTween = DotweenAnimations.FlipBookCover(coverTransform, flipAngle, flipDuration);//표지 넘기기 애니메이션 실행.
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.PanelSlide);
         var fadeOutTween = DotweenAnimations.FadeOutBookCover(coverCanvasGroup, fadeOutDuration);//표지가 넘어가며 페이드아웃 실행
         var fadeInTween = DotweenAnimations.FadeInBookCover(contentCanvasGroup, fadeInDuration);//표지가 사라지면 내지가 페이드인 됨.
 
@@ -239,6 +241,7 @@ public class CollectionSceneManager : MonoBehaviour
     {
         Debug.Log("[CollectionScene] 뒤로가기 클릭 : 이전 씬으로 돌아가고 CollectionScene은 원래대로 초기화");
         HapticUX.Vibrate(50);
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
         StartCoroutine(ExitSceneWithFade());
     }
 

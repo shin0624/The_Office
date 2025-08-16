@@ -28,6 +28,7 @@ public class EmegencyCheckManager : MonoBehaviour
             if (emergencyPanel != null)
             {
                 emergencyPanel.SetActive(true);
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.PanelOpen);
                 if (emergencyText != null)
                 {
                     emergencyText.text =
@@ -41,6 +42,7 @@ public class EmegencyCheckManager : MonoBehaviour
                     closeButton.onClick.AddListener(() =>
                     {
                         emergencyPanel.SetActive(false);
+                        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.PanelClose);
                         SaveLoadManager.Instance.ClearLastQuitFlag();
                     });
                 }

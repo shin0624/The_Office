@@ -24,7 +24,7 @@ public class ValueChangeEffect : MonoBehaviour
     {
         if (affectionValue == null) return;
         if (change == 0) return;//수치 변화가 없으면 표시하지 않음
-
+        
         string prefix = change > 0 ? "+" : "";//변화량이 있으면 수치 앞에 +를 붙인다. 감소할 경우 -를 붙인 값이 change로 들어오니까 prefix에 -를 따로 붙이지 않아도 됨.
         affectionValue.text = $"{prefix}{change}";//전위식을 앞에 붙이고 수치를 뒤에 붙임
         affectionValue.color = change > 0 ? Color.blue : Color.red;//증가의 경우 파랑, 감소의 경우 빨강

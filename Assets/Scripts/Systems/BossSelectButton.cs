@@ -21,6 +21,7 @@ public class BossSelectButton : MonoBehaviour
 
     private void OnSelectBoss(string bossType)//선택한 상사에 따라 JSON에서 상사 타입을 구별할 KEY를 할당하는 메서드. 버튼 클릭 이벤트에 등록한다.
     {
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
         PlayerPrefs.SetString("SelectedBoss", bossType);//Character_Data.json의 characters 내 male_boss, female_boss, young_boss값이 들어온다.
         PlayerPrefs.Save();
         SceneManager.LoadScene("MainScene");
