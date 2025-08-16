@@ -17,20 +17,20 @@ public class GameQuitControll : MonoBehaviour
     {
         get
         {
-            if (instance == null)
-            {
-                GameObject managerobj = GameObject.Find("Managers");
-                if (managerobj == null)
-                {
-                    managerobj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
-                    DontDestroyOnLoad(managerobj);//씬 전환 시에도 파괴되지 않도록 설정
-                }
-                instance = managerobj.GetComponent<GameQuitControll>();//Managers 오브젝트에서 GameQuitControll 컴포넌트를 찾음
-                if (instance == null)
-                {
-                    instance = managerobj.AddComponent<GameQuitControll>();//컴포넌트가 없으면 추가
-                }
-            }
+            // if (instance == null)
+            // {
+            //     GameObject managerobj = GameObject.Find("Managers");
+            //     if (managerobj == null)
+            //     {
+            //         managerobj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
+            //         DontDestroyOnLoad(managerobj);//씬 전환 시에도 파괴되지 않도록 설정
+            //     }
+            //     instance = managerobj.GetComponent<GameQuitControll>();//Managers 오브젝트에서 GameQuitControll 컴포넌트를 찾음
+            //     if (instance == null)
+            //     {
+            //         instance = managerobj.AddComponent<GameQuitControll>();//컴포넌트가 없으면 추가
+            //     }
+            // }
             return instance;
         }
     }

@@ -1183,6 +1183,9 @@ MonoBehaviour:
   - type: 3
     clip: {fileID: 8300000, guid: 8636ed6279e5e2a448d63d60a26511a0, type: 3}
     loop: 1
+  - type: 1
+    clip: {fileID: 8300000, guid: 9669960e415ea604d81fb0784634df79, type: 3}
+    loop: 1
   sfxClips:
   - type: 0
     clip: {fileID: 8300000, guid: ebaea2651756c53479a75bd105605dac, type: 3}

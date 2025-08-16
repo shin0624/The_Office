@@ -31,8 +31,8 @@ public class GameInitializer : MonoBehaviour
             Debug.Log("[GameInitializer] 디버그 : 모든 게임 데이터 초기화 완료");
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);//현재 열린 씬 재로드 후 즉시 초기화 트랜잭션 반영.
-        }   
- #endif
+        }
+#endif
     }
 
     [ContextMenu("PlayerPrefs 초기화")]
@@ -55,7 +55,7 @@ public class GameInitializer : MonoBehaviour
         }
 
         if (showDebugLogs)
-                Debug.Log("[GameInitializer] 게임 초기화 시작");
+            Debug.Log("[GameInitializer] 게임 초기화 시작");
 
         CreateOrFindManagers();//Managers 오브젝트 생성 또는 찾기
 
@@ -80,7 +80,7 @@ public class GameInitializer : MonoBehaviour
         {
             managersObject = new GameObject("Managers");
             DontDestroyOnLoad(managersObject);
-            
+
             if (showDebugLogs)
                 Debug.Log("[GameInitializer] Managers 오브젝트 생성");
         }
@@ -91,9 +91,44 @@ public class GameInitializer : MonoBehaviour
         }
     }
 
+    // 250816. 각 매니저 스크립트 내 getter에서의 매니저 오브젝트 생성 제거 및 매니저 오브젝트 생성 주도권을 GameInitializer에게만 한정하도록 수정. 필요한 컴포넌트들은 여기서 모두 부착.   
+    private void EnsureAllManagersAttached()//Managers 하위에 필수 매니저 컴포넌트 부착을 보장하는 메서드.
+    {
+        // SaveLoadManager 부착 보장
+        if (!managersObject.TryGetComponent<SaveLoadManager>(out var saveLoadMgr)) // Managers에 SaveLoadManager가 붙어있는지 확인합니다.
+        {                                      // 조건문 시작
+            saveLoadMgr = managersObject.AddComponent<SaveLoadManager>(); // 없으면 새로 추가합니다.
+            if (showDebugLogs)                 // 디버그 로그가 활성화 상태라면
+                Debug.Log("[GameInitializer] SaveLoadManager 부착"); // 부착 로그를 출력합니다.
+        }                                      // 조건문 끝
+
+        // ScoreManager 부착 보장
+        if (!managersObject.TryGetComponent<ScoreManager>(out var scoreMgr)) // Managers에 ScoreManager가 붙어있는지 확인합니다.
+        {                                      // 조건문 시작
+            scoreMgr = managersObject.AddComponent<ScoreManager>(); // 없으면 새로 추가합니다.
+            if (showDebugLogs)                 // 디버그 로그가 활성화 상태라면
+                Debug.Log("[GameInitializer] ScoreManager 부착"); // 부착 로그를 출력합니다.
+        }                                      // 조건문 끝
+
+        // GameQuitControll 부착 보장
+        if (!managersObject.TryGetComponent<GameQuitControll>(out var quitCtrl)) // Managers에 GameQuitControll이 붙어있는지 확인합니다.
+        {                                      // 조건문 시작
+            quitCtrl = managersObject.AddComponent<GameQuitControll>(); // 없으면 새로 추가합니다.
+            if (showDebugLogs)                 // 디버그 로그가 활성화 상태라면
+                Debug.Log("[GameInitializer] GameQuitControll 부착"); // 부착 로그를 출력합니다.
+        }                                      // 조건문 끝
+
+        // CollectionManager 부착 보장
+        if (!managersObject.TryGetComponent<CollectionManager>(out var collectionMgr)) // Managers에 CollectionManager가 붙어있는지 확인합니다.
+        {                                      // 조건문 시작
+            collectionMgr = managersObject.AddComponent<CollectionManager>(); // 없으면 새로 추가합니다.
+            if (showDebugLogs)                 // 디버그 로그가 활성화 상태라면
+                Debug.Log("[GameInitializer] CollectionManager 부착"); // 부착 로그를 출력합니다.
+        }
+    }
+
     private void InitializeUI()//UI 매니저 초기화 메서드
     {
-        
         var uiManager = FindAnyObjectByType<UIManager>();// UI 매니저가 있다면 초기화
         if (uiManager != null)
         {
@@ -105,7 +140,7 @@ public class GameInitializer : MonoBehaviour
     private IEnumerator InitializeAudioAfterDelay()//오디오 매니저 초기화 메서드
     {
         yield return new WaitForSeconds(1f);// ScoreManager가 완전히 초기화될 때까지 대기
-        
+
         var saveData = ScoreManager.Instance.GetCurrentSaveData();
         if (saveData != null)
         {

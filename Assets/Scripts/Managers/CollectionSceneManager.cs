@@ -40,6 +40,7 @@ public class CollectionSceneManager : MonoBehaviour
 
     public bool IsAnimating => isAnimating;
     public bool HasFliped => hasFlipped;
+
     void OnEnable()
     {
         entrySource = PlayerPrefs.GetString("CollectionEntrySource", "FromFoyer");

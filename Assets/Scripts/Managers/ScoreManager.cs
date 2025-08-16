@@ -14,21 +14,21 @@ public class ScoreManager : MonoBehaviour
     {
         get
         {
-            if (instance == null)
-            {
-                GameObject managerObj = GameObject.Find("Managers");
-                if (managerObj == null)
-                {
-                    managerObj = new GameObject("Managers");
-                    DontDestroyOnLoad(managerObj);
-                }
+            // if (instance == null)
+            // {
+            //     GameObject managerObj = GameObject.Find("Managers");
+            //     if (managerObj == null)
+            //     {
+            //         managerObj = new GameObject("Managers");
+            //         DontDestroyOnLoad(managerObj);
+            //     }
 
-                instance = managerObj.GetComponent<ScoreManager>();
-                if (instance == null)
-                {
-                    instance = managerObj.AddComponent<ScoreManager>();
-                }
-            }
+            //     instance = managerObj.GetComponent<ScoreManager>();
+            //     if (instance == null)
+            //     {
+            //         instance = managerObj.AddComponent<ScoreManager>();
+            //     }
+            // }
             return instance;
         }
     }
@@ -67,16 +67,24 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        // if (instance == null)
+        // {
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
+        //     InitializeGame();//게임 초기화
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);//중복 인스턴스 제거
+        // }
+        if (instance != null && instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
-            InitializeGame();//게임 초기화
+            Destroy(gameObject);//중복 방지
+            return;
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);//중복 인스턴스 제거
-        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        InitializeGame();//게임 초기화
     }
 
     private void Start()

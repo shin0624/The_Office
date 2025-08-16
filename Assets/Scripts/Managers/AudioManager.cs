@@ -19,10 +19,10 @@ public class AudioManager : MonoBehaviour
         {
             if (instance == null)
             {
-                GameObject managerObj = GameObject.Find("SoundManagers");
+                GameObject managerObj = GameObject.Find("AudioManagers");
                 if (managerObj == null)
                 {
-                    managerObj = new GameObject("SoundManagers");
+                    managerObj = new GameObject("AudioManagers");
                     DontDestroyOnLoad(managerObj);
                 }
                 instance = managerObj.GetComponent<AudioManager>();
