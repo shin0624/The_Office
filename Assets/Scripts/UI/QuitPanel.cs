@@ -62,6 +62,7 @@ public class QuitPanel : MonoBehaviour
 
     private void OnBackButtonClicked()
     {
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
         SetButtonsInteractable(false);
         StartCoroutine(ClosePanel());
     }

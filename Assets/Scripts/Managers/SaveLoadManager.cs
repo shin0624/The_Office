@@ -16,20 +16,20 @@ public class SaveLoadManager : MonoBehaviour
     {
         get
         {
-            if (instance == null)
-            {
-                GameObject managerObj = GameObject.Find("Managers");
-                if (managerObj == null)
-                {
-                    managerObj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
-                    DontDestroyOnLoad(managerObj);//씬 전환 시에도 파괴되지 않도록 설정
-                }
-                instance = managerObj.GetComponent<SaveLoadManager>();//Managers 오브젝트에서 SaveLoadManager 컴포넌트를 찾음
-                if (instance == null)
-                {
-                    instance = managerObj.AddComponent<SaveLoadManager>();//컴포넌트가 없으면 추가
-                }
-            }
+            // if (instance == null)
+            // {
+            //     GameObject managerObj = GameObject.Find("Managers");
+            //     if (managerObj == null)
+            //     {
+            //         managerObj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
+            //         DontDestroyOnLoad(managerObj);//씬 전환 시에도 파괴되지 않도록 설정
+            //     }
+            //     instance = managerObj.GetComponent<SaveLoadManager>();//Managers 오브젝트에서 SaveLoadManager 컴포넌트를 찾음
+            //     if (instance == null)
+            //     {
+            //         instance = managerObj.AddComponent<SaveLoadManager>();//컴포넌트가 없으면 추가
+            //     }
+            // }
             return instance;//싱글톤 인스턴스 반환
         }
     }
@@ -47,17 +47,26 @@ public class SaveLoadManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
-            InitializePaths();//저장 경로 초기화
+        // if (instance == null)
+        // {
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
+        //     InitializePaths();//저장 경로 초기화
 
-        }
-        else if (instance != this)
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);//중복 인스턴스 제거
+        // }
+
+        if (instance != null && instance != this)
         {
-            Destroy(gameObject);//중복 인스턴스 제거
+            Destroy(gameObject);//중복 방지
+            return;
         }
+        instance = this;
+        InitializePaths();//저장 경로 초기화
+        DontDestroyOnLoad(gameObject);
         Application.quitting += OnAppQuitting;//긴급저장 이벤트 할당
        
     }

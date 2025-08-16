@@ -13,17 +13,17 @@ public class CollectionManager : MonoBehaviour
     {
         get
         {
-            GameObject managerObj = GameObject.Find("Managers");
-            if (managerObj == null)
-            {
-                managerObj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
-                DontDestroyOnLoad(managerObj);//씬 전환 시에도 파괴되지 않도록 설정
-            }
-            instance = managerObj.GetComponent<CollectionManager>();//Managers 오브젝트에서 SaveLoadManager 컴포넌트를 찾음
-            if (instance == null)
-            {
-                instance = managerObj.AddComponent<CollectionManager>();//컴포넌트가 없으면 추가
-            }
+            // GameObject managerObj = GameObject.Find("Managers");
+            // if (managerObj == null)
+            // {
+            //     managerObj = new GameObject("Managers");//Managers 오브젝트가 없으면 생성
+            //     DontDestroyOnLoad(managerObj);//씬 전환 시에도 파괴되지 않도록 설정
+            // }
+            // instance = managerObj.GetComponent<CollectionManager>();//Managers 오브젝트에서 SaveLoadManager 컴포넌트를 찾음
+            // if (instance == null)
+            // {
+            //     instance = managerObj.AddComponent<CollectionManager>();//컴포넌트가 없으면 추가
+            // }
             return instance;
         }
     }
@@ -37,16 +37,25 @@ public class CollectionManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        // if (instance == null)
+        // {
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);
+        //     InitializeCollectionManager();
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);
+        // }
+
+        if (instance != null && instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            InitializeCollectionManager();
+            Destroy(gameObject);//중복 방지
+            return;
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        InitializeCollectionManager();
     }
 
     private void InitializeCollectionManager()//컬렉션 매니저 전체 초기화 메서드.

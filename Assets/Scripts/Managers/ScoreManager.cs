@@ -14,21 +14,21 @@ public class ScoreManager : MonoBehaviour
     {
         get
         {
-            if (instance == null)
-            {
-                GameObject managerObj = GameObject.Find("Managers");
-                if (managerObj == null)
-                {
-                    managerObj = new GameObject("Managers");
-                    DontDestroyOnLoad(managerObj);
-                }
+            // if (instance == null)
+            // {
+            //     GameObject managerObj = GameObject.Find("Managers");
+            //     if (managerObj == null)
+            //     {
+            //         managerObj = new GameObject("Managers");
+            //         DontDestroyOnLoad(managerObj);
+            //     }
 
-                instance = managerObj.GetComponent<ScoreManager>();
-                if (instance == null)
-                {
-                    instance = managerObj.AddComponent<ScoreManager>();
-                }
-            }
+            //     instance = managerObj.GetComponent<ScoreManager>();
+            //     if (instance == null)
+            //     {
+            //         instance = managerObj.AddComponent<ScoreManager>();
+            //     }
+            // }
             return instance;
         }
     }
@@ -67,16 +67,24 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        // if (instance == null)
+        // {
+        //     instance = this;
+        //     DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
+        //     InitializeGame();//게임 초기화
+        // }
+        // else if (instance != this)
+        // {
+        //     Destroy(gameObject);//중복 인스턴스 제거
+        // }
+        if (instance != null && instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);//씬 전환 시에도 파괴되지 않도록 설정
-            InitializeGame();//게임 초기화
+            Destroy(gameObject);//중복 방지
+            return;
         }
-        else if (instance != this)
-        {
-            Destroy(gameObject);//중복 인스턴스 제거
-        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        InitializeGame();//게임 초기화
     }
 
     private void Start()
@@ -187,6 +195,11 @@ public class ScoreManager : MonoBehaviour
             if (oldScore > affectionScore)// 호감도 감소 시 진동 기능 호출
             {
                 HapticUX.Vibrate(500);
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreDown);//점수 다운 효과음 재생 
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreUp);//점수 업 효과음 재생
             }
             currentSaveData.player_data.affection_level = affectionScore;//저장 데이터에 반영.
             OnAffectionChanged?.Invoke(affectionScore);//호감도 변경 이벤트 호출
@@ -204,6 +217,11 @@ public class ScoreManager : MonoBehaviour
             if (oldScore > socialScore)//사회력 점수 감소 시 진동 기능 호출
             {
                 HapticUX.Vibrate(500);
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreDown);//점수 다운 효과음 재생 
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ScoreUp);//점수 업 효과음 재생
             }
             currentSaveData.player_data.social_score = socialScore;//저장 데이터에 반영.
             OnSocialScoreChanged?.Invoke(socialScore);//사회력 점수 변경 이벤트 호출

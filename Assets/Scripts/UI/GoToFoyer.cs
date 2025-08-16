@@ -19,6 +19,7 @@ public class GoToFoyer : MonoBehaviour
         
         if(foyerUI.activeSelf==false)
         {
+            AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
             foyerUI.SetActive(true);
 
         }

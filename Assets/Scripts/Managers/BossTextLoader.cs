@@ -123,6 +123,8 @@ public class BossTextLoader : MonoBehaviour
 
     private void OnChoiceSelected(Choice choice)//선택지 버튼 클릭 시 호출되는 메서드.
     {
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
+        
         Debug.Log($"선택 : {choice.choice_text}, 호감도 변화: {choice.affection_change:+0;-#}, 사회력 변화: {choice.social_score_change:+0;-#}");
         if (ScoreManager.Instance != null)//ScoreManager를 통한 점수 업데이트 진행
         {

@@ -14,6 +14,7 @@ public class GameStart : MonoBehaviour
 
     private void OnStartButtonClicked()
     {
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);//버튼 클릭 사운드
         SceneManager.LoadScene("SelectScene");
     }
 

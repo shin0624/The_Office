@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static AudioEnums;
 using UnityEngine;
 
 public class DataStructures : MonoBehaviour
@@ -122,6 +123,23 @@ public class DataStructures : MonoBehaviour
         public string goodEndingMessage;  // Good 엔딩 메시지
         [TextArea(2, 4)]
         public string badEndingMessage;   // Bad 엔딩 메시지
+    }
+
+    [Serializable]
+    public class BGMClipEntry//bgm관리 클래스
+    {
+        public BGMType type;//어떤 씬의 BGM인지 명시
+        public AudioClip clip;
+        public bool loop = true;
+    }
+
+    [Serializable]
+    public class SFXClipEntry//사운드 이펙트 관리 클래스
+    {
+        public SFXType type;//어떤 인터랙션의 효과음인지 명시
+        public AudioClip clip;
+        [Range(0.0f, 1.0f)] public float defaultVolume = 1.0f;//기본 재생 볼륨
+       [Range(0.5f, 1.5f)] public float pitch = 1.0f;//기본 재생 피치
     }
 
 }

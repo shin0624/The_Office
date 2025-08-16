@@ -217,6 +217,7 @@ public class EndingUIController : MonoBehaviour
         if (isExiting) return;
         isExiting = true;
         SetButtonsInteractable(false);//중복 클릭 방지
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
 
         DotweenAnimations.FadeOutEndingPanel(EndingCanvasPanel, 0.5f, () =>
         {
@@ -231,7 +232,7 @@ public class EndingUIController : MonoBehaviour
         if (isExiting) return;
         isExiting = true;
         SetButtonsInteractable(false);//중복 클릭 방지
-
+        AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
         Debug.Log("[EndingUIController] 컬렉션 버튼 클릭 - 사원수첩 씬으로 이동");
     
         DotweenAnimations.FadeOutEndingPanel(EndingCanvasPanel, 0.5f, () =>
