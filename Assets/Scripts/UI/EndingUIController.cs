@@ -216,6 +216,9 @@ public class EndingUIController : MonoBehaviour
     {
         if (isExiting) return;
         isExiting = true;
+
+        AdMobManager.Instance?.ShowIfReady();//250817. 엔딩 후 다시하기 버튼 클릭 시 전면 광고 출력
+
         SetButtonsInteractable(false);//중복 클릭 방지
         AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
 
@@ -231,6 +234,9 @@ public class EndingUIController : MonoBehaviour
     {
         if (isExiting) return;
         isExiting = true;
+
+        AdMobManager.Instance?.ShowIfReady();//250817. 엔딩 후 컬렉션 보기 버튼 클릭 시 전면 광고 출력
+
         SetButtonsInteractable(false);//중복 클릭 방지
         AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
         Debug.Log("[EndingUIController] 컬렉션 버튼 클릭 - 사원수첩 씬으로 이동");
