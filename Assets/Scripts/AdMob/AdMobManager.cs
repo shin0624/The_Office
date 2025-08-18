@@ -12,7 +12,7 @@ public class AdMobManager : MonoBehaviour
     [SerializeField] private float showCooldownSeconds = 0.0f;//전면광고 노출 쿨다운(초), 0이면 비활성
 
     [Header("Ad Unit Ids")]
-    [SerializeField] private string androidInterstitialId = "ca-app-pub-5233935535970305/6588300861";//안드로이드용 아이디
+    [SerializeField] private string androidInterstitialId = "";//안드로이드용 아이디
     [SerializeField] private string testInterstitialId = "ca-app-pub-3940256099942544/1033173712";//테스트 아이디
     private InterstitialAd interstitial;// 전면광고 인스턴스를 보관하는 참조 객체
     private bool sdkInitialized = false;//sdk 초기화 완료여부 플래그
