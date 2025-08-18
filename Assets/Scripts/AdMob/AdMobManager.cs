@@ -12,7 +12,7 @@ public class AdMobManager : MonoBehaviour
     [SerializeField] private float showCooldownSeconds = 0.0f;//전면광고 노출 쿨다운(초), 0이면 비활성
 
     [Header("Ad Unit Ids")]
-    [SerializeField] private string androidInterstitialId = "Z";//안드로이드용 아이디
+    [SerializeField] private string androidInterstitialId = "ca-app-pub-5233935535970305/6588300861";//안드로이드용 아이디
     [SerializeField] private string testInterstitialId = "ca-app-pub-3940256099942544/1033173712";//테스트 아이디
     private InterstitialAd interstitial;// 전면광고 인스턴스를 보관하는 참조 객체
     private bool sdkInitialized = false;//sdk 초기화 완료여부 플래그
@@ -165,10 +165,10 @@ public class AdMobManager : MonoBehaviour
 
     private string GetInterstitialAdUnitId()//플랫폼 별 광고 단위  ID를 반환하는 메서드. iOS는 아직 할지 말지 확정 안됨. 안드로이드와 테스트만.
     {
-#if UNITY_ANDROID
-    return testInterstitialId;//MAIN 브랜치용 : 테스트 ID (빌드용 브랜치에서는 실제 광고 ID 사용)
+#if UNITY_ANDROID 
+    return androidInterstitialId;//Build 브랜치용 : Google Play 출시를 위한 앱 번들 빌드용 아이디
 #elif UNITY_EDITOR
-    return testInterstitialId;
+    return androidInterstitialId;
 #endif
     }
 
