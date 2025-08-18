@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -75,7 +74,10 @@ public class AudioManager : MonoBehaviour
         else if (instance != null)
         {
             Destroy(gameObject);
+            return;
         }
+
+        EnsureBgmSource();//오디오 소스 유효성 보장(없으면 생성하도록)
 
         BuildDictonaries();//인스펙터에서 등록한 리스트를 딕셔너리로 구성
         PrepareSfxVoices();//sfx동시재생을 위한 보조 오디오 소스 준비
@@ -145,6 +147,8 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)//씬이 변경될 때 BGM도 같이 변경시키도록 OnSceneLoaded()를 씬 변경 이벤트에 추가
     {
+
+        EnsureBgmSource();//씬 전환 직후 소스 유효성 보장
         if (TryMapSceneToBgm(scene.name, out var bgmType))//로드될 씬의 이름을 BGMType으로 매핑
         {
             PlayBGM(bgmType, fadeTime: 0.7f);
@@ -162,6 +166,8 @@ public class AudioManager : MonoBehaviour
             StopCoroutine(bgmFadeCoroutine);
             bgmFadeCoroutine = null;
         }
+
+        EnsureBgmSource(); //접근 전에 유효성 보장.
 
         if (fadeTime > 0.0f && bgmSource.isPlaying)//BGM 페이드인 시작 
         {
@@ -284,6 +290,19 @@ public class AudioManager : MonoBehaviour
     {
         if (linear <= 0.0001f) return -80.0f;//거의 0에 가까우면 -80(사실상 음소거)로 처리.
         return Mathf.Log10(linear) * 20.0f;//데시벨 표준 변환식 (DB = 20 * log10(linear)) 적용.
+    }
+
+    private void EnsureBgmSource()//씬 전환 시 BGMSource 접근 과정에서 NRE 발생이 일어남을 확인하여, BGMSource 유지 보장을 위해 선언
+    {
+        if (bgmSource == null || !bgmSource)
+        {
+            var go = new GameObject("BGMSource");
+            go.transform.SetParent(transform);
+            bgmSource = go.AddComponent<AudioSource>();
+            bgmSource.playOnAwake = false;
+            bgmSource.loop = true;
+            bgmSource.outputAudioMixerGroup = audioMixer.outputAudioMixerGroup;
+        }
     }
 
 

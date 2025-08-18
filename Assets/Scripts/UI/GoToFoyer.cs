@@ -21,8 +21,6 @@ public class GoToFoyer : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX(AudioEnums.SFXType.ButtonClick);
 
-            AdMobManager.Instance?.ShowIfReady();//250817. 휴게실 버튼 클릭 시 전면 광고 출력
-
             foyerUI.SetActive(true);
 
         }
