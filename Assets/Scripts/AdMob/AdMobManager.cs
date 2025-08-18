@@ -166,9 +166,9 @@ public class AdMobManager : MonoBehaviour
     private string GetInterstitialAdUnitId()//플랫폼 별 광고 단위  ID를 반환하는 메서드. iOS는 아직 할지 말지 확정 안됨. 안드로이드와 테스트만.
     {
 #if UNITY_ANDROID
-    return testInterstitialId;//일단 테스트를 위해 폰과 데스크탑 모두 테스트아이디 할당
+    return androidInterstitialId;//앱번들 제출용 : 안드로이드에서 광고 ID
 #elif UNITY_EDITOR
-    return testInterstitialId;
+    return androidInterstitialId;
 #endif
     }
 

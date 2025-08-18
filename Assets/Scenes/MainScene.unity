@@ -2589,7 +2589,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC608\uC2DC\uD14D\uC2A4\uD2B8"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
   m_sharedMaterial: {fileID: 1783129595289558205, guid: 3683ba7deb7440645ba777cc4328f743, type: 2}
@@ -2703,11 +2703,11 @@ RectTransform:
   - {fileID: 1399681491}
   m_Father: {fileID: 1743163103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!225 &693162013
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3056,7 +3056,7 @@ RectTransform:
   m_GameObject: {fileID: 796134182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.14755452, z: 1}
+  m_LocalScale: {x: 1, y: 0.21209486, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592315809}
@@ -5758,11 +5758,11 @@ RectTransform:
   - {fileID: 95042983}
   m_Father: {fileID: 1743163103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!225 &1606260508
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7391,9 +7391,9 @@ MonoBehaviour:
   - {fileID: 1606260509}
   - {fileID: 693162014}
   endingTitleSprite:
-  - {fileID: 21300000, guid: 8a9a131bdde34364992391415f32f2ec, type: 3}
-  - {fileID: 21300000, guid: 359fd3555c9765c46938ed492af3b795, type: 3}
-  - {fileID: 21300000, guid: ceef3c60bb1a3214dac80bc5a593ce9e, type: 3}
+  - {fileID: 21300000, guid: e9106f3fd3d838045bf073cd934a5795, type: 3}
+  - {fileID: 21300000, guid: 11bb1b2dcb603384296a22da9789b751, type: 3}
+  - {fileID: 21300000, guid: b89fe100f1518c540a14863c08daf623, type: 3}
   endingMessageObject: {fileID: 1968160505}
   endingMessage: {fileID: 680038802}
   maleBossSprites:
