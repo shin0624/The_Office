@@ -1,8 +1,8 @@
-# THE OFFICE - 신입사원 살아남기 프로젝트
+# THE OFFICE - 신입사원 살아남기 
 
 ## 📋 프로젝트 개요
 
-**THE OFFICE - 신입사원 살아남기**는 비주얼 노벨과 캐주얼 게임 요소를 결합한 모바일 게임입니다. Unity UGUI를 활용하여 간단하면서도 효과적인 사용자 경험을 제공하며, JSON 기반 데이터 관리로 확장성을 확보합니다.
+**THE OFFICE - 신입사원 살아남기**는 시뮬레이션과 캐주얼 게임 요소를 결합한 모바일 게임입니다. Unity UGUI를 활용하여 간단하면서도 효과적인 사용자 경험을 제공하며, JSON 기반 데이터 관리로 확장성을 확보합니다.
 
 ## 📋 프로젝트 컨셉
 
@@ -14,18 +14,18 @@
 
 ## 인게임 스크린샷
 ### 현재 개발 중인 화면입니다.
-<img width="509" height="903" alt="Image" src="https://github.com/user-attachments/assets/698f1a3f-7c48-483b-882a-9d71073ab220" />
-<img width="469" height="861" alt="Image" src="https://github.com/user-attachments/assets/cba8fc7b-a50b-4d16-a284-b5a8bb5180ed" />
-<img width="457" height="817" alt="Image" src="https://github.com/user-attachments/assets/565c0784-4a2a-424e-b4f2-68b72eb8f54c" />
-<img width="458" height="815" alt="Image" src="https://github.com/user-attachments/assets/d6d26b17-084e-4609-9786-d1e1496edad9" />
-<img width="460" height="817" alt="Image" src="https://github.com/user-attachments/assets/7f1490ed-cfab-474c-b3bc-3bc8cead9052" />
+<img width="1080" height="1920" alt="Image" src="https://github.com/user-attachments/assets/792d2771-be9e-406b-8c97-15536c15cd37" />
+<img width="1080" height="1920" alt="Image" src="https://github.com/user-attachments/assets/07b23ed8-2a9f-470c-8f7c-bf1e84253572" />
+<img width="1080" height="1920" alt="Image" src="https://github.com/user-attachments/assets/ab3811c4-6194-47b5-9c35-af7848edd7cc" />
+<img width="1080" height="1920" alt="Image" src="https://github.com/user-attachments/assets/5be57f77-0c10-4ffb-9311-239f0b2b0595" />
+<img width="1080" height="1920" alt="Image" src="https://github.com/user-attachments/assets/420cc960-0f80-4b9f-a883-0b6a5758679c" />
 
-- **개발 기간**: 2025.07~
+- **개발 기간**: 2025.07 ~ 2025.08 
 - **타겟 플랫폼**: Android (Google Play)
 - **개발 엔진**: <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" /> 2023.2.16f1 LTS
 - **기술 스택**: <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" /> <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white" />  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
 - **그래픽 리소스** : Sora AI / Leonardo AI
-- **장르**: 캐주얼 80%, 비주얼 노벨 20%
+- **장르**: 캐주얼, 시뮬레이션
 
 
 ## 🎮 게임 시스템
@@ -44,7 +44,7 @@
 
 ### 핵심 스테이터스
 
-- **사회력 점수**: 1~99999
+- **사회력 점수**: 1~300
 - **직급**: 인턴 → 사원 → 주임 → 대리 → 과장 → 차장 → 부장 → 이사 → 상무 → 전무 → 부사장 → 사장 (12단계)
 - **호감도**: 낮음 → 보통 → 높음 (Red → Blue → Green)
 
@@ -122,6 +122,7 @@
 - Input System
 - DOTween(3rd Party)
 - JsonUtility (내장)
+- Google AdMob(광고)
 - Firebase 또는 The Backend 활용 방안 검토중
 
 
